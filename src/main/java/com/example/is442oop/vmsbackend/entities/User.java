@@ -2,6 +2,8 @@ package com.example.is442oop.vmsbackend.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table
 public class User {
@@ -16,30 +18,34 @@ public class User {
           strategy = GenerationType.SEQUENCE,
           generator = "user_sequence"
   )
-  private Long userId;
+  private Long Id;
   private String name;
   private String email;
   private String password;
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "usertype_id", referencedColumnName = "userTypeId")
-  private UserType userType;
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(
+          name = "user_workflow",
+          joinColumns = @JoinColumn(name = "user_id"),
+          inverseJoinColumns = @JoinColumn(name = "workflow_id")
+  )
+  private Set<Workflow> userWorkFlows;
 
   public User(){
   }
   public User(Long id, String name, String email, String password) {
-    this.userId = id;
+    this.Id = id;
     this.name = name;
     this.email = email;
     this.password = password;
   }
 
   public Long getId() {
-    return userId;
+    return Id;
   }
 
   public void setId(Long id) {
-    userId = id;
+    Id = id;
   }
 
   public String getName() {
