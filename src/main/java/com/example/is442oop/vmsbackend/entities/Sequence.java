@@ -1,86 +1,83 @@
 package com.example.is442oop.vmsbackend.entities;
+
 import jakarta.persistence.*;
 import java.util.List;
 
-
 @Entity
-@Table(name="sequence")
+@Table(name = "sequence")
 public class Sequence {
-    @Id 
+    @Id
     private Integer sequenceID;
     private Integer sequence;
     private Boolean isDone;
-    private String sequenceType;
+    @Enumerated(EnumType.STRING)
+    private sequenceTypeEnum sequenceTypeEnum;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "workflowID", insertable = false, updatable = false)
+    private Workflow workflow;
 
-    public Sequence(Integer sequenceID, Integer sequence, Boolean isDone, String sequenceType) {
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "questionnaireID", insertable = false, updatable = false)
+    private Questionnaire questionnaire;
+
+    @OneToMany(mappedBy = "sequence", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public List<Answer> answer;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "userTypeID", insertable = false, updatable = false)
+    private UserType userType;
+
+    public Sequence(Integer sequenceID, Integer sequence, Boolean isDone,
+            sequenceTypeEnum sequenceTypeEnum) {
         this.sequenceID = sequenceID;
         this.sequence = sequence;
         this.isDone = isDone;
-        this.sequenceType = sequenceType;
+        this.sequenceTypeEnum = sequenceTypeEnum;
     }
 
-    public Sequence(){
-        
+    public Sequence() {
+
     }
-
-
-    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name="workflowID", insertable=false, updatable = false)
-    private Workflow workflow;
-
-    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name="questionnaireID", insertable=false, updatable = false)
-    private Questionnaire questionnaire;
-
-    @OneToMany(mappedBy="sequence", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public List <Answer> answer;
-
-
-    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name="userTypeID", insertable=false, updatable = false)
-    private UserType userType;
-    
 
 
     public Integer getSequenceID() {
         return sequenceID;
     }
 
-
     public void setSequenceID(Integer sequenceID) {
         this.sequenceID = sequenceID;
     }
-
 
     public Integer getSequence() {
         return sequence;
     }
 
-
     public void setSequence(Integer sequence) {
         this.sequence = sequence;
     }
-
 
     public Boolean getIsDone() {
         return isDone;
     }
 
-
     public void setIsDone(Boolean isDone) {
         this.isDone = isDone;
     }
 
+    public sequenceTypeEnum getSequenceTypeEnum() {
+        return sequenceTypeEnum;
+    }
 
-    public String getSequenceType() {
-        return sequenceType;
+    public void setSequenceTypeEnum(sequenceTypeEnum sequenceTypeEnum) {
+        this.sequenceTypeEnum = sequenceTypeEnum;
     }
 
 
-    public void setSequenceType(String sequenceType) {
-        this.sequenceType = sequenceType;
-    }
+}
 
+enum sequenceTypeEnum {
+    APPROVAL,
+    QUESTIONAIRE
 
 }
