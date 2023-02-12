@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "sequence")
 public class Sequence {
     @Id
     private Integer sequenceID;

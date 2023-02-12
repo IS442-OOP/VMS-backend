@@ -3,7 +3,6 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="Workflow")
 public class Workflow {
     @Id 
     private Integer workflowID;
@@ -13,7 +12,6 @@ public class Workflow {
     @OneToMany(mappedBy="sequence", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public List <Sequence> sequence;
 
-    
     public Workflow(Integer workflowID, String name) {
         this.workflowID = workflowID;
         this.name = name;

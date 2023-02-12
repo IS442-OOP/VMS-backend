@@ -4,7 +4,6 @@ import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "section")
 public class Section {
     @Id
     private Integer stringID;

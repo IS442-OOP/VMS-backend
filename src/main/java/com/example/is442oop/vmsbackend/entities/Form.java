@@ -3,7 +3,6 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="form")
 public class Form {
     @Id
     private Integer formID;

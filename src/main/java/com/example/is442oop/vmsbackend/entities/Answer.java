@@ -2,7 +2,6 @@ package com.example.is442oop.vmsbackend.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Answer")
 public class Answer {
     @Id
     private Integer answerID;

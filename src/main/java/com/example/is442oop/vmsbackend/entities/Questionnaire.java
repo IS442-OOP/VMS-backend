@@ -4,7 +4,6 @@ import java.util.List;
 
 
 @Entity
-@Table(name="questionnaire")
 public class Questionnaire {
     @Id 
     private Integer questionnaireID;

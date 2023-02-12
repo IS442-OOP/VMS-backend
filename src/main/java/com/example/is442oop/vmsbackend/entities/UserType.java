@@ -3,7 +3,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="userType")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class UserType {
     @Id
     private String userTypeID;
