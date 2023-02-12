@@ -1,41 +1,43 @@
 package com.example.is442oop.vmsbackend.entities;
-
 import jakarta.persistence.*;
 
 @Entity
-@Table
+@Table(name="Answer")
 public class Answer {
-  @jakarta.persistence.Id
-  @SequenceGenerator(
-          name = "answer_sequence",
-          sequenceName = "answer_sequence",
-          allocationSize = 1
-  )
-  @GeneratedValue(
-          strategy = GenerationType.SEQUENCE,
-          generator = "answer_sequence"
-  )
-  private Long Id;
+    @Id
+    private Integer answerID;
+    private String answer; 
+    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+    @JoinColumn(name="questionID", insertable=false, updatable = false)
+    private Question question;
+    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY, optional = true)
+    @JoinColumn(name="userWorkflowID", insertable=false, updatable = false, nullable = true)
+    private UserWorkflow userWorkflow;
+    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+    @JoinColumn(name="sequenceID", insertable=false, updatable = false)
+    private Sequence sequence;
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "form_id")
-  private Long answerFormId;
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "user_workflow_id")
-  private UserWorkflow answerUserWorkflowId;
+    public Answer(Integer answerID, String answer) {
+        this.answerID = answerID;
+        this.answer = answer;
+    }
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "field_id")
-  private Field answerFieldId;
+    public Answer(){
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "option_id")
-  private Option answerOptionId;
+    }
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "user_id")
-  private User answerUserId;
+    public Integer getAnswerID() {
+        return answerID;
+    }
 
-  private String answer;
+    public void setAnswerID(Integer answerID) {
+        this.answerID = answerID;
+    }
+    public String getAnswer() {
+        return answer;
+    }
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 }

@@ -1,42 +1,39 @@
 package com.example.is442oop.vmsbackend.entities;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
-@Table
+@Table(name="form")
 public class Form {
-  @Id
-  @SequenceGenerator(
-          name = "form_sequence",
-          sequenceName = "form_sequence",
-          allocationSize = 1
-  )
-  @GeneratedValue(
-          strategy = GenerationType.SEQUENCE,
-          generator = "form_sequence"
-  )
+    @Id
+    private Integer formID;
+    private String HTML;
+    @OneToMany(mappedBy="form", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    public List <Questionnaire> questionnaire;
 
-  @JsonIgnore
-  @OneToMany(mappedBy = "form")
-  private Set<Section> sections = new HashSet<>();
+    
+    public Form(Integer formID, String hTML) {
+        this.formID = formID;
+        HTML = hTML;
+    }
 
-  private Long Id;
-  private String name;
-  private float revisionNumber;
-  private Date effectiveDate;
+    public Form(){
 
-  @ManyToMany(cascade = CascadeType.ALL)
-  @JoinTable(name = "workflow_forms",
-          inverseJoinColumns = @JoinColumn(name = "workflow_id"),
-          joinColumns = @JoinColumn(name = "form_id")
-  )
-  private Set<Workflow> formWorkflows;
+    }
 
-  @OneToMany(mappedBy = "answerFormId")
-  private Set<Answer> formAnswers;
+
+    public Integer getFormID() {
+        return formID;
+    }
+    public void setFormID(Integer formID) {
+        this.formID = formID;
+    }
+    public String getHTML() {
+        return HTML;
+    }
+    public void setHTML(String hTML) {
+        HTML = hTML;
+    }
+
+
 }

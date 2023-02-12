@@ -1,74 +1,87 @@
 package com.example.is442oop.vmsbackend.entities;
-
 import jakarta.persistence.*;
+import java.util.List;
 
-import java.util.Set;
 
 @Entity
-@Table
+@Table(name="User")
 public class User {
+    @Id 
+    private Integer userID;
+    private String email;
+    private String password;
+    private Boolean isAccountActivated;
+    private String vendorName; 
 
-  @Id
-  @SequenceGenerator(
-          name = "user_sequence",
-          sequenceName = "user_sequence",
-          allocationSize = 1
-  )
-  @GeneratedValue(
-          strategy = GenerationType.SEQUENCE,
-          generator = "user_sequence"
-  )
-  private Long Id;
-  private String name;
-  private String email;
-  private String password;
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    public List <UserWorkflow> userWorkflow; 
+    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+    @JoinColumn(name="userTypeID", insertable=false, updatable = false)
+    private UserType userType;
+    
 
-  @ManyToMany(cascade = CascadeType.ALL)
-  @JoinTable(
-          name = "user_workflow",
-          joinColumns = @JoinColumn(name = "user_id"),
-          inverseJoinColumns = @JoinColumn(name = "workflow_id")
-  )
-  private Set<Workflow> userWorkFlows;
+    public User(Integer userID, String email, String password, boolean isAccountActivated, String vendorName) {
+        this.userID = userID;
+        this.email = email;
+        this.password = password;
+        this.isAccountActivated = isAccountActivated;
+        this.vendorName = vendorName;
+    }
 
-  public User(){
-  }
-  public User(Long id, String name, String email, String password) {
-    this.Id = id;
-    this.name = name;
-    this.email = email;
-    this.password = password;
-  }
+    public User(){
+        
+    }
 
-  public Long getId() {
-    return Id;
-  }
 
-  public void setId(Long id) {
-    Id = id;
-  }
 
-  public String getName() {
-    return name;
-  }
+    public Integer getUserID() {
+        return userID;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setUserID(Integer userID) {
+        this.userID = userID;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public String getEmail() {
+        return email;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isAccountActivated() {
+        return isAccountActivated;
+    }
+
+    public void setAccountActivated(boolean isAccountActivated) {
+        this.isAccountActivated = isAccountActivated;
+    }
+
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
+    }
+
+
+
+
+
+    
+
+
+    
+
+    
 }

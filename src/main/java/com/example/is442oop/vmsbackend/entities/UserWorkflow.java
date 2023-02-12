@@ -1,34 +1,64 @@
 package com.example.is442oop.vmsbackend.entities;
-
 import jakarta.persistence.*;
-
-import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Entity
-@Table
+@Table(name="userWorkflow")
 public class UserWorkflow {
+    @Id 
+    private Integer userWorkflowID;
+    private String dateAssigned;
+    private String isApprroved;
 
-  @Id
-  @GeneratedValue
-  private Long id;
+    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY, optional = true)
+    @JoinColumn(name="userID", insertable=false, updatable = false, nullable=true)
+    private User user;
 
-  @ManyToOne
-  @JoinColumn(name = "user_id")
-  private User user;
+    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY, optional = true)
+    @JoinColumn(name="workflowID", insertable=false, updatable = false, nullable=true)
+    private Workflow workflow;
 
-  @OneToMany(mappedBy = "answerUserId")
-  private Set<Answer> userAnswer;
+    
+    @OneToMany(mappedBy="userWorkflow", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    public List <Answer> answer;
 
-  @ManyToOne
-  @JoinColumn(name = "workflow_id")
-  private Workflow workflow;
 
-  @OneToMany(mappedBy = "answerUserWorkflowId")
-  private Set<Answer> userWorkflowAnswers;
+    public User getUser() {
+        return user;
+    }
 
-  private Date dateAssigned;
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-  private boolean isSubmitted;
-  private boolean isApproved;
+    public Integer getUserWorkflowID() {
+        return userWorkflowID;
+    }
+
+    public void setUserWorkflowID(Integer userWorkflowID) {
+        this.userWorkflowID = userWorkflowID;
+    }
+
+    public String getDateAssigned() {
+        return dateAssigned;
+    }
+
+    public void setDateAssigned(String dateAssigned) {
+        this.dateAssigned = dateAssigned;
+    }
+
+    public String getIsApprroved() {
+        return isApprroved;
+    }
+
+    public void setIsApprroved(String isApprroved) {
+        this.isApprroved = isApprroved;
+    }
+
+
+
+
+    
+
+    
 }
