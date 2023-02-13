@@ -1,6 +1,6 @@
 package com.example.is442oop.vmsbackend.entities;
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Workflow {
@@ -8,9 +8,9 @@ public class Workflow {
     private Integer workflowID;
     private String name;
     @OneToMany(mappedBy="workflow", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public List <UserWorkflow> userWorkflow; 
+    public Set <UserWorkflow> userWorkflow; 
     @OneToMany(mappedBy="sequence", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public List <Sequence> sequence;
+    public Set <Sequence> sequence;
 
     public Workflow(Integer workflowID, String name) {
         this.workflowID = workflowID;

@@ -1,6 +1,6 @@
 package com.example.is442oop.vmsbackend.entities;
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
@@ -13,9 +13,9 @@ public class Question {
     @JoinColumn(name="sectionID", insertable=false, updatable = false)
     private Section section;
     @OneToMany(mappedBy="question", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public List <QuestionOption> options;    
+    public Set <QuestionOption> options;    
     @OneToMany(mappedBy="question", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public List <Answer> answer;
+    public Set <Answer> answer;
 
 
 

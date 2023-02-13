@@ -1,6 +1,6 @@
 package com.example.is442oop.vmsbackend.entities;
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Form {
@@ -8,7 +8,7 @@ public class Form {
     private Integer formID;
     private String HTML;
     @OneToMany(mappedBy="form", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public List <Questionnaire> questionnaire;
+    public Set <Questionnaire> questionnaire;
 
     
     public Form(Integer formID, String hTML) {

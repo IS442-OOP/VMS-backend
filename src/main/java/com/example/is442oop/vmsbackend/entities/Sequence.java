@@ -1,7 +1,7 @@
 package com.example.is442oop.vmsbackend.entities;
 
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Sequence {
@@ -21,7 +21,7 @@ public class Sequence {
     private Questionnaire questionnaire;
 
     @OneToMany(mappedBy = "sequence", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    public List<Answer> answer;
+    public Set<Answer> answer;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "userTypeID", insertable = false, updatable = false)

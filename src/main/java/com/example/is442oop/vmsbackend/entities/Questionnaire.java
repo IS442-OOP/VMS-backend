@@ -1,6 +1,6 @@
 package com.example.is442oop.vmsbackend.entities;
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
@@ -9,10 +9,10 @@ public class Questionnaire {
     private Integer questionnaireID;
     private String name;
     @OneToMany(mappedBy="questionnaire", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public List <Sequence> sequence;
+    public Set <Sequence> sequence;
 
     @OneToMany(mappedBy="section", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public List <Section> section;
+    public Set <Section> section;
 
     @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name="formID", insertable=false, updatable = false)

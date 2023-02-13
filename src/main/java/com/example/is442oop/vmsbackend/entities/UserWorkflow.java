@@ -1,6 +1,6 @@
 package com.example.is442oop.vmsbackend.entities;
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class UserWorkflow {
@@ -19,7 +19,7 @@ public class UserWorkflow {
 
     
     @OneToMany(mappedBy="userWorkflow", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public List <Answer> answer;
+    public Set <Answer> answer;
 
 
     public User getUser() {

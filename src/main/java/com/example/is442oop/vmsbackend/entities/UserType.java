@@ -1,6 +1,6 @@
 package com.example.is442oop.vmsbackend.entities;
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -9,10 +9,10 @@ public class UserType {
     private String userTypeID;
     private String userType;
     @OneToMany(mappedBy="userType", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public List <User> user; 
+    public Set <User> user; 
 
     @OneToMany(mappedBy="userType", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public List <Sequence> sequence;  
+    public Set <Sequence> sequence;  
 
 
 

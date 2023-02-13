@@ -1,6 +1,6 @@
 package com.example.is442oop.vmsbackend.entities;
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
@@ -13,7 +13,7 @@ public class User {
     private String vendorName; 
 
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public List <UserWorkflow> userWorkflow; 
+    public Set <UserWorkflow> userWorkflow; 
     @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name="userTypeID", insertable=false, updatable = false)
     private UserType userType;
