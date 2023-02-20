@@ -1,0 +1,56 @@
+package com.example.is442oop.vmsbackend.dao;
+
+import com.example.is442oop.vmsbackend.entities.User;
+import com.example.is442oop.vmsbackend.exception.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.CannotCreateTransactionException;
+
+import java.util.Base64;
+import java.util.Objects;
+
+public class UserDao {
+  private final UserRepository userRepository;
+
+  @Autowired
+  public UserDao(UserRepository userRepository){
+    this.userRepository = userRepository;
+  }
+
+  public void registerUser(User user) {
+    userRepository.save(user);
+  }
+
+  public User findUser(String email){
+    try {
+      return userRepository.findStudentByEmail(email).get();
+    } catch (Exception e) {
+      if (e instanceof CannotCreateTransactionException){
+        throw e;
+      }
+      throw new NotFoundException("User cannot be found for email: " + email);
+    }
+  }
+
+  public boolean isUserPresent(String email){
+    try{
+      return userRepository.findStudentByEmail(email).isPresent();
+    } catch (Exception e) {
+      if (e instanceof CannotCreateTransactionException) {
+        throw e;
+      }
+      throw new NotFoundException("User cannot be found for email: " + email);
+    }
+
+  }
+
+  public void hashPassword(User user, String password){
+    Base64.Encoder encoder = Base64.getEncoder();
+    user.setPassword(encoder.encodeToString(password.getBytes()));
+  }
+
+  public boolean verifyPassword(String encryptedPassword, String enteredPassword){
+    Base64.Decoder decoder = Base64.getDecoder();
+    byte[] bytes = decoder.decode(encryptedPassword);
+    return Objects.equals(new String(bytes), enteredPassword);
+  }
+}

@@ -6,11 +6,11 @@ import java.util.List;
 @Entity
 public class User {
     @Id 
-    private Integer userID;
+    private Long userID;
     private String email;
     private String password;
     private Boolean isAccountActivated;
-    private String vendorName; 
+    private String name;
 
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public List <UserWorkflow> userWorkflow; 
@@ -19,12 +19,12 @@ public class User {
     private UserType userType;
     
 
-    public User(Integer userID, String email, String password, boolean isAccountActivated, String vendorName) {
+    public User(Long userID, String email, String password, boolean isAccountActivated, String name) {
         this.userID = userID;
         this.email = email;
         this.password = password;
         this.isAccountActivated = isAccountActivated;
-        this.vendorName = vendorName;
+        this.name = name;
     }
 
     public User(){
@@ -33,11 +33,11 @@ public class User {
 
 
 
-    public Integer getUserID() {
+    public Long getUserID() {
         return userID;
     }
 
-    public void setUserID(Integer userID) {
+    public void setUserID(Long userID) {
         this.userID = userID;
     }
 
@@ -65,12 +65,12 @@ public class User {
         this.isAccountActivated = isAccountActivated;
     }
 
-    public String getVendorName() {
-        return vendorName;
+    public String getName() {
+        return name;
     }
 
-    public void setVendorName(String vendorName) {
-        this.vendorName = vendorName;
+    public void setName(String vendorName) {
+        this.name = name;
     }
 
 
