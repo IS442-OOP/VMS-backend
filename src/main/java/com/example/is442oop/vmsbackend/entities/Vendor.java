@@ -7,6 +7,9 @@ public class Vendor extends UserType {
     private String companyDescription;
 
 
+    public Vendor() {
+    }
+
     public Vendor(String companyDescription) {
         super();
         this.companyDescription = companyDescription;

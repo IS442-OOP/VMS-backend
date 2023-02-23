@@ -1,4 +1,4 @@
-package com.example.is442oop.vmsbackend.service;
+package com.example.is442oop.vmsbackend.service.register;
 
 import com.example.is442oop.vmsbackend.dao.UserDao;
 import com.example.is442oop.vmsbackend.entities.User;
@@ -7,8 +7,10 @@ import com.example.is442oop.vmsbackend.utils.JwtUtil;
 import com.example.is442oop.vmsbackend.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
-public class RegisterService {
+@Service
+public class RegisterService implements RegisterInterface {
   private final UserDao userDao;
 
   @Autowired
@@ -17,8 +19,6 @@ public class RegisterService {
   }
 
   public ResponseEntity registerUser(User user){
-
-
     try {
       if (userDao.isUserPresent(user.getEmail())){
         return ResponseUtil.responseConflict(user.getEmail());

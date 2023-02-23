@@ -1,7 +1,7 @@
 package com.example.is442oop.vmsbackend.controller;
 
 import com.example.is442oop.vmsbackend.entities.User;
-import com.example.is442oop.vmsbackend.service.RegisterService;
+import com.example.is442oop.vmsbackend.service.register.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +23,6 @@ public class RegisterController {
 
   @PostMapping
   public ResponseEntity registerUser(@RequestBody User user){
-    return registerService.registerUser(user);
+      return registerService.registerUser(user);
   }
 }

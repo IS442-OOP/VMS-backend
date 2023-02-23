@@ -3,11 +3,13 @@ package com.example.is442oop.vmsbackend.dao;
 import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.CannotCreateTransactionException;
 
 import java.util.Base64;
 import java.util.Objects;
 
+@Component
 public class UserDao {
   private final UserRepository userRepository;
 

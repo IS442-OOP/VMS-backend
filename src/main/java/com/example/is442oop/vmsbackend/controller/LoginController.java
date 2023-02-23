@@ -1,7 +1,7 @@
 package com.example.is442oop.vmsbackend.controller;
 
 import com.example.is442oop.vmsbackend.entities.User;
-import com.example.is442oop.vmsbackend.service.LoginService;
+import com.example.is442oop.vmsbackend.service.login.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +22,6 @@ public class LoginController {
 
   @PostMapping
   public ResponseEntity loginUser(@RequestBody User user){
-    return loginService.loginUser(user);
+    return loginService.handle(user);
   }
 }

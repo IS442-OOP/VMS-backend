@@ -1,4 +1,4 @@
-package com.example.is442oop.vmsbackend.service;
+package com.example.is442oop.vmsbackend.service.login;
 
 import com.example.is442oop.vmsbackend.dao.UserDao;
 import com.example.is442oop.vmsbackend.entities.User;
@@ -6,18 +6,21 @@ import com.example.is442oop.vmsbackend.exception.InternalServerException;
 import com.example.is442oop.vmsbackend.exception.NotFoundException;
 import com.example.is442oop.vmsbackend.utils.JwtUtil;
 import com.example.is442oop.vmsbackend.utils.ResponseUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LoginService {
+public class LoginService implements LoginInterface {
 
   private final UserDao userDao;
+
+  @Autowired
   public LoginService(UserDao userDao){
     this.userDao = userDao;
   }
 
-  public ResponseEntity loginUser(User user){
+  public ResponseEntity handle(User user){
     try {
       User userFromDatabase = userDao.findUser(user.getEmail());
       if (userFromDatabase != null){
