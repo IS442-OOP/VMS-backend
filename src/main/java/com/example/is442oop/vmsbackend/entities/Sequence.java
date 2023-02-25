@@ -1,11 +1,20 @@
 package com.example.is442oop.vmsbackend.entities;
 
 import jakarta.persistence.*;
-import java.util.*;
+import java.util.List;
 
 @Entity
 public class Sequence {
     @Id
+    @SequenceGenerator(
+            name = "sequence_sequence",
+            sequenceName = "sequence_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "sequence_sequence"
+    )
     private Integer sequenceID;
     private Integer sequence;
     private Boolean isDone;
@@ -21,11 +30,14 @@ public class Sequence {
     private Questionnaire questionnaire;
 
     @OneToMany(mappedBy = "sequence", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    public Set<Answer> answer;
+    private List<Answer> answer;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "userTypeID", insertable = false, updatable = false)
     private UserType userType;
+
+    @OneToMany(mappedBy = "sequenceForUserWorkflow", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<UserWorkflowSequence> userWorkflowSequences;
 
     public Sequence(Integer sequenceID, Integer sequence, Boolean isDone,
             sequenceTypeEnum sequenceTypeEnum) {

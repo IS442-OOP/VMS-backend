@@ -6,7 +6,7 @@ import java.util.*;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class UserType {
     @Id
-    private String userTypeID;
+    private Long userTypeID;
     private String userType;
     @OneToMany(mappedBy="userType", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public Set <User> user; 
@@ -16,7 +16,7 @@ public class UserType {
 
 
 
-    public UserType(String userTypeID, String userType) {
+    public UserType(Long userTypeID, String userType) {
         this.userTypeID = userTypeID;
         this.userType = userType;
     }
@@ -27,10 +27,10 @@ public class UserType {
 
 
 
-    public String getUserTypeID() {
+    public Long getUserTypeID() {
         return userTypeID;
     }
-    public void setUserTypeID(String userTypeID) {
+    public void setUserTypeID(Long userTypeID) {
         this.userTypeID = userTypeID;
     }
     public String getUserType() {

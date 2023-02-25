@@ -1,44 +1,51 @@
 package com.example.is442oop.vmsbackend.entities;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import java.util.*;
+import java.util.List;
 
 
 @Entity
 public class User {
-    @Id 
-    private Integer userID;
+    @Id
+    @SequenceGenerator(
+            name = "user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_sequence"
+    )
+    private Long userID;
+    private String name;
     private String email;
     private String password;
-    private Boolean isAccountActivated;
-    private String vendorName; 
+    private boolean isAccountActivated;
 
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public Set <UserWorkflow> userWorkflow; 
+    public List <UserWorkflow> userWorkflow;
     @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name="userTypeID", insertable=false, updatable = false)
     private UserType userType;
     
 
-    public User(Integer userID, String email, String password, boolean isAccountActivated, String vendorName) {
-        this.userID = userID;
+    public User(@JsonProperty("email") String email,
+                @JsonProperty("password") String password,
+                @JsonProperty("name") String name,
+                @JsonProperty("isAccountActivated") boolean isAccountActivated) {
         this.email = email;
         this.password = password;
+        this.name = name;
         this.isAccountActivated = isAccountActivated;
-        this.vendorName = vendorName;
     }
 
     public User(){
-        
+
     }
 
 
-
-    public Integer getUserID() {
+    public Long getUserID() {
         return userID;
-    }
-
-    public void setUserID(Integer userID) {
-        this.userID = userID;
     }
 
     public String getEmail() {
@@ -65,22 +72,24 @@ public class User {
         this.isAccountActivated = isAccountActivated;
     }
 
-    public String getVendorName() {
-        return vendorName;
+    public String getName() {
+        return name;
     }
 
-    public void setVendorName(String vendorName) {
-        this.vendorName = vendorName;
+    public void setName(String vendorName) {
+        this.name = name;
     }
 
-
-
-
-
-    
-
-
-    
-
-    
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID=" + userID +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", isAccountActivated=" + isAccountActivated +
+                ", userWorkflow=" + userWorkflow +
+                ", userType=" + userType +
+                '}';
+    }
 }

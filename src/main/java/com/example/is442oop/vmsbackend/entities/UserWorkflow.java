@@ -1,11 +1,20 @@
 package com.example.is442oop.vmsbackend.entities;
 import jakarta.persistence.*;
-import java.util.*;
+import java.util.List;
 
 @Entity
 public class UserWorkflow {
-    @Id 
-    private Integer userWorkflowID;
+    @Id
+    @SequenceGenerator(
+            name = "userworkflow_sequence",
+            sequenceName = "userworkflow_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "userworkflow_sequence"
+    )
+    private Long userWorkflowID;
     private String dateAssigned;
     private String isApprroved;
 
@@ -17,9 +26,11 @@ public class UserWorkflow {
     @JoinColumn(name="workflowID", insertable=false, updatable = false, nullable=true)
     private Workflow workflow;
 
-    
-    @OneToMany(mappedBy="userWorkflow", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public Set <Answer> answer;
+    @OneToMany(mappedBy="userWorkflowForAnswer", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    private List <Answer> answer;
+
+    @OneToMany(mappedBy = "userWorkflow", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    private List<UserWorkflowSequence> userWorkflowSequences;
 
 
     public User getUser() {
@@ -30,11 +41,11 @@ public class UserWorkflow {
         this.user = user;
     }
 
-    public Integer getUserWorkflowID() {
+    public Long getUserWorkflowID() {
         return userWorkflowID;
     }
 
-    public void setUserWorkflowID(Integer userWorkflowID) {
+    public void setUserWorkflowID(Long userWorkflowID) {
         this.userWorkflowID = userWorkflowID;
     }
 

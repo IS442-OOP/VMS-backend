@@ -11,7 +11,7 @@ public class Answer {
     private Question question;
     @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY, optional = true)
     @JoinColumn(name="userWorkflowID", insertable=false, updatable = false, nullable = true)
-    private UserWorkflow userWorkflow;
+    private UserWorkflow userWorkflowForAnswer;
     @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name="sequenceID", insertable=false, updatable = false)
     private Sequence sequence;
