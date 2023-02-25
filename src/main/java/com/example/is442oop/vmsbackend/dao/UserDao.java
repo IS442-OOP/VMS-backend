@@ -47,7 +47,7 @@ public class UserDao {
 
   public void hashPassword(User user, String password){
     Base64.Encoder encoder = Base64.getEncoder();
-    user.setPassword(encoder.encodeToString(password.getBytes()));
+//    user.setPassword(encoder.encodeToString(password.getBytes()));
   }
 
   public boolean verifyPassword(String encryptedPassword, String enteredPassword){

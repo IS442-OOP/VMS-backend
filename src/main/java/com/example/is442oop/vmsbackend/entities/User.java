@@ -1,44 +1,51 @@
 package com.example.is442oop.vmsbackend.entities;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.util.List;
 
 
 @Entity
 public class User {
-    @Id 
+    @Id
+    @SequenceGenerator(
+            name = "user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_sequence"
+    )
     private Long userID;
+    private String name;
     private String email;
     private String password;
-    private Boolean isAccountActivated;
-    private String name;
+    private boolean isAccountActivated;
 
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public List <UserWorkflow> userWorkflow; 
+    public List <UserWorkflow> userWorkflow;
     @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name="userTypeID", insertable=false, updatable = false)
     private UserType userType;
     
 
-    public User(Long userID, String email, String password, boolean isAccountActivated, String name) {
-        this.userID = userID;
+    public User(@JsonProperty("email") String email,
+                @JsonProperty("password") String password,
+                @JsonProperty("name") String name,
+                @JsonProperty("isAccountActivated") boolean isAccountActivated) {
         this.email = email;
         this.password = password;
-        this.isAccountActivated = isAccountActivated;
         this.name = name;
+        this.isAccountActivated = isAccountActivated;
     }
 
     public User(){
-        
-    }
 
+    }
 
 
     public Long getUserID() {
         return userID;
-    }
-
-    public void setUserID(Long userID) {
-        this.userID = userID;
     }
 
     public String getEmail() {
@@ -73,14 +80,16 @@ public class User {
         this.name = name;
     }
 
-
-
-
-
-    
-
-
-    
-
-    
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID=" + userID +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", isAccountActivated=" + isAccountActivated +
+                ", userWorkflow=" + userWorkflow +
+                ", userType=" + userType +
+                '}';
+    }
 }

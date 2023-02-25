@@ -22,7 +22,7 @@ public class RegisterController {
   }
 
   @PostMapping
-  public ResponseEntity registerUser(@RequestBody User user){
-      return registerService.registerUser(user);
+  public ResponseEntity registerUser(@RequestBody User user) {
+    return registerService.handle(user);
   }
 }

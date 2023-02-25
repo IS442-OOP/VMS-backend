@@ -18,7 +18,8 @@ public class RegisterService implements RegisterInterface {
     this.userDao = userDaoUtils;
   }
 
-  public ResponseEntity registerUser(User user){
+  public ResponseEntity handle(User user){
+    System.out.println(user.toString());
     try {
       if (userDao.isUserPresent(user.getEmail())){
         return ResponseUtil.responseConflict(user.getEmail());

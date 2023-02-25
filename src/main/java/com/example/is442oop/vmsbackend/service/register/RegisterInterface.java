@@ -4,5 +4,5 @@ import com.example.is442oop.vmsbackend.entities.User;
 import org.springframework.http.ResponseEntity;
 
 public interface RegisterInterface {
-  public ResponseEntity registerUser(User user);
+  public ResponseEntity handle(User user);
 }
