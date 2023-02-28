@@ -23,10 +23,12 @@ public class LoginService implements LoginInterface {
   public ResponseEntity handle(User user){
     try {
       User userFromDatabase = userDao.findUser(user.getEmail());
+      
       if (userFromDatabase != null){
         if (userDao.verifyPassword(userFromDatabase.getPassword(), user.getPassword())){
           String token = JwtUtil.jwtBuilder(userFromDatabase.getUserID(), user.getEmail(), user.getName());
-          return ResponseUtil.responseLoginSuccess(userFromDatabase.getUserID(), token);
+          System.out.println(token);
+          return ResponseUtil.responseLoginSuccess(userFromDatabase.getUserID(), token, user);
         } else {
           return ResponseUtil.responseNotAuthorized();
         }
@@ -36,9 +38,13 @@ public class LoginService implements LoginInterface {
       }
     } catch (Exception e){
       if (e instanceof NotFoundException){
+        
+        e.printStackTrace();
         throw new NotFoundException(e.getMessage());
       } else {
+        e.printStackTrace();
         throw new InternalServerException(e.getMessage());
+       
       }
     }
 
