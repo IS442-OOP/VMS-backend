@@ -1,9 +1,9 @@
 package com.example.is442oop.vmsbackend.dto;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 @Data
-@Builder
+@SuperBuilder
 public class ResponseDto {
   private String message;
   private String token;

@@ -1,5 +1,6 @@
 package com.example.is442oop.vmsbackend.utils;
 
+import com.example.is442oop.vmsbackend.dto.LoginResponseDto;
 import com.example.is442oop.vmsbackend.dto.ResponseDto;
 import com.example.is442oop.vmsbackend.entities.User;
 import org.springframework.http.HttpStatus;
@@ -35,10 +36,24 @@ public class ResponseUtil {
             .build();
   }
 
+  public static LoginResponseDto createReturnValue(String message, String token, User user) {
+    return LoginResponseDto.builder()
+            .message(message)
+            .token(token)
+            .user(user)
+            .build();
+  }
+
   public static ResponseEntity<User> responseOk(User user) {
     return ResponseEntity.status(HttpStatus.OK)
             .body(user);
   }
+
+  public static ResponseEntity<LoginResponseDto> responseOk(String message, String token, User user) {
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(createReturnValue(message, token, user));
+  }
+
 
   public static ResponseEntity responseTaskDeleted(Long Id) {
     ResponseDto body = createReturnValue(responseTaskDeleted + Id);
@@ -83,8 +98,8 @@ public class ResponseUtil {
             .body(body);
   }
 
-  public static ResponseEntity responseLoginSuccess(Long Id, String token) {
-    ResponseDto body = createReturnValue(responseLoginSuccess + Id, token);
+  public static ResponseEntity responseLoginSuccess(Long Id, String token, User user) {
+    ResponseDto body = createReturnValue(responseLoginSuccess + Id, token, user);
     return ResponseEntity.status(HttpStatus.CREATED)
             .body(body);
   }
