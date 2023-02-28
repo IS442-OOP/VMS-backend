@@ -14,7 +14,7 @@ public class Workflow {
             strategy = GenerationType.SEQUENCE,
             generator = "workflow_sequence"
     )
-    private Integer workflowID;
+    private Long workflowID;
     private String name;
     @OneToMany(mappedBy="workflow", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public Set <UserWorkflow> userWorkflow; 
@@ -24,15 +24,15 @@ public class Workflow {
     public Workflow() {
     }
 
-    public Workflow(Integer workflowID, String name) {
+    public Workflow(Long workflowID, String name) {
         this.workflowID = workflowID;
         this.name = name;
     }
 
-    public Integer getWorkflowID() {
+    public Long getWorkflowID() {
         return workflowID;
     }
-    public void setWorkflowID(Integer workflowID) {
+    public void setWorkflowID(Long workflowID) {
         this.workflowID = workflowID;
     }
     public String getName() {

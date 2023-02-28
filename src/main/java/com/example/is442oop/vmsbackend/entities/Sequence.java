@@ -15,7 +15,7 @@ public class Sequence {
             strategy = GenerationType.SEQUENCE,
             generator = "sequence_sequence"
     )
-    private Integer sequenceID;
+    private Long sequenceID;
     private Integer sequence;
     private Boolean isDone;
     @Enumerated(EnumType.STRING)
@@ -32,6 +32,12 @@ public class Sequence {
     @OneToMany(mappedBy = "sequence", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Answer> answer;
 
+    @OneToOne(mappedBy = "sequence", cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+    private QuestionnaireSequence questionnaireSequence;
+
+    @OneToOne(mappedBy = "sequence", cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+    private ApprovalSequence approvalSequence;
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "userTypeID", insertable = false, updatable = false)
     private UserType userType;
@@ -39,7 +45,7 @@ public class Sequence {
     @OneToMany(mappedBy = "sequenceForUserWorkflow", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UserWorkflowSequence> userWorkflowSequences;
 
-    public Sequence(Integer sequenceID, Integer sequence, Boolean isDone,
+    public Sequence(Long sequenceID, Integer sequence, Boolean isDone,
             sequenceTypeEnum sequenceTypeEnum) {
         this.sequenceID = sequenceID;
         this.sequence = sequence;
@@ -52,11 +58,11 @@ public class Sequence {
     }
 
 
-    public Integer getSequenceID() {
+    public Long getSequenceID() {
         return sequenceID;
     }
 
-    public void setSequenceID(Integer sequenceID) {
+    public void setSequenceID(Long sequenceID) {
         this.sequenceID = sequenceID;
     }
 

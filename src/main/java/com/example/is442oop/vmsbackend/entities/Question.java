@@ -6,31 +6,33 @@ import java.util.*;
 @Entity
 public class Question {
     @Id
-    private Integer questionID;
+    private Long questionID;
     private String question; 
     private String questionType;
     @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name="sectionID", insertable=false, updatable = false)
-    private Section section;
+    @JoinColumn(name="questionnaireID", insertable=false, updatable = false)
+    private Questionnaire questionnaire;
     @OneToMany(mappedBy="question", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public Set <QuestionOption> options;    
     @OneToMany(mappedBy="question", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public Set <Answer> answer;
 
 
+    public Question() {
+    }
 
-    public Question(Integer questionID, String question, String questionType) {
+    public Question(Long questionID, String question, String questionType) {
         this.questionID = questionID;
         this.question = question;
         this.questionType = questionType;
     }
-    
-    public Integer getQuestionID() {
+
+    public Long getQuestionID() {
         return questionID;
     }
 
 
-    public void setQuestionID(Integer questionID) {
+    public void setQuestionID(Long questionID) {
         this.questionID = questionID;
     }
 

@@ -6,19 +6,22 @@ import java.util.*;
 @Entity
 public class Questionnaire {
     @Id 
-    private Integer questionnaireID;
+    private Long questionnaireID;
     private String name;
     @OneToMany(mappedBy="questionnaire", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public Set <Sequence> sequence;
+    public Set <Question> questions;
 
-    @OneToMany(mappedBy="section", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public Set <Section> section;
+    @OneToMany(mappedBy="questionnaire", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    public Set <QuestionnaireSequence> sequenceQuestionnaires;
+
+    @OneToMany(mappedBy="questionnaireToApprove", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    public Set<ApprovalSequence> sequenceApprovals;
 
     @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name="formID", insertable=false, updatable = false)
     private Form form;
     
-    public Questionnaire(Integer questionnaireID, String name) {
+    public Questionnaire(Long questionnaireID, String name) {
         this.questionnaireID = questionnaireID;
         this.name = name;
     }
@@ -28,10 +31,10 @@ public class Questionnaire {
     }
 
 
-    public Integer getQuestionnaireID() {
+    public Long getQuestionnaireID() {
         return questionnaireID;
     }
-    public void setQuestionnaireID(Integer questionnaireID) {
+    public void setQuestionnaireID(Long questionnaireID) {
         this.questionnaireID = questionnaireID;
     }
     public String getName() {
