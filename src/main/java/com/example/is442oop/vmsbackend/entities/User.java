@@ -1,4 +1,5 @@
 package com.example.is442oop.vmsbackend.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.util.List;
@@ -27,7 +28,6 @@ public class User {
     @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name="userTypeID", insertable=false, updatable = false)
     private UserType userType;
-    
 
     public User(@JsonProperty("email") String email,
                 @JsonProperty("password") String password,
@@ -43,11 +43,12 @@ public class User {
 
     }
 
-
+    @JsonIgnore
     public Long getUserID() {
         return userID;
     }
 
+    @JsonIgnore
     public String getEmail() {
         return email;
     }
@@ -56,6 +57,7 @@ public class User {
         this.email = email;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -79,6 +81,13 @@ public class User {
     public void setName(String vendorName) {
         this.name = name;
     }
+    
+    public UserType getUserType() {
+        return userType;
+    }
+
+
+    
 
     @Override
     public String toString() {
