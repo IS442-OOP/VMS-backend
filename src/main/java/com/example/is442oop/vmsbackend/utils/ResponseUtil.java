@@ -2,6 +2,7 @@ package com.example.is442oop.vmsbackend.utils;
 
 import com.example.is442oop.vmsbackend.dto.LoginResponseDto;
 import com.example.is442oop.vmsbackend.dto.ResponseDto;
+import com.example.is442oop.vmsbackend.entities.Question;
 import com.example.is442oop.vmsbackend.entities.Questionnaire;
 import com.example.is442oop.vmsbackend.entities.User;
 import org.springframework.http.HttpStatus;
@@ -46,7 +47,13 @@ public class ResponseUtil {
             .build();
   }
 
-  public static ResponseEntity<User> responseOk(List<Questionnaire> list) {
+  public static ResponseEntity<User> responseOk(User user) {
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(user);
+  }
+
+
+  public static ResponseEntity<List<Questionnaire>> responseOk(List<Questionnaire> list) {
     return ResponseEntity.status(HttpStatus.OK)
             .body(list);
   }
