@@ -2,12 +2,14 @@ package com.example.is442oop.vmsbackend.utils;
 
 import com.example.is442oop.vmsbackend.dto.LoginResponseDto;
 import com.example.is442oop.vmsbackend.dto.ResponseDto;
+import com.example.is442oop.vmsbackend.entities.Questionnaire;
 import com.example.is442oop.vmsbackend.entities.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -44,9 +46,9 @@ public class ResponseUtil {
             .build();
   }
 
-  public static ResponseEntity<User> responseOk(User user) {
+  public static ResponseEntity<User> responseOk(List<Questionnaire> list) {
     return ResponseEntity.status(HttpStatus.OK)
-            .body(user);
+            .body(list);
   }
 
   public static ResponseEntity<LoginResponseDto> responseOk(String message, String token, User user) {
