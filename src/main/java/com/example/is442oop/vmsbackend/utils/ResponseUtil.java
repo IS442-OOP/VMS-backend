@@ -53,11 +53,6 @@ public class ResponseUtil {
   }
 
 
-  public static ResponseEntity<List<Questionnaire>> responseOk(List<Questionnaire> list) {
-    return ResponseEntity.status(HttpStatus.OK)
-            .body(list);
-  }
-
   public static ResponseEntity<LoginResponseDto> responseOk(String message, String token, User user) {
     return ResponseEntity.status(HttpStatus.OK)
             .body(createReturnValue(message, token, user));
