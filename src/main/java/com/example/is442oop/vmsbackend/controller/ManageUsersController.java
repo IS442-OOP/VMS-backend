@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,13 +27,13 @@ public class ManageUsersController {
 
   // @RequestAttribute("userId") String id
   @GetMapping
-  public @ResponseBody Object retrieveUsers(){
+  public ResponseEntity retrieveUsers(@RequestHeader(name="Authorization") String token){
     return manageUsersService.retrieveUsers();
   }
 
   // @GetMapping("/{userId}")
-  // public @ResponseBody Object getUserWorkflows(@PathVariable Integer userId) {
-  //   return manageUsersService.getUserWorkflows();
+  // public ResponseEntity retrieveUserWorkflows(@RequestHeader(name="Authorization") String token, @PathVariable Integer userId) {
+  //   return manageUsersService.retrieveUserWorkflows(userId);
   // }
 
   // @PostMapping("/{userId}")
