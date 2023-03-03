@@ -7,5 +7,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 public interface ManageUsersInterface {
-    public List<User> retrieveUsers();
+    public ResponseEntity retrieveUsers();
+
+    public ResponseEntity retrieveUserWorkflows();
 }
