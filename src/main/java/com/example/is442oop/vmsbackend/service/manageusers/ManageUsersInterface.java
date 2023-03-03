@@ -1,11 +1,8 @@
 package com.example.is442oop.vmsbackend.service.manageusers;
 
 import com.example.is442oop.vmsbackend.entities.User;
-
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 
 public interface ManageUsersInterface {
-    public List<User> retrieveUsers();
+  public ResponseEntity handle(User user);
 }
