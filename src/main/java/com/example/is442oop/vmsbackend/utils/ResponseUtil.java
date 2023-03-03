@@ -1,13 +1,17 @@
 package com.example.is442oop.vmsbackend.utils;
 
 import com.example.is442oop.vmsbackend.dto.LoginResponseDto;
+import com.example.is442oop.vmsbackend.dto.ManageUsersDto;
 import com.example.is442oop.vmsbackend.dto.ResponseDto;
 import com.example.is442oop.vmsbackend.entities.User;
+import com.example.is442oop.vmsbackend.entities.UserWorkflow;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -22,6 +26,7 @@ public class ResponseUtil {
   private final static String responseTaskUpdated = "Task has been updated for Id: ";
   private final static String responseNotAuthorized = "User not authorized";
   private final static String responseLoginSuccess = "User has login successfully for Id: ";
+ 
 
   public static ResponseDto createReturnValue(String message) {
     return ResponseDto.builder()
@@ -44,6 +49,19 @@ public class ResponseUtil {
             .build();
   }
 
+  public static ManageUsersDto createReturnValue(List<User> users) {
+    return ManageUsersDto.builder()     
+            .users(users)
+            .build();
+  }
+
+  public static ManageUsersDto createReturnValue(User user, List<UserWorkflow> userworkflows) {
+    return ManageUsersDto.builder()
+            .user(user)
+            .userworkflows(userworkflows)
+            .build();
+  }
+
   public static ResponseEntity<User> responseOk(User user) {
     return ResponseEntity.status(HttpStatus.OK)
             .body(user);
@@ -54,6 +72,15 @@ public class ResponseUtil {
             .body(createReturnValue(message, token, user));
   }
 
+  public static ResponseEntity<ManageUsersDto> responseOk(List<User> users) {
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(createReturnValue(users));
+  }
+
+  public static ResponseEntity<ManageUsersDto> responseOk(User user, List<UserWorkflow> workflows) {
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(createReturnValue(user, workflows));
+  }
 
   public static ResponseEntity responseTaskDeleted(Long Id) {
     ResponseDto body = createReturnValue(responseTaskDeleted + Id);

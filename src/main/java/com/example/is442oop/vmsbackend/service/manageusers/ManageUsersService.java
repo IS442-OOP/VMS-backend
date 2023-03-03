@@ -6,10 +6,9 @@ import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.entities.UserWorkflow;
 import com.example.is442oop.vmsbackend.exception.InternalServerException;
 import com.example.is442oop.vmsbackend.exception.NotFoundException;
-import com.example.is442oop.vmsbackend.utils.JwtUtil;
+import com.example.is442oop.vmsbackend.exception.UserForbiddenException;
 import com.example.is442oop.vmsbackend.utils.ResponseUtil;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +24,8 @@ public class ManageUsersService implements ManageUsersInterface {
   public ManageUsersService(UserDao userDao){
     this.userDao = userDao;
   }
-  public List<User> retrieveUsers() {
-    
-    List<User> users = userDao.retrieveUsers();
-    return users;
-    
+  public ResponseEntity retrieveUsers() {
+    return ResponseUtil.responseOk(userDao.retrieveUsers());
   }
 
 }
