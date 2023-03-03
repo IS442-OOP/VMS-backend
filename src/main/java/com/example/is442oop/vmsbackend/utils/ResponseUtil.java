@@ -49,6 +49,11 @@ public class ResponseUtil {
             .body(user);
   }
 
+  public static ResponseEntity<User> responseVendorCreated(User user) {
+    return ResponseEntity.status(HttpStatus.CREATED)
+            .body(user);
+  }
+
   public static ResponseEntity<LoginResponseDto> responseOk(String message, String token, User user) {
     return ResponseEntity.status(HttpStatus.OK)
             .body(createReturnValue(message, token, user));
@@ -93,7 +98,6 @@ public class ResponseUtil {
 
   public static ResponseEntity responseUserCreated(Long Id, String token) {
     ResponseDto body = createReturnValue(responseCreated + Id, token);
-    System.out.println(body);
     return ResponseEntity.status(HttpStatus.CREATED)
             .body(body);
   }

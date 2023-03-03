@@ -23,12 +23,13 @@ public class LoginService implements LoginInterface {
   public ResponseEntity handle(User user){
     try {
       User userFromDatabase = userDao.findUser(user.getEmail());
+      System.out.println(userFromDatabase.toString());
       
       if (userFromDatabase != null){
         if (userDao.verifyPassword(userFromDatabase.getPassword(), user.getPassword())){
           String token = JwtUtil.jwtBuilder(userFromDatabase.getUserID(), user.getEmail(), user.getName());
           System.out.println(token);
-          return ResponseUtil.responseLoginSuccess(userFromDatabase.getUserID(), token, user);
+          return ResponseUtil.responseLoginSuccess(userFromDatabase.getUserID(), token, userFromDatabase);
         } else {
           return ResponseUtil.responseNotAuthorized();
         }

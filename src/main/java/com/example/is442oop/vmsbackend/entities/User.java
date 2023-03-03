@@ -24,6 +24,7 @@ public class User {
 
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public List <UserWorkflow> userWorkflow;
+
     @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name="userTypeID", insertable=false, updatable = false)
     private UserType userType;
@@ -78,6 +79,14 @@ public class User {
 
     public void setName(String vendorName) {
         this.name = name;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
     @Override
