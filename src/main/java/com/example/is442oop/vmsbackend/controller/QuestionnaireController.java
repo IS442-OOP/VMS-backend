@@ -38,10 +38,16 @@ public class QuestionnaireController {
 
     @PostMapping
     public @ResponseBody ResponseEntity createQuestionnaire(@RequestBody Map<String,String> questionnaireDetails){
-        Long questionnaireID= Long.parseLong(questionnaireDetails.get("questionnaireID"));
         String name = questionnaireDetails.get("name");
         String description = questionnaireDetails.get("description");
-        return questionnaireService.createQuestionnaire(questionnaireID, name, description);
+        return questionnaireService.createQuestionnaire(name, description);
+    }
+
+    @PostMapping("/{questionnaireID}")
+    public @ResponseBody Questionnaire editQuestionnaire(@PathVariable Long questionnaireID ,@RequestBody Map<String,?> questionnaireDetails){
+        return questionnaireService.editQuestionnaire(questionnaireID,questionnaireDetails);
+
+
     }
 
 }

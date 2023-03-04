@@ -1,6 +1,7 @@
 package com.example.is442oop.vmsbackend.service.questionnaires;
 
 import com.example.is442oop.vmsbackend.dao.Questionnaires.*;
+import com.example.is442oop.vmsbackend.entities.Question;
 import com.example.is442oop.vmsbackend.entities.Questionnaire;
 import com.example.is442oop.vmsbackend.utils.ResponseUtil;
 
@@ -28,7 +29,13 @@ public class QuestionnaireService implements QuestionnaireInterface {
       return ResponseUtil.responseOkGetQuestionnaire(questionnaireDAO.getQuestionnaireByID(questionnaireID));
     }
 
-    public ResponseEntity createQuestionnaire(Long questionnaireID, String name, String description){
-      return ResponseUtil.responseOkCreateQuestionnaire(questionnaireDAO.createQuestionnaire(questionnaireID, name, description));
+    public ResponseEntity createQuestionnaire(String name, String description){
+      return ResponseUtil.responseOkCreateQuestionnaire(questionnaireDAO.createQuestionnaire(name, description));
     }
+
+    public Questionnaire editQuestionnaire(Long questionnaireID,Map<String,?> questionnaireDetails){
+      return questionnaireDAO.editQuestionnaire(questionnaireID, questionnaireDetails);
+    }
+
+    
 }

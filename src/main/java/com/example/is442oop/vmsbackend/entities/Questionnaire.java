@@ -6,10 +6,12 @@ import java.util.*;
 @Entity
 public class Questionnaire {
     @Id 
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long questionnaireID;
     private String name;
     private String description;
-    @OneToMany(mappedBy="questionnaire", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    
+    @OneToMany(mappedBy="questionnaire", cascade=CascadeType.ALL, orphanRemoval = true, fetch=FetchType.LAZY)
     public Set <Question> questions;
 
     @OneToMany(mappedBy="questionnaire", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
@@ -22,8 +24,7 @@ public class Questionnaire {
     @JoinColumn(name="formID", insertable=false, updatable = false)
     private Form form;
     
-    public Questionnaire(Long questionnaireID, String name, String description) {
-        this.questionnaireID = questionnaireID;
+    public Questionnaire(String name, String description) {
         this.name = name;
         this.description= description;
     }
@@ -51,5 +52,14 @@ public class Questionnaire {
 
     public void setDescription(String description){
         this.description = description;
+    }
+
+    public void addQuestion(Question question){
+        this.questions.add(question); 
+    }
+
+    public void clearQuestions(){
+        this.questions.clear();
+
     }
 }
