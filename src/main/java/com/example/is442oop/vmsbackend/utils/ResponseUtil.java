@@ -58,6 +58,11 @@ public class ResponseUtil {
     .body(list);
   }
 
+  public static ResponseEntity <Questionnaire> responseOkCreateQuestionnaire(Questionnaire questionnaire){
+    return ResponseEntity.status(HttpStatus.OK)
+    .body(questionnaire);
+  }
+
   public static ResponseEntity <Questionnaire> responseOkGetQuestionnaire(Questionnaire questionnaire){
     return ResponseEntity.status(HttpStatus.OK)
     .body(questionnaire);
