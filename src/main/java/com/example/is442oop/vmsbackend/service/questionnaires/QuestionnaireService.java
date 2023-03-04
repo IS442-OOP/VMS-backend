@@ -28,8 +28,7 @@ public class QuestionnaireService implements QuestionnaireInterface {
       return ResponseUtil.responseOkGetQuestionnaire(questionnaireDAO.getQuestionnaireByID(questionnaireID));
     }
 
-    public ResponseEntity createQuestionnaire(Long questionnaireID, String name){
-      return ResponseUtil.responseOkCreateQuestionnaire(questionnaireDAO.createQuestionnaire(questionnaireID, name));
-      
+    public ResponseEntity createQuestionnaire(Long questionnaireID, String name, String description){
+      return ResponseUtil.responseOkCreateQuestionnaire(questionnaireDAO.createQuestionnaire(questionnaireID, name, description));
     }
 }

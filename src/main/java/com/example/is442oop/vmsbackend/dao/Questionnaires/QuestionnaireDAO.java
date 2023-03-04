@@ -34,10 +34,10 @@ public class QuestionnaireDAO {
       return null;
     }
 
-    public Questionnaire createQuestionnaire(Long questionnaireID, String name){
+    public Questionnaire createQuestionnaire(Long questionnaireID, String name, String description){
 
       try{
-        Questionnaire newQuestionnaire = new Questionnaire(questionnaireID, name);
+        Questionnaire newQuestionnaire = new Questionnaire(questionnaireID, name, description);
         return questionnaireRepository.save(newQuestionnaire);
       }
       catch(Exception e){

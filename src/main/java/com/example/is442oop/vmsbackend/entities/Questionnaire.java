@@ -8,6 +8,7 @@ public class Questionnaire {
     @Id 
     private Long questionnaireID;
     private String name;
+    private String description;
     @OneToMany(mappedBy="questionnaire", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public Set <Question> questions;
 
@@ -21,15 +22,19 @@ public class Questionnaire {
     @JoinColumn(name="formID", insertable=false, updatable = false)
     private Form form;
     
-    public Questionnaire(Long questionnaireID, String name) {
+    public Questionnaire(Long questionnaireID, String name, String description) {
         this.questionnaireID = questionnaireID;
         this.name = name;
+        this.description= description;
     }
 
     public Questionnaire(){
 
     }
 
+    public String getDescription(){
+        return description;
+    }
 
     public Long getQuestionnaireID() {
         return questionnaireID;
@@ -43,4 +48,8 @@ public class Questionnaire {
     public void setName(String name) {
         this.name = name;
     } 
+
+    public void setDescription(String description){
+        this.description = description;
+    }
 }

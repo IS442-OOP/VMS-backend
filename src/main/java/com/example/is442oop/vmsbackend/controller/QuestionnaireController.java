@@ -40,7 +40,8 @@ public class QuestionnaireController {
     public @ResponseBody ResponseEntity createQuestionnaire(@RequestBody Map<String,String> questionnaireDetails){
         Long questionnaireID= Long.parseLong(questionnaireDetails.get("questionnaireID"));
         String name = questionnaireDetails.get("name");
-        return questionnaireService.createQuestionnaire(questionnaireID, name);
+        String description = questionnaireDetails.get("description");
+        return questionnaireService.createQuestionnaire(questionnaireID, name, description);
     }
 
 }
