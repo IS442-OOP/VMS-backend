@@ -1,6 +1,4 @@
 package com.example.is442oop.vmsbackend.dao.Questionnaires;
-
-import com.example.is442oop.vmsbackend.entities.QuestionOption;
 import com.example.is442oop.vmsbackend.entities.Questionnaire;
 import com.example.is442oop.vmsbackend.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +23,9 @@ public class QuestionnaireDAO {
       return null;
     }
 
-    public List<QuestionOption> getAllQuestionOptions(){
+    public Questionnaire getQuestionnaireByID(Long questionnaireID){
       try{
-        return questionnaireRepository.getAllQuestionOptions();
+        return questionnaireRepository.getQuestionnaireByID(questionnaireID);
       }
       catch(Exception e){
       }

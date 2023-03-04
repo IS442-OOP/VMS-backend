@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class QuestionnaireService implements QuestionnaireInterface {
-
     private final QuestionnaireDAO questionnaireDAO;
     @Autowired
     public QuestionnaireService(QuestionnaireDAO questionnaireDAO){
@@ -22,11 +21,7 @@ public class QuestionnaireService implements QuestionnaireInterface {
       return ResponseUtil.responseOk(questionnaireDAO.getAllQuestionnaires());
     }
 
-    public ResponseEntity getAllQuestionOptions(){
-      return ResponseUtil.responseOkQuestionOption(questionnaireDAO.getAllQuestionOptions());
+    public ResponseEntity getQuestionnaireByID(Long questionnaireID){
+      return ResponseUtil.responseOkGetQuestionnaire(questionnaireDAO.getQuestionnaireByID(questionnaireID));
     }
-  
-
-
-    
 }

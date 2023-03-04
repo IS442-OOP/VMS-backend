@@ -58,9 +58,9 @@ public class ResponseUtil {
     .body(list);
   }
 
-  public static ResponseEntity <List<QuestionOption>> responseOkQuestionOption(List<QuestionOption> list){
+  public static ResponseEntity <Questionnaire> responseOkGetQuestionnaire(Questionnaire questionnaire){
     return ResponseEntity.status(HttpStatus.OK)
-    .body(list);
+    .body(questionnaire);
   }
 
   public static ResponseEntity<LoginResponseDto> responseOk(String message, String token, User user) {

@@ -7,6 +7,6 @@ import com.example.is442oop.vmsbackend.entities.Questionnaire;
 
 interface QuestionnaireInterface {
     public ResponseEntity getAllQuestionnaires();
-    public ResponseEntity getAllQuestionOptions();
+    public ResponseEntity getQuestionnaireByID(Long questionnaireID);
     
 }

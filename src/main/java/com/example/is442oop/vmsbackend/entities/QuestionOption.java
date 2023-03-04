@@ -18,6 +18,10 @@ public class QuestionOption {
         this.optionType = optionType;
     }
 
+    public QuestionOption(){
+        
+    }
+
 
     public Integer getOptionID() {
         return optionID;
