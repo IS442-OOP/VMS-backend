@@ -8,6 +8,4 @@ import org.springframework.http.ResponseEntity;
 
 public interface ManageUsersInterface {
     public ResponseEntity retrieveUsers();
-
-    public ResponseEntity retrieveUserWorkflows();
 }
