@@ -21,6 +21,10 @@ public class QuestionnaireService implements QuestionnaireInterface {
     public ResponseEntity getAllQuestionnaires() {
       return ResponseUtil.responseOk(questionnaireDAO.getAllQuestionnaires());
     }
+
+    public ResponseEntity getAllQuestionOptions(){
+      return ResponseUtil.responseOkQuestionOption(questionnaireDAO.getAllQuestionOptions());
+    }
   
 
 
