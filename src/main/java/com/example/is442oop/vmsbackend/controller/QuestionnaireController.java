@@ -22,7 +22,7 @@ public class QuestionnaireController {
     }
 
     @GetMapping
-    public @ResponseBody List<Questionnaire> getAllQuestionnaires() {
+    public ResponseEntity getAllQuestionnaires() {
         return questionnaireService.getAllQuestionnaires();
     }
 

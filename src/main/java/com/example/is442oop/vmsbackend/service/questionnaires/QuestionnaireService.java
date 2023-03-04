@@ -2,9 +2,12 @@ package com.example.is442oop.vmsbackend.service.questionnaires;
 
 import com.example.is442oop.vmsbackend.dao.Questionnaires.*;
 import com.example.is442oop.vmsbackend.entities.Questionnaire;
+import com.example.is442oop.vmsbackend.utils.ResponseUtil;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,8 +18,8 @@ public class QuestionnaireService implements QuestionnaireInterface {
     public QuestionnaireService(QuestionnaireDAO questionnaireDAO){
       this.questionnaireDAO = questionnaireDAO;
     }
-    public List<Questionnaire> getAllQuestionnaires() {
-      return questionnaireDAO.getAllQuestionnaires();
+    public ResponseEntity getAllQuestionnaires() {
+      return ResponseUtil.responseOk(questionnaireDAO.getAllQuestionnaires());
     }
   
 
