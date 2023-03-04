@@ -1,15 +1,11 @@
 package com.example.is442oop.vmsbackend.dao.Questionnaires;
 
+import com.example.is442oop.vmsbackend.entities.QuestionOption;
 import com.example.is442oop.vmsbackend.entities.Questionnaire;
-import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.CannotCreateTransactionException;
-
-import java.util.Base64;
 import java.util.List;
-import java.util.Objects;
 
 @Component
 public class QuestionnaireDAO {
@@ -21,7 +17,21 @@ public class QuestionnaireDAO {
     }
     
     public List<Questionnaire> getAllQuestionnaires(){
+      try{
         return questionnaireRepository.getAllQuestionnaires();
+      }
+      catch(Exception e){
+      }
+      return null;
+    }
+
+    public List<QuestionOption> getAllQuestionOptions(){
+      try{
+        return questionnaireRepository.getAllQuestionOptions();
+      }
+      catch(Exception e){
+      }
+      return null;
     }
     
 }
