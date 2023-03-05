@@ -19,7 +19,6 @@ public class UserDao {
   }
 
   public void registerUser(User user) {
-    System.out.println(user);
     userRepository.save(user);
   }
 
@@ -51,9 +50,18 @@ public class UserDao {
     user.setPassword(encoder.encodeToString(password.getBytes()));
   }
 
+  public String hashPassword(String password){
+    Base64.Encoder encoder = Base64.getEncoder();
+    return encoder.encodeToString(password.getBytes());
+  }
+
   public boolean verifyPassword(String encryptedPassword, String enteredPassword){
     Base64.Decoder decoder = Base64.getDecoder();
     byte[] bytes = decoder.decode(encryptedPassword);
     return Objects.equals(new String(bytes), enteredPassword);
+  }
+
+  public void updatePassword(int userId, String password) throws Exception {
+    userRepository.updatePassword(Long.valueOf(userId), password);
   }
 }

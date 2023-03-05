@@ -1,14 +1,12 @@
 package com.example.is442oop.vmsbackend.utils;
 
-import com.example.is442oop.vmsbackend.dto.LoginResponseDto;
-import com.example.is442oop.vmsbackend.dto.ResponseDto;
+import com.example.is442oop.vmsbackend.dto.response.LoginResponseDto;
+import com.example.is442oop.vmsbackend.dto.response.ResponseDto;
+import com.example.is442oop.vmsbackend.dto.response.TrueFalseDto;
 import com.example.is442oop.vmsbackend.entities.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 public class ResponseUtil {
@@ -41,6 +39,13 @@ public class ResponseUtil {
             .message(message)
             .token(token)
             .user(user)
+            .build();
+  }
+
+  public static TrueFalseDto createReturnValue(String message, boolean state) {
+    return TrueFalseDto.builder()
+            .isCompleted(state)
+            .message(message)
             .build();
   }
 
@@ -108,8 +113,26 @@ public class ResponseUtil {
             .body(body);
   }
 
+  public static ResponseEntity responseUpdateSuccess(String Id) {
+    TrueFalseDto body = createReturnValue(responseLoginSuccess + Id, true);
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(body);
+  }
+
+  public static ResponseEntity responseUpdateFail(String Id) {
+    TrueFalseDto body = createReturnValue(responseLoginSuccess + Id, false);
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(body);
+  }
+
   public static ResponseEntity responseInternalServerError() {
     ResponseDto body = createReturnValue(responseInternalServerError);
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(body);
+  }
+
+  public static ResponseEntity responseInternalServerError(String message) {
+    ResponseDto body = createReturnValue(message);
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
             .body(body);
   }

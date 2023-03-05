@@ -1,4 +1,4 @@
-package com.example.is442oop.vmsbackend.service.login;
+package com.example.is442oop.vmsbackend.service.user.login;
 
 import com.example.is442oop.vmsbackend.dao.user.UserDao;
 import com.example.is442oop.vmsbackend.entities.User;
