@@ -2,8 +2,8 @@ package com.example.is442oop.vmsbackend.entities;
 
 import jakarta.persistence.*;
 
-// @Entity
-public class Vendor{
+@Entity
+public class Vendor extends UserType{
     private String companyDescription;
 
 
