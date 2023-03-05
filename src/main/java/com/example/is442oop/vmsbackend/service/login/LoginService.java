@@ -1,6 +1,6 @@
 package com.example.is442oop.vmsbackend.service.login;
 
-import com.example.is442oop.vmsbackend.dao.user.UserDao;
+import com.example.is442oop.vmsbackend.dao.UserDao;
 import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.exception.InternalServerException;
 import com.example.is442oop.vmsbackend.exception.NotFoundException;
@@ -23,13 +23,12 @@ public class LoginService implements LoginInterface {
   public ResponseEntity handle(User user){
     try {
       User userFromDatabase = userDao.findUser(user.getEmail());
-      System.out.println(userFromDatabase.toString());
       
       if (userFromDatabase != null){
         if (userDao.verifyPassword(userFromDatabase.getPassword(), user.getPassword())){
           String token = JwtUtil.jwtBuilder(userFromDatabase.getUserID(), user.getEmail(), user.getName());
           System.out.println(token);
-          return ResponseUtil.responseLoginSuccess(userFromDatabase.getUserID(), token, userFromDatabase);
+          return ResponseUtil.responseLoginSuccess(userFromDatabase.getUserID(), token, user);
         } else {
           return ResponseUtil.responseNotAuthorized();
         }
