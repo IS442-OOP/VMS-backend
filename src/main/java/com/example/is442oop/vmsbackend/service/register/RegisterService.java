@@ -1,7 +1,8 @@
 package com.example.is442oop.vmsbackend.service.register;
 
-import com.example.is442oop.vmsbackend.dao.UserDao;
+import com.example.is442oop.vmsbackend.dao.user.UserDao;
 import com.example.is442oop.vmsbackend.entities.User;
+import com.example.is442oop.vmsbackend.entities.UserType;
 import com.example.is442oop.vmsbackend.exception.InternalServerException;
 import com.example.is442oop.vmsbackend.utils.JwtUtil;
 import com.example.is442oop.vmsbackend.utils.ResponseUtil;
@@ -18,10 +19,17 @@ public class RegisterService implements RegisterInterface {
     this.userDao = userDaoUtils;
   }
 
-  public ResponseEntity handle(User user){
-    System.out.println(user.toString());
+  public ResponseEntity registerNonVendor(User user, boolean isAdmin) {
+    System.out.println("HI");
+    if (isAdmin) {
+      user.setUserType(new UserType(1L, "Admin"));
+    } else {
+      user.setUserType(new UserType(2L, "Approver"));
+    }
+    user.setAccountActivated(true);
+
     try {
-      if (userDao.isUserPresent(user.getEmail())){
+      if (userDao.isUserPresent(user.getEmail())) {
         return ResponseUtil.responseConflict(user.getEmail());
       } else {
         try {
@@ -30,13 +38,31 @@ public class RegisterService implements RegisterInterface {
           userDao.registerUser(user);
           User newUser = userDao.findUser(user.getEmail());
           return ResponseUtil.responseUserCreated(newUser.getUserID(), token);
-        } catch (Exception e){
+        } catch (Exception e) {
           throw new InternalServerException(e.getMessage());
         }
       }
-    } catch (Exception e){
+    } catch (Exception e) {
       System.out.println(e);
       throw new InternalServerException(e.getMessage());
     }
+  }
+
+  public ResponseEntity registerVendor(User user){
+    user.setAccountActivated(false);
+    user.setUserType(new UserType(3L, "Vendor"));
+    try {
+      if (userDao.isUserPresent(user.getEmail())) {
+        return ResponseUtil.responseConflict(user.getEmail());
+      } else {
+          userDao.registerUser(user);
+          User newUser = userDao.findUser(user.getEmail());
+          return ResponseUtil.responseVendorCreated(newUser);
+      }
+    } catch (Exception e) {
+      System.out.println(e);
+      throw new InternalServerException(e.getMessage());
+    }
+
   }
 }

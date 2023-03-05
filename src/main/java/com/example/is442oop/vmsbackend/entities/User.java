@@ -25,8 +25,9 @@ public class User {
 
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public List <UserWorkflow> userWorkflow;
+
     @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name="userTypeID", insertable=false, updatable = false)
+    @JoinColumn(name="userTypeID")
     private UserType userType;
 
     public User(@JsonProperty("email") String email,
@@ -88,6 +89,14 @@ public class User {
 
 
     
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
 
     @Override
     public String toString() {

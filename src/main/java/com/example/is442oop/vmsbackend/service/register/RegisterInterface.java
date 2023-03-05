@@ -4,5 +4,7 @@ import com.example.is442oop.vmsbackend.entities.User;
 import org.springframework.http.ResponseEntity;
 
 public interface RegisterInterface {
-  public ResponseEntity handle(User user);
+  public ResponseEntity registerNonVendor(User user, boolean isAdmin);
+
+  public ResponseEntity registerVendor(User user);
 }
