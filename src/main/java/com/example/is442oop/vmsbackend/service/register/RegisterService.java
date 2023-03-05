@@ -1,10 +1,9 @@
 package com.example.is442oop.vmsbackend.service.register;
 
-import com.example.is442oop.vmsbackend.dao.UserDao;
+import com.example.is442oop.vmsbackend.dao.user.UserDao;
 import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.entities.UserType;
 import com.example.is442oop.vmsbackend.exception.InternalServerException;
-import com.example.is442oop.vmsbackend.exception.NotFoundException;
 import com.example.is442oop.vmsbackend.utils.JwtUtil;
 import com.example.is442oop.vmsbackend.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +20,14 @@ public class RegisterService implements RegisterInterface {
   }
 
   public ResponseEntity registerNonVendor(User user, boolean isAdmin) {
+    System.out.println("HI");
     if (isAdmin) {
       user.setUserType(new UserType(1L, "Admin"));
     } else {
       user.setUserType(new UserType(2L, "Approver"));
     }
     user.setAccountActivated(true);
+
     try {
       if (userDao.isUserPresent(user.getEmail())) {
         return ResponseUtil.responseConflict(user.getEmail());

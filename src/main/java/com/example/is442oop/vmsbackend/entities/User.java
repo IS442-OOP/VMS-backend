@@ -26,7 +26,7 @@ public class User {
     public List <UserWorkflow> userWorkflow;
 
     @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name="userTypeID", insertable=false, updatable = false)
+    @JoinColumn(name="userTypeID")
     private UserType userType;
     
 
