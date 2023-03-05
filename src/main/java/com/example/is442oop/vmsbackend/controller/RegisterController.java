@@ -22,7 +22,17 @@ public class RegisterController {
   }
 
   @PostMapping
-  public ResponseEntity registerUser(@RequestBody User user) {
-    return registerService.handle(user);
+  public ResponseEntity registerAdmin(@RequestBody User user) {
+    return registerService.registerNonVendor(user, true);
+  }
+
+  @PostMapping(path = "/vendor")
+  public ResponseEntity registerVendor(@RequestBody User user) {
+    return registerService.registerVendor(user);
+  }
+
+  @PostMapping(path = "/approver")
+  public ResponseEntity registerApprover(@RequestBody User user) {
+    return registerService.registerNonVendor(user, false);
   }
 }
