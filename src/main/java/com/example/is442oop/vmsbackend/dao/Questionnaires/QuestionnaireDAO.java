@@ -38,8 +38,9 @@ public class QuestionnaireDAO {
         return null;
     }
 
-    public Questionnaire createQuestionnaire(String name, String description) {
-
+    public Questionnaire createQuestionnaire(Map<String,?> questionnaireDetails) {
+        String name = (String) questionnaireDetails.get("name");
+        String description = (String) questionnaireDetails.get("description");
         try {
             Questionnaire newQuestionnaire = new Questionnaire(name, description);
             return questionnaireRepository.save(newQuestionnaire);

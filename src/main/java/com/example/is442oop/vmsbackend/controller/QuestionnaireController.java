@@ -38,9 +38,7 @@ public class QuestionnaireController {
 
     @PostMapping
     public @ResponseBody ResponseEntity createQuestionnaire(@RequestBody Map<String,String> questionnaireDetails){
-        String name = questionnaireDetails.get("name");
-        String description = questionnaireDetails.get("description");
-        return questionnaireService.createQuestionnaire(name, description);
+        return questionnaireService.createQuestionnaire(questionnaireDetails);
     }
 
     @PostMapping("/{questionnaireID}")
