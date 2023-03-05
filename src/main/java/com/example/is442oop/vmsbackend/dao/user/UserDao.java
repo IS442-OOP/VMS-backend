@@ -1,4 +1,4 @@
-package com.example.is442oop.vmsbackend.dao;
+package com.example.is442oop.vmsbackend.dao.user;
 
 import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.exception.NotFoundException;
@@ -19,6 +19,7 @@ public class UserDao {
   }
 
   public void registerUser(User user) {
+    System.out.println(user);
     userRepository.save(user);
   }
 
