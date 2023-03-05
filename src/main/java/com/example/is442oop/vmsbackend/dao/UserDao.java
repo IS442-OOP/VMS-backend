@@ -2,8 +2,6 @@ package com.example.is442oop.vmsbackend.dao;
 
 import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.exception.NotFoundException;
-import com.example.is442oop.vmsbackend.exception.UserForbiddenException;
-import com.example.is442oop.vmsbackend.utils.ResponseUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,7 +24,7 @@ public class UserDao {
     userRepository.save(user);
   }
 
-  public List<User> retrieveUsers() {
+  public List<User> getAllUsers() {
     return userRepository.getAllUsers();
   }
 

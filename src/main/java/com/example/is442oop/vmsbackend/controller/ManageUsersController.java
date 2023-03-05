@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import com.example.is442oop.vmsbackend.entities.User;
+import com.example.is442oop.vmsbackend.entities.UserWorkflow;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestAttribute;
@@ -30,13 +32,14 @@ public class ManageUsersController {
 
   // @RequestAttribute("userId") String id
   @GetMapping
-  public List<User> retrieveUsers(@RequestHeader(name="Authorization") String token){
-    return manageUsersService.retrieveUsers();
+  public List<User> getAllUsers(){
+    return manageUsersService.getAllUsers();
   }
 
+  
   // @GetMapping("/{userId}")
-  // public ResponseEntity retrieveUserWorkflows(@RequestHeader(name="Authorization") String token, @PathVariable Integer userId) {
-  //   return manageUsersService.retrieveUserWorkflows(userId);
+  // public List<UserWorkflow> getUserWorkflows(@RequestAttribute("userId") Long userId) {
+  //   return manageUsersService.getUserWorkflows(userId); 
   // }
 
   // @PostMapping("/{userId}")
