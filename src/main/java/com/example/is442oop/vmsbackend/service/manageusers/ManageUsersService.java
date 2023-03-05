@@ -24,8 +24,8 @@ public class ManageUsersService implements ManageUsersInterface {
   public ManageUsersService(UserDao userDao){
     this.userDao = userDao;
   }
-  public ResponseEntity retrieveUsers() {
-    return ResponseUtil.responseOk(userDao.retrieveUsers());
+  public List<User> retrieveUsers() {
+    return userDao.retrieveUsers();
   }
 
 }

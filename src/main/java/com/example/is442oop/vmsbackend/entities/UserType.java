@@ -3,12 +3,12 @@ import jakarta.persistence.*;
 import java.util.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+// @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class UserType {
     @Id
     private Long userTypeID;
     private String userType;
-    @OneToMany(mappedBy="userType", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="userType", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     public Set <User> user; 
 
     @OneToMany(mappedBy="userType", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
@@ -24,8 +24,6 @@ public class UserType {
     public UserType(){
 
     }
-
-
 
     public Long getUserTypeID() {
         return userTypeID;
