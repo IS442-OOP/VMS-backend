@@ -6,13 +6,15 @@ import java.util.*;
 @Entity
 public class Question {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long questionID;
     private String question; 
     private String questionType;
+
     @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="questionnaireID", insertable=false, updatable = false)
     private Questionnaire questionnaire;
-    @OneToMany(mappedBy="question", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="question", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval = true)
     public Set <QuestionOption> options;    
     @OneToMany(mappedBy="question", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public Set <Answer> answer;
@@ -21,10 +23,10 @@ public class Question {
     public Question() {
     }
 
-    public Question(Long questionID, String question, String questionType) {
-        this.questionID = questionID;
+    public Question(String question, String questionType) {
         this.question = question;
         this.questionType = questionType;
+        this.options = new HashSet<QuestionOption>();
     }
 
     public Long getQuestionID() {
@@ -54,5 +56,21 @@ public class Question {
 
     public void setQuestionType(String questionType) {
         this.questionType = questionType;
+    }
+
+    // public void setOptions(Set<QuestionOption> questionOptions){
+    //     this.options = questionOptions;
+    // }
+
+    public void addOption(QuestionOption questionOption){
+        this.options.add(questionOption);
+    }
+
+    public void clearOptions(){
+        this.options.clear();
+    }
+
+    public void setQuestionnaire(Questionnaire questionnaire){
+        this.questionnaire= questionnaire;
     }
 }
