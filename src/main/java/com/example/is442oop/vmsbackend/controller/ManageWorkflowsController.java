@@ -16,7 +16,7 @@ public class ManageWorkflowsController {
         this.manageWorkflowsService = manageWorkflowsService;
     }
     @GetMapping
-    public ResponseEntity retrieveWorkflows(@RequestAttribute(name="Authorization") String token){
+    public ResponseEntity retrieveWorkflows(){
         return manageWorkflowsService.retrieveWorkflows();
     }
 }
