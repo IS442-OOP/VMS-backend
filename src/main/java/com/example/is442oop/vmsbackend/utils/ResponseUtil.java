@@ -3,11 +3,14 @@ package com.example.is442oop.vmsbackend.utils;
 import com.example.is442oop.vmsbackend.dto.LoginResponseDto;
 import com.example.is442oop.vmsbackend.dto.ResponseDto;
 import com.example.is442oop.vmsbackend.entities.User;
+import com.example.is442oop.vmsbackend.entities.Workflow;
+import org.hibernate.jdbc.Work;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -119,4 +122,10 @@ public class ResponseUtil {
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
             .body(body);
   }
+
+  public static ResponseEntity <List<Workflow>> responseOk(List<Workflow> list){
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(list);
+  }
+
 }

@@ -1,8 +1,11 @@
 package com.example.is442oop.vmsbackend.service.manageworkflows;
 
 import com.example.is442oop.vmsbackend.dao.manageworkflows.ManageWorkflowsDao;
+import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.entities.Workflow;
+import com.example.is442oop.vmsbackend.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +20,10 @@ public class ManageWorkflowsService implements ManageWorkflowsInterface{
         this.manageWorkflowsDao = manageWorkflowsDao;
     }
 
-    public List<Workflow> retrieveWorkflows() {
-
-        List<Workflow> workflows = manageWorkflowsDao.retrieveWorkflows();
-        return workflows;
+    public ResponseEntity retrieveWorkflows() {
+        return ResponseUtil.responseOk(manageWorkflowsDao.retrieveWorkflows());
+//        List<Workflow> workflows = manageWorkflowsDao.retrieveWorkflows();
+//        return workflows;
 
     }
 
