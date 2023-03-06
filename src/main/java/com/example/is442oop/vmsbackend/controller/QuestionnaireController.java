@@ -31,24 +31,24 @@ public class QuestionnaireController {
     }
 
     @GetMapping
-    public ResponseEntity getAllQuestionnaires(@RequestHeader(name = "Authorization") String token) {
+    public ResponseEntity getAllQuestionnaires(@RequestAttribute(name = "Authorization") String token) {
         return questionnaireService.getAllQuestionnaires();
     }
 
     @GetMapping("/{questionnaireID}")
-    public ResponseEntity getQuestionnaireByID(@RequestHeader(name = "Authorization") String token,
+    public ResponseEntity getQuestionnaireByID(@RequestAttribute(name = "Authorization") String token,
             @PathVariable Long questionnaireID) {
         return questionnaireService.getQuestionnaireByID(questionnaireID);
     }
 
     @PostMapping
-    public @ResponseBody ResponseEntity createQuestionnaire(@RequestHeader(name = "Authorization") String token,
+    public @ResponseBody ResponseEntity createQuestionnaire(@RequestAttribute(name = "Authorization") String token,
             @RequestBody Map<String, String> questionnaireDetails) {
         return questionnaireService.createQuestionnaire(questionnaireDetails);
     }
 
     @PostMapping("/{questionnaireID}")
-    public @ResponseBody Questionnaire editQuestionnaire(@RequestHeader(name = "Authorization") String token,
+    public @ResponseBody Questionnaire editQuestionnaire(@RequestAttribute(name = "Authorization") String token,
             @PathVariable Long questionnaireID, @RequestBody Map<String, ?> questionnaireDetails) {
         return questionnaireService.editQuestionnaire(questionnaireID, questionnaireDetails);
 
