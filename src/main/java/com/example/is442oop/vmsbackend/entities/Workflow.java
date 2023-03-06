@@ -1,20 +1,22 @@
 package com.example.is442oop.vmsbackend.entities;
 import jakarta.persistence.*;
+import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
+
 import java.util.*;
 
 @Entity
 public class Workflow {
     @Id
-    @SequenceGenerator(
-            name = "workflow_sequence",
-            sequenceName = "workflow_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "workflow_sequence"
-    )
-    private Long workflowID;
+//    @SequenceGenerator(
+//            name = "workflow_sequence",
+//            sequenceName = "workflow_sequence",
+//            allocationSize = 1
+//    )
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "workflow_sequence"
+//    )
+    private String workflowID;
     private String name;
     @OneToMany(mappedBy="workflow", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public Set <UserWorkflow> userWorkflow; 
@@ -24,15 +26,15 @@ public class Workflow {
     public Workflow() {
     }
 
-    public Workflow(Long workflowID, String name) {
+    public Workflow(String workflowID, String name) {
         this.workflowID = workflowID;
         this.name = name;
     }
 
-    public Long getWorkflowID() {
+    public String getWorkflowID() {
         return workflowID;
     }
-    public void setWorkflowID(Long workflowID) {
+    public void setWorkflowID(String workflowID) {
         this.workflowID = workflowID;
     }
     public String getName() {
