@@ -14,10 +14,7 @@ public class QuestionOption {
     private Question question;
 
 
-    public QuestionOption() {
-    }
-
-    public QuestionOption(Integer optionID, String questionOption, String optionType) {
+    public QuestionOption(String questionOption, String optionType) {
         this.optionID = optionID;
         this.questionOption = questionOption;
         this.optionType = optionType;
