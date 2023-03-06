@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value="/api/v1/user/register", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/api/v1/account/register", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RegisterController {
 
   private final RegisterService registerService;

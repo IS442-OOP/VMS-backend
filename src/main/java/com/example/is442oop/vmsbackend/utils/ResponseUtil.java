@@ -4,6 +4,9 @@ import com.example.is442oop.vmsbackend.dto.response.LoginResponseDto;
 import com.example.is442oop.vmsbackend.dto.response.ResponseDto;
 import com.example.is442oop.vmsbackend.dto.response.TrueFalseDto;
 import com.example.is442oop.vmsbackend.entities.User;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -51,7 +54,11 @@ public class ResponseUtil {
             .build();
   }
 
-  public static ResponseEntity<User> responseOk(User user) {
+  public static ResponseEntity<User> responseOk(User user) throws JsonProcessingException {
+//    System.out.println(user.toString());
+//    ObjectMapper mapper = new ObjectMapper();
+//    mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+//    String json = mapper.writeValueAsString(user);
     return ResponseEntity.status(HttpStatus.OK)
             .body(user);
   }
@@ -116,8 +123,8 @@ public class ResponseUtil {
   }
 
   public static ResponseEntity responseLoginSuccess(Long Id, String token, User user) {
-    ResponseDto body = createReturnValue(responseLoginSuccess + Id, token, user);
-    return ResponseEntity.status(HttpStatus.CREATED)
+    ResponseDto body = createReturnValue(responseLoginSuccess + Id, token);
+    return ResponseEntity.status(HttpStatus.OK)
             .body(body);
   }
 

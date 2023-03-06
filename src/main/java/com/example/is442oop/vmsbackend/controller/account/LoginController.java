@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/user/login")
+@RequestMapping("/api/v1/account/login")
 public class LoginController {
 
   private final LoginService loginService;

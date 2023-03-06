@@ -5,12 +5,13 @@ import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.exception.NotFoundException;
 import com.example.is442oop.vmsbackend.service.user.userDetails.UserDetailsService;
 import com.example.is442oop.vmsbackend.utils.ResponseUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/user/update")
+@RequestMapping("/api/v1/user")
 public class UserDetailsController {
 
   private final UserDetailsService userDetailsService;
@@ -20,7 +21,7 @@ public class UserDetailsController {
     this.userDetailsService = userDetailsService;
   }
 
-  @PutMapping
+  @PutMapping(path = "/update")
   public ResponseEntity updatePassword(
           @RequestBody UpdateUserDetailsDto updateUserDetailsDto,
           @RequestAttribute("userId") String userId)
@@ -37,13 +38,14 @@ public class UserDetailsController {
     }
   }
 
-  @GetMapping
+  @GetMapping(path = "/details")
   public ResponseEntity getUserDetails(
           @RequestAttribute("userId") String userId)
   {
 
     try {
       User user = userDetailsService.getUserDetails(userId);
+      System.out.println(user.toString());
       return ResponseUtil.responseOk(user);
     } catch (NotFoundException e) {
       return ResponseUtil.responseUserNotFoundId(userId);

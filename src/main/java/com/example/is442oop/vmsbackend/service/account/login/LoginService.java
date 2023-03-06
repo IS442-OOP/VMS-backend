@@ -28,14 +28,14 @@ public class LoginService implements LoginInterface {
       if (userFromDatabase != null){
         if (userDao.verifyPassword(userFromDatabase.getPassword(), user.getPassword())){
           String token = JwtUtil.jwtBuilder(userFromDatabase.getUserID(), user.getEmail(), user.getName());
-          System.out.println(token);
+          System.out.println("hi");
           return ResponseUtil.responseLoginSuccess(userFromDatabase.getUserID(), token, userFromDatabase);
         } else {
           return ResponseUtil.responseNotAuthorized();
         }
 
       } else {
-        return ResponseUtil.responseUserNotFound(user.getEmail());
+        return ResponseUtil.responseUserNotFoundEmail(user.getEmail());
       }
     } catch (Exception e){
       if (e instanceof NotFoundException){
