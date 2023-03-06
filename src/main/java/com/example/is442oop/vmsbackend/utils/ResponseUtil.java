@@ -59,20 +59,21 @@ public class ResponseUtil {
   }
 
   public static ResponseEntity <Questionnaire> responseOkCreateQuestionnaire(Questionnaire questionnaire){
-    return ResponseEntity.status(HttpStatus.OK)
+    return ResponseEntity.status(HttpStatus.CREATED)
     .body(questionnaire);
   }
 
   public static ResponseEntity <Questionnaire> responseOkGetQuestionnaire(Questionnaire questionnaire){
+    return ResponseEntity.status(HttpStatus.OK)
+    .body(questionnaire);
+
+  }
+
   public static ResponseEntity<User> responseVendorCreated(User user) {
     return ResponseEntity.status(HttpStatus.CREATED)
             .body(user);
   }
 
-  public static ResponseEntity<LoginResponseDto> responseOk(String message, String token, User user) {
-    return ResponseEntity.status(HttpStatus.OK)
-    .body(questionnaire);
-  }
 
   public static ResponseEntity<LoginResponseDto> responseOk(String message, String token, User user) {
     return ResponseEntity.status(HttpStatus.OK)
@@ -138,5 +139,4 @@ public class ResponseUtil {
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
         .body(body);
   }
-}
 }

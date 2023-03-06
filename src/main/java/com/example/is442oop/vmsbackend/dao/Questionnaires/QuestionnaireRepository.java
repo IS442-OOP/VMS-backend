@@ -12,6 +12,4 @@ public interface QuestionnaireRepository extends JpaRepository<Questionnaire, Lo
 
   @Query("select q from Questionnaire q where q.questionnaireID=?1")
   Questionnaire getQuestionnaireByID(Long questionnaireID);
-  
-  
 }
