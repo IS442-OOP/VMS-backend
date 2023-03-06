@@ -1,7 +1,7 @@
-package com.example.is442oop.vmsbackend.controller.user;
+package com.example.is442oop.vmsbackend.controller.account;
 
 import com.example.is442oop.vmsbackend.entities.User;
-import com.example.is442oop.vmsbackend.service.user.register.RegisterService;
+import com.example.is442oop.vmsbackend.service.account.register.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

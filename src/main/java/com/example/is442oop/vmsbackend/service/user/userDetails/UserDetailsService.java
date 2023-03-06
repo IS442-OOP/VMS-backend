@@ -1,22 +1,17 @@
-package com.example.is442oop.vmsbackend.service.user.updateDetails;
+package com.example.is442oop.vmsbackend.service.user.userDetails;
 
 import com.example.is442oop.vmsbackend.dao.user.UserDao;
 import com.example.is442oop.vmsbackend.dto.request.UpdateUserDetailsDto;
 import com.example.is442oop.vmsbackend.entities.User;
-import com.example.is442oop.vmsbackend.entities.UserType;
-import com.example.is442oop.vmsbackend.exception.InternalServerException;
-import com.example.is442oop.vmsbackend.utils.JwtUtil;
-import com.example.is442oop.vmsbackend.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UpdateUserDetailsService {
+public class UserDetailsService {
   private final UserDao userDao;
 
   @Autowired
-  public UpdateUserDetailsService(UserDao userDao){
+  public UserDetailsService(UserDao userDao){
     this.userDao = userDao;
   }
 
@@ -31,5 +26,10 @@ public class UpdateUserDetailsService {
         return false;
       }
 
+  }
+
+  public User getUserDetails(String userId)
+          throws Exception {
+    return userDao.getUser(userId);
   }
 }

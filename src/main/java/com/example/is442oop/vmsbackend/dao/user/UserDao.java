@@ -8,6 +8,7 @@ import org.springframework.transaction.CannotCreateTransactionException;
 
 import java.util.Base64;
 import java.util.Objects;
+import java.util.Optional;
 
 @Component
 public class UserDao {
@@ -42,6 +43,16 @@ public class UserDao {
       }
       throw new NotFoundException("User cannot be found for email: " + email);
     }
+
+  }
+
+  public User getUser(String userId) throws Exception {
+      Optional<User> user = userRepository.findById(Long.valueOf(userId));
+      if (user.isPresent()) {
+        return user.get();
+      } else {
+        throw new NotFoundException("User does not exist for id: " + userId);
+      }
 
   }
 

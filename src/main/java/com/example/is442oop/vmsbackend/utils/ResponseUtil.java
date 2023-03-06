@@ -14,7 +14,9 @@ public class ResponseUtil {
   private final static String responseConflictEmail = "User already exists for email: ";
   private final static String responseCreated = "User has been created for Id: ";
   private final static String responseInternalServerError = "Internal Server Error has occured";
-  private final static String responseUserNotFound = "User cannot be found with email: ";
+  private final static String responseUserNotFoundEmail = "User cannot be found with email: ";
+
+  private final static String responseUserNotFoundId = "User cannot be found with id: ";
   private final static String responseTaskNotFound = "Task cannot be found for Id: ";
   private final static String responseTaskDeleted = "Task has been deleted for Id: ";
   private final static String responseTaskUpdated = "Task has been updated for Id: ";
@@ -83,8 +85,14 @@ public class ResponseUtil {
             .body(body);
   }
 
-  public static ResponseEntity responseUserNotFound(String email) {
-    ResponseDto body = createReturnValue(responseUserNotFound + email);
+  public static ResponseEntity responseUserNotFoundEmail(String email) {
+    ResponseDto body = createReturnValue(responseUserNotFoundEmail + email);
+    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body(body);
+  }
+
+  public static ResponseEntity responseUserNotFoundId(String userId) {
+    ResponseDto body = createReturnValue(responseUserNotFoundId + userId);
     return ResponseEntity.status(HttpStatus.NOT_FOUND)
             .body(body);
   }

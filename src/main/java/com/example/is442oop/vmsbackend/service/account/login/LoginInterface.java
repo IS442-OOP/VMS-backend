@@ -1,4 +1,4 @@
-package com.example.is442oop.vmsbackend.service.user.login;
+package com.example.is442oop.vmsbackend.service.account.login;
 
 import com.example.is442oop.vmsbackend.entities.User;
 import org.springframework.http.ResponseEntity;

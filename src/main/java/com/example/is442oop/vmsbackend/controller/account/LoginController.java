@@ -1,7 +1,7 @@
-package com.example.is442oop.vmsbackend.controller.user;
+package com.example.is442oop.vmsbackend.controller.account;
 
 import com.example.is442oop.vmsbackend.entities.User;
-import com.example.is442oop.vmsbackend.service.user.login.LoginService;
+import com.example.is442oop.vmsbackend.service.account.login.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
