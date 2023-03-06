@@ -10,8 +10,9 @@ public class Question {
     private Long questionID;
     private String question; 
     private String questionType;
-    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name="questionnaireID")
+
+    @ManyToOne(cascade= CascadeType.ALL)
+    @JoinColumn(name="questionnaireID", insertable=false, updatable = false)
     private Questionnaire questionnaire;
     @OneToMany(mappedBy="question", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval = true)
     public Set <QuestionOption> options;    

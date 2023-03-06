@@ -1,4 +1,4 @@
-package com.example.is442oop.vmsbackend.controller;
+package com.example.is442oop.vmsbackend.controller.questionnaire;
 
 import com.example.is442oop.vmsbackend.service.questionnaires.QuestionnaireService;
 
@@ -45,7 +45,7 @@ public class QuestionnaireController {
         return questionnaireService.createQuestionnaire(questionnaireDetails);
     }
 
-    @PostMapping("/{questionnaireID}")
+    @PutMapping("/{questionnaireID}")
     public @ResponseBody Questionnaire editQuestionnaire(@PathVariable Long questionnaireID, @RequestBody Map<String, ?> questionnaireDetails) {
         return questionnaireService.editQuestionnaire(questionnaireID, questionnaireDetails);
 

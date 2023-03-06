@@ -8,12 +8,14 @@ public class QuestionOption {
     private Integer optionID;
     private String questionOption;
     private String optionType;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "questionID")
+    
+    @ManyToOne(cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "questionID", insertable = false, updatable = false, nullable = true)
     private Question question;
 
-    
+
     public QuestionOption(String questionOption, String optionType) {
+        this.optionID = optionID;
         this.questionOption = questionOption;
         this.optionType = optionType;
     }
