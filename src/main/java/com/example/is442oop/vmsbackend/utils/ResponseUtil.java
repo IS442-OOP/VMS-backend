@@ -2,12 +2,16 @@ package com.example.is442oop.vmsbackend.utils;
 
 import com.example.is442oop.vmsbackend.dto.LoginResponseDto;
 import com.example.is442oop.vmsbackend.dto.ResponseDto;
+import com.example.is442oop.vmsbackend.entities.Question;
+import com.example.is442oop.vmsbackend.entities.QuestionOption;
+import com.example.is442oop.vmsbackend.entities.Questionnaire;
 import com.example.is442oop.vmsbackend.entities.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -25,28 +29,44 @@ public class ResponseUtil {
 
   public static ResponseDto createReturnValue(String message) {
     return ResponseDto.builder()
-            .message(message)
-            .build();
+        .message(message)
+        .build();
   }
 
   public static ResponseDto createReturnValue(String message, String token) {
     return ResponseDto.builder()
-            .message(message)
-            .token(token)
-            .build();
+        .message(message)
+        .token(token)
+        .build();
   }
 
   public static LoginResponseDto createReturnValue(String message, String token, User user) {
     return LoginResponseDto.builder()
-            .message(message)
-            .token(token)
-            .user(user)
-            .build();
+        .message(message)
+        .token(token)
+        .user(user)
+        .build();
   }
 
   public static ResponseEntity<User> responseOk(User user) {
     return ResponseEntity.status(HttpStatus.OK)
-            .body(user);
+        .body(user);
+  }
+
+  public static ResponseEntity <List<Questionnaire>> responseOk(List<Questionnaire> list){
+    return ResponseEntity.status(HttpStatus.OK)
+    .body(list);
+  }
+
+  public static ResponseEntity <Questionnaire> responseOkCreateQuestionnaire(Questionnaire questionnaire){
+    return ResponseEntity.status(HttpStatus.CREATED)
+    .body(questionnaire);
+  }
+
+  public static ResponseEntity <Questionnaire> responseOkGetQuestionnaire(Questionnaire questionnaire){
+    return ResponseEntity.status(HttpStatus.OK)
+    .body(questionnaire);
+
   }
 
   public static ResponseEntity<User> responseVendorCreated(User user) {
@@ -54,69 +74,69 @@ public class ResponseUtil {
             .body(user);
   }
 
+
   public static ResponseEntity<LoginResponseDto> responseOk(String message, String token, User user) {
     return ResponseEntity.status(HttpStatus.OK)
-            .body(createReturnValue(message, token, user));
+        .body(createReturnValue(message, token, user));
   }
-
 
   public static ResponseEntity responseTaskDeleted(Long Id) {
     ResponseDto body = createReturnValue(responseTaskDeleted + Id);
     return ResponseEntity.status(HttpStatus.NO_CONTENT)
-            .body(body);
+        .body(body);
   }
 
   public static ResponseEntity responseTaskUpdated(Long Id) {
     ResponseDto body = createReturnValue(responseTaskUpdated + Id);
     return ResponseEntity.status(HttpStatus.NO_CONTENT)
-            .body(body);
+        .body(body);
   }
 
   public static ResponseEntity responseTaskNotFound(Long Id) {
     ResponseDto body = createReturnValue(responseTaskNotFound + Id);
     return ResponseEntity.status(HttpStatus.NOT_FOUND)
-            .body(body);
+        .body(body);
   }
 
   public static ResponseEntity responseUserNotFound(String email) {
     ResponseDto body = createReturnValue(responseUserNotFound + email);
     return ResponseEntity.status(HttpStatus.NOT_FOUND)
-            .body(body);
+        .body(body);
   }
 
   public static ResponseEntity responseConflict(String email) {
     ResponseDto body = createReturnValue(responseConflictEmail + email);
     return ResponseEntity.status(HttpStatus.CONFLICT)
-            .body(body);
+        .body(body);
   }
 
   public static ResponseEntity responseTaskCreated(Long Id) {
     ResponseDto body = createReturnValue(responseCreated + Id);
     return ResponseEntity.status(HttpStatus.CREATED)
-            .body(body);
+        .body(body);
   }
 
   public static ResponseEntity responseUserCreated(Long Id, String token) {
     ResponseDto body = createReturnValue(responseCreated + Id, token);
     return ResponseEntity.status(HttpStatus.CREATED)
-            .body(body);
+        .body(body);
   }
 
   public static ResponseEntity responseLoginSuccess(Long Id, String token, User user) {
     ResponseDto body = createReturnValue(responseLoginSuccess + Id, token, user);
     return ResponseEntity.status(HttpStatus.CREATED)
-            .body(body);
+        .body(body);
   }
 
   public static ResponseEntity responseInternalServerError() {
     ResponseDto body = createReturnValue(responseInternalServerError);
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .body(body);
+        .body(body);
   }
 
   public static ResponseEntity responseNotAuthorized() {
     ResponseDto body = createReturnValue(responseNotAuthorized);
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-            .body(body);
+        .body(body);
   }
 }

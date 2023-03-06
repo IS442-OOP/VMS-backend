@@ -4,18 +4,22 @@ import jakarta.persistence.*;
 @Entity
 public class QuestionOption {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer optionID;
     private String questionOption;
     private String optionType;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "questionID", insertable = false, updatable = false, nullable = true)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "questionID")
     private Question question;
 
     
-    public QuestionOption(Integer optionID, String questionOption, String optionType) {
-        this.optionID = optionID;
+    public QuestionOption(String questionOption, String optionType) {
         this.questionOption = questionOption;
         this.optionType = optionType;
+    }
+
+    public QuestionOption(){
+
     }
 
 
@@ -47,6 +51,10 @@ public class QuestionOption {
     public void setOptionType(String optionType) {
         this.optionType = optionType;
     }  
+
+    public void setQuestion(Question question){
+        this.question= question;
+    }
 
 
     
