@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,25 +31,22 @@ public class QuestionnaireController {
     }
 
     @GetMapping
-    public ResponseEntity getAllQuestionnaires(@RequestAttribute(name = "Authorization") String token) {
+    public ResponseEntity getAllQuestionnaires() {
         return questionnaireService.getAllQuestionnaires();
     }
 
     @GetMapping("/{questionnaireID}")
-    public ResponseEntity getQuestionnaireByID(@RequestAttribute(name = "Authorization") String token,
-            @PathVariable Long questionnaireID) {
+    public ResponseEntity getQuestionnaireByID(@PathVariable Long questionnaireID) {
         return questionnaireService.getQuestionnaireByID(questionnaireID);
     }
 
     @PostMapping
-    public @ResponseBody ResponseEntity createQuestionnaire(@RequestAttribute(name = "Authorization") String token,
-            @RequestBody Map<String, String> questionnaireDetails) {
+    public @ResponseBody ResponseEntity createQuestionnaire(@RequestBody Map<String, String> questionnaireDetails) {
         return questionnaireService.createQuestionnaire(questionnaireDetails);
     }
 
     @PostMapping("/{questionnaireID}")
-    public @ResponseBody Questionnaire editQuestionnaire(@RequestAttribute(name = "Authorization") String token,
-            @PathVariable Long questionnaireID, @RequestBody Map<String, ?> questionnaireDetails) {
+    public @ResponseBody Questionnaire editQuestionnaire(@PathVariable Long questionnaireID, @RequestBody Map<String, ?> questionnaireDetails) {
         return questionnaireService.editQuestionnaire(questionnaireID, questionnaireDetails);
 
     }
