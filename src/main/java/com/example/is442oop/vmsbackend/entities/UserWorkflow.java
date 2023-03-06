@@ -18,18 +18,18 @@ public class UserWorkflow {
     private String dateAssigned;
     private String isApprroved;
 
-    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY, optional = true)
+    @ManyToOne(cascade= CascadeType.ALL, optional = true)
     @JoinColumn(name="userID", insertable=false, updatable = false, nullable=true)
     private User user;
 
-    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY, optional = true)
+    @ManyToOne(cascade= CascadeType.ALL, optional = true)
     @JoinColumn(name="workflowID", insertable=false, updatable = false, nullable=true)
     private Workflow workflow;
 
-    @OneToMany(mappedBy="userWorkflowForAnswer", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="userWorkflowForAnswer", cascade=CascadeType.ALL)
     private List <Answer> answer;
 
-    @OneToMany(mappedBy = "userWorkflow", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "userWorkflow", cascade=CascadeType.ALL)
     private List<UserWorkflowSequence> userWorkflowSequences;
 
 

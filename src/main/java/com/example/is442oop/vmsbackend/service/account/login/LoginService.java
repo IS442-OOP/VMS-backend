@@ -1,4 +1,4 @@
-package com.example.is442oop.vmsbackend.service.login;
+package com.example.is442oop.vmsbackend.service.account.login;
 
 import com.example.is442oop.vmsbackend.dao.user.UserDao;
 import com.example.is442oop.vmsbackend.entities.User;
@@ -28,14 +28,13 @@ public class LoginService implements LoginInterface {
       if (userFromDatabase != null){
         if (userDao.verifyPassword(userFromDatabase.getPassword(), user.getPassword())){
           String token = JwtUtil.jwtBuilder(userFromDatabase.getUserID(), user.getEmail(), user.getName());
-          System.out.println(token);
           return ResponseUtil.responseLoginSuccess(userFromDatabase.getUserID(), token, userFromDatabase);
         } else {
           return ResponseUtil.responseNotAuthorized();
         }
 
       } else {
-        return ResponseUtil.responseUserNotFound(user.getEmail());
+        return ResponseUtil.responseUserNotFoundEmail(user.getEmail());
       }
     } catch (Exception e){
       if (e instanceof NotFoundException){

@@ -17,11 +17,11 @@ public class UserWorkflowSequence {
   )
   private Long userWorkflowSequenceId;
   private boolean isDone;
-  @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY, optional = true)
+  @ManyToOne(cascade= CascadeType.ALL, optional = true)
   @JoinColumn(name="userWorkflowID", insertable=false, updatable = false, nullable=true)
   private UserWorkflow userWorkflow;
 
-  @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY, optional = true)
+  @ManyToOne(cascade= CascadeType.ALL, optional = true)
   @JoinColumn(name="sequenceID", insertable=false, updatable = false, nullable=true)
   private Sequence sequenceForUserWorkflow;
 }

@@ -21,24 +21,24 @@ public class Sequence {
     @Enumerated(EnumType.STRING)
     private sequenceTypeEnum sequenceTypeEnum;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "workflowID", insertable = false, updatable = false)
     private Workflow workflow;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "questionnaireID", insertable = false, updatable = false)
     private Questionnaire questionnaire;
 
-    @OneToMany(mappedBy = "sequence", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sequence", cascade = CascadeType.ALL)
     private List<Answer> answer;
 
-    @OneToOne(mappedBy = "sequence", cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+    @OneToOne(mappedBy = "sequence", cascade= CascadeType.ALL)
     private QuestionnaireSequence questionnaireSequence;
 
-    @OneToOne(mappedBy = "sequence", cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+    @OneToOne(mappedBy = "sequence", cascade= CascadeType.ALL)
     private ApprovalSequence approvalSequence;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userTypeID", insertable = false, updatable = false)
     private UserType userType;
 

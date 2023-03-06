@@ -1,4 +1,5 @@
 package com.example.is442oop.vmsbackend.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.*;
 
@@ -8,10 +9,13 @@ public class UserType {
     @Id
     private Long userTypeID;
     private String userType;
-    @OneToMany(mappedBy="userType", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+
+    @JsonIgnore
+    @OneToMany(mappedBy="userType", cascade=CascadeType.ALL)
     public Set <User> user; 
 
-    @OneToMany(mappedBy="userType", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @JsonIgnore
+    @OneToMany(mappedBy="userType", cascade=CascadeType.ALL)
     public Set <Sequence> sequence;  
 
 
