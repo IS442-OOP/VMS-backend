@@ -1,7 +1,6 @@
 package com.example.is442oop.vmsbackend.dao;
 
 import com.example.is442oop.vmsbackend.entities.User;
-import com.example.is442oop.vmsbackend.entities.UserWorkflow;
 import com.example.is442oop.vmsbackend.exception.NotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.transaction.CannotCreateTransactionException;
 import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Component
 public class UserDao {
@@ -32,7 +30,7 @@ public class UserDao {
 
   public User findUserById(Long userId) {
     try {
-      return userRepository.findUserById(userId).get();
+      return userRepository.findById(userId).get();
     }
     catch (Exception e) {
       if (e instanceof CannotCreateTransactionException) {
