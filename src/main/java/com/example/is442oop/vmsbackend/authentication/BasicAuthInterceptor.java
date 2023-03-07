@@ -18,7 +18,7 @@ public class BasicAuthInterceptor implements HandlerInterceptor {
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
     if (!request.getRequestURI().contains("account") && !request.getRequestURI().contains("error")) {
       try {
-        String header = request.getHeader("Authorization").split(" ")[1];
+        String header = request.getHeader("Authorization");
         System.out.println(header);
         if (header == "") {
           response.setStatus(HttpStatus.UNAUTHORIZED.value());
