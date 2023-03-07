@@ -49,15 +49,14 @@ public class ResponseUtil {
             .build();
   }
 
-  public static ManageUsersDto createReturnValue(List<User> users) {
+  public static ManageUsersDto createReturnUsers(List<User> users) {
     return ManageUsersDto.builder()     
             .users(users)
             .build();
   }
 
-  public static ManageUsersDto createReturnValue(User user, List<UserWorkflow> userworkflows) {
+  public static ManageUsersDto createReturnUserWorkflows(List<UserWorkflow> userworkflows) {
     return ManageUsersDto.builder()
-            .user(user)
             .userworkflows(userworkflows)
             .build();
   }
@@ -72,14 +71,14 @@ public class ResponseUtil {
             .body(createReturnValue(message, token, user));
   }
 
-  public static ResponseEntity<ManageUsersDto> responseOk(List<User> users) {
+  public static ResponseEntity<ManageUsersDto> responseGetUsersOk(List<User> users) {
     return ResponseEntity.status(HttpStatus.OK)
-            .body(createReturnValue(users));
+            .body(createReturnUsers(users));
   }
 
-  public static ResponseEntity<ManageUsersDto> responseOk(User user, List<UserWorkflow> workflows) {
+  public static ResponseEntity<ManageUsersDto> responseGetUserWorkflowsOk(List<UserWorkflow> workflows) {
     return ResponseEntity.status(HttpStatus.OK)
-            .body(createReturnValue(user, workflows));
+            .body(createReturnUserWorkflows(workflows));
   }
 
   public static ResponseEntity responseTaskDeleted(Long Id) {
