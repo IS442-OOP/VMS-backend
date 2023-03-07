@@ -45,7 +45,7 @@ public class QuestionnaireController {
     }
 
     @PostMapping("/{questionnaireID}")
-    public @ResponseBody Questionnaire editQuestionnaire(@PathVariable Long questionnaireID, @RequestBody Map<String, ?> questionnaireDetails) {
+    public @ResponseBody Questionnaire editQuestionnaire(@PathVariable Long questionnaireID, @RequestBody Map<?, ?> questionnaireDetails) {
         return questionnaireService.editQuestionnaire(questionnaireID, questionnaireDetails);
 
     }

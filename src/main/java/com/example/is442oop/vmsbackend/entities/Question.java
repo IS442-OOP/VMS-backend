@@ -10,7 +10,6 @@ public class Question {
     private Long questionID;
     private String question; 
     private String questionType;
-    private boolean isRequired; 
     @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name="questionnaireID")
     private Questionnaire questionnaire;
@@ -23,10 +22,9 @@ public class Question {
     public Question() {
     }
 
-    public Question(String question, String questionType, boolean isRequired) {
+    public Question(String question, String questionType) {
         this.question = question;
         this.questionType = questionType;
-        this.isRequired= isRequired;
         this.options = new HashSet<QuestionOption>();
     }
 
@@ -59,13 +57,9 @@ public class Question {
         this.questionType = questionType;
     }
 
-    public boolean getIsRequired(){
-        return isRequired;
-    }
-
-    public void setIsRequired(){
-        this.isRequired= isRequired;
-    }
+    // public void setOptions(Set<QuestionOption> questionOptions){
+    //     this.options = questionOptions;
+    // }
 
     public void addOption(QuestionOption questionOption){
         this.options.add(questionOption);

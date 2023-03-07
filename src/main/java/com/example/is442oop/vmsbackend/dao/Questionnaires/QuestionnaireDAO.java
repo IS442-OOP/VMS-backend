@@ -52,34 +52,33 @@ public class QuestionnaireDAO {
         return null;
     }
 
-    public Questionnaire editQuestionnaire(Long questionnaireID, Map<String, ?> questionnaireDetails) {
+    public Questionnaire editQuestionnaire(Long questionnaireID, Map<?, ?> questionnaireDetails) {
         try {
             Questionnaire questionnaire = this.getQuestionnaireByID(questionnaireID);
-            String name = (String) questionnaireDetails.get("name");
-            String description = (String) questionnaireDetails.get("description");
-            String dateCreated = (String) questionnaireDetails.get("dateCreated");
+            // String name = (String) questionnaireDetails.get("name");
+            // String description = (String) questionnaireDetails.get("description");
+            // String dateCreated = (String) questionnaireDetails.get("dateCreated");
 
             ArrayList<Map<String, ?>> questions = (ArrayList) questionnaireDetails.get("questions");
             questionnaire.clearQuestions();
             for (Map<String, ?> question : questions) {
                 String questionType = (String) question.get("questionType");
                 String questionName = (String) question.get("question");
-                Boolean isRequired = (Boolean) question.get("isRequired");
+                // Boolean isRequired = (Boolean) question.get("isRequired");
                 ArrayList<Map<String, ?>> options = (ArrayList) question.get("options");
-                Question newQuestion = new Question(questionName, questionType, isRequired);
+                Question newQuestion = new Question(questionName, questionType);
                 newQuestion.setQuestionnaire(questionnaire);
                 for (Map<String, ?> option : options) {
-                    String optionType = (String) option.get("optionType");
-                    String optionName = (String) option.get("option");
-                    QuestionOption questionOption = new QuestionOption(optionName, optionType);
+                    String optionName = (String) option.get("questionOption");
+                    QuestionOption questionOption = new QuestionOption(optionName);
                     questionOption.setQuestion(newQuestion);
                     newQuestion.addOption(questionOption);
                 }
                 questionnaire.addQuestion(newQuestion);
             }
-            questionnaire.setName(name);
-            questionnaire.setDescription(description);
-            questionnaire.setDateCreated(dateCreated);
+            // questionnaire.setName(name);
+            // questionnaire.setDescription(description);
+            // questionnaire.setDateCreated(dateCreated);
             return questionnaireRepository.save(questionnaire);
         } catch (Exception e) {
             System.out.println(e);

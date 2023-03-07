@@ -28,6 +28,7 @@ public class Questionnaire {
     public Questionnaire(String name, String description, String dateCreated) {
         this.name = name;
         this.description= description;
+        this.dateCreated= dateCreated;
     }
 
     public Questionnaire(){
