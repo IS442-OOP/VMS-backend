@@ -7,6 +7,7 @@ import com.example.is442oop.vmsbackend.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.lang.StackWalker.Option;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -56,21 +57,39 @@ public class QuestionnaireDAO {
         try {
             Questionnaire questionnaire = this.getQuestionnaireByID(questionnaireID);
             ArrayList<Map<String, ?>> questions = (ArrayList) questionnaireDetails.get("questions");
-            questionnaire.clearQuestions();
+            System.out.println(questions);
+
             for (Map<String, ?> question : questions) {
                 String questionType = (String) question.get("questionType");
                 String questionName = (String) question.get("question");
-                // Boolean isRequired = (Boolean) question.get("isRequired");
-                ArrayList<Map<String, ?>> options = (ArrayList) question.get("options");
-                Question newQuestion = new Question(questionName, questionType);
-                newQuestion.setQuestionnaire(questionnaire);
-                for (Map<String, ?> option : options) {
-                    String optionName = (String) option.get("questionOption");
-                    QuestionOption questionOption = new QuestionOption(optionName);
-                    questionOption.setQuestion(newQuestion);
-                    newQuestion.addOption(questionOption);
+                Object questionIDExists = question.get("questionID");
+                if (questionIDExists != null) {
+                    Long questionID = Long.valueOf((Integer)questionIDExists);
+                    Question questionObj = questionnaire.getQuestionById(questionID);
+                    questionObj.setQuestionType(questionType);
+                    questionObj.setQuestion(questionName);
+                    ArrayList<Map<String, ?>> options = (ArrayList) question.get("options");
+                    for (Map<String, ?> option : options) {
+                        Object optionIDExists = option.get("optionID");
+                        String questionOption = (String) option.get("questionOption");
+
+                        if (optionIDExists != null) {
+                            Integer optionID = (Integer) optionIDExists;
+                            QuestionOption optionObj = questionObj.getOptionById(optionID);
+
+                            optionObj.setQuestionOption(questionOption);
+                        } else {
+                            QuestionOption optionObj = new QuestionOption(questionOption);
+                            questionObj.addOption(optionObj);
+                            optionObj.setQuestion(questionObj);
+                        }
+                    }
+                } else {
+                    Question questionObj = new Question(questionName, questionType);
+                    questionnaire.addQuestion(questionObj);
+                    questionObj.setQuestionnaire(questionnaire);;
                 }
-                questionnaire.addQuestion(newQuestion);
+
             }
             return questionnaireRepository.save(questionnaire);
         } catch (Exception e) {

@@ -14,7 +14,7 @@ public class Question {
     @JoinColumn(name="questionnaireID")
     private Questionnaire questionnaire;
     @OneToMany(mappedBy="question", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval = true)
-    public Set <QuestionOption> options;    
+    public List <QuestionOption> options;    
     @OneToMany(mappedBy="question", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public Set <Answer> answer;
 
@@ -25,7 +25,7 @@ public class Question {
     public Question(String question, String questionType) {
         this.question = question;
         this.questionType = questionType;
-        this.options = new HashSet<QuestionOption>();
+        // this.options = new List<QuestionOption>();
     }
 
     public Long getQuestionID() {
@@ -67,6 +67,15 @@ public class Question {
 
     public void clearOptions(){
         this.options.clear();
+    }
+
+    public QuestionOption getOptionById(Integer id){
+        for(QuestionOption option: options){
+            if(option.getOptionID() == id){
+                return option;
+            }
+        }
+        return null;
     }
 
     public void setQuestionnaire(Questionnaire questionnaire){
