@@ -8,6 +8,8 @@ import com.example.is442oop.vmsbackend.entities.Question;
 import com.example.is442oop.vmsbackend.entities.QuestionOption;
 import com.example.is442oop.vmsbackend.entities.Questionnaire;
 import com.example.is442oop.vmsbackend.entities.User;
+import com.example.is442oop.vmsbackend.entities.Workflow;
+import org.hibernate.jdbc.Work;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -202,4 +204,10 @@ public class ResponseUtil {
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
         .body(body);
   }
+
+  public static ResponseEntity <List<Workflow>> responseOkWorkflow(List<Workflow> list){
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(list);
+  }
+
 }
