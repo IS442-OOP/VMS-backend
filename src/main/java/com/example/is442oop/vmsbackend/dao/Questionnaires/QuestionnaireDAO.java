@@ -64,8 +64,9 @@ public class QuestionnaireDAO {
             for (Map<String, ?> question : questions) {
                 String questionType = (String) question.get("questionType");
                 String questionName = (String) question.get("question");
+                Boolean isRequired = (Boolean) question.get("isRequired");
                 ArrayList<Map<String, ?>> options = (ArrayList) question.get("options");
-                Question newQuestion = new Question(questionName, questionType);
+                Question newQuestion = new Question(questionName, questionType, isRequired);
                 newQuestion.setQuestionnaire(questionnaire);
                 for (Map<String, ?> option : options) {
                     String optionType = (String) option.get("optionType");
