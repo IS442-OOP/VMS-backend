@@ -33,6 +33,10 @@ public class QuestionnaireService implements QuestionnaireInterface {
       return ResponseUtil.responseOkCreateQuestionnaire(questionnaireDAO.createQuestionnaire(questionnaireDetails));
     }
 
+    public Questionnaire editQuestionnaireQuestions(Long questionnaireID,Map<?,?> questionnaireDetails){
+      return questionnaireDAO.editQuestionnaireQuestions(questionnaireID, questionnaireDetails);
+    }
+
     public Questionnaire editQuestionnaire(Long questionnaireID,Map<?,?> questionnaireDetails){
       return questionnaireDAO.editQuestionnaire(questionnaireID, questionnaireDetails);
     }

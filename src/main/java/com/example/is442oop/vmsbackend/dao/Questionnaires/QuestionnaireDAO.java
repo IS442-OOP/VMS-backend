@@ -38,7 +38,7 @@ public class QuestionnaireDAO {
         return null;
     }
 
-    public Questionnaire createQuestionnaire(Map<String,?> questionnaireDetails) {
+    public Questionnaire createQuestionnaire(Map<String, ?> questionnaireDetails) {
         String name = (String) questionnaireDetails.get("name");
         String description = (String) questionnaireDetails.get("description");
         String dateCreated = (String) questionnaireDetails.get("dateCreated");
@@ -52,13 +52,9 @@ public class QuestionnaireDAO {
         return null;
     }
 
-    public Questionnaire editQuestionnaire(Long questionnaireID, Map<?, ?> questionnaireDetails) {
+    public Questionnaire editQuestionnaireQuestions(Long questionnaireID, Map<?, ?> questionnaireDetails) {
         try {
             Questionnaire questionnaire = this.getQuestionnaireByID(questionnaireID);
-            // String name = (String) questionnaireDetails.get("name");
-            // String description = (String) questionnaireDetails.get("description");
-            // String dateCreated = (String) questionnaireDetails.get("dateCreated");
-
             ArrayList<Map<String, ?>> questions = (ArrayList) questionnaireDetails.get("questions");
             questionnaire.clearQuestions();
             for (Map<String, ?> question : questions) {
@@ -76,13 +72,24 @@ public class QuestionnaireDAO {
                 }
                 questionnaire.addQuestion(newQuestion);
             }
-            // questionnaire.setName(name);
-            // questionnaire.setDescription(description);
-            // questionnaire.setDateCreated(dateCreated);
             return questionnaireRepository.save(questionnaire);
         } catch (Exception e) {
             System.out.println(e);
 
+        }
+        return null;
+    }
+
+    public Questionnaire editQuestionnaire(Long questionnaireID, Map<?, ?> questionnaireDetails) {
+        try {
+            Questionnaire questionnaire = this.getQuestionnaireByID(questionnaireID);
+            String name = (String) questionnaireDetails.get("name");
+            String description = (String) questionnaireDetails.get("description");
+            questionnaire.setName(name);
+            questionnaire.setDescription(description);
+            return questionnaireRepository.save(questionnaire);
+        } catch (Exception e) {
+            System.out.println(e);
         }
         return null;
     }

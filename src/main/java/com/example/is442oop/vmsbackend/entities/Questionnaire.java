@@ -31,6 +31,11 @@ public class Questionnaire {
         this.dateCreated= dateCreated;
     }
 
+    public Questionnaire(String name, String description) {
+        this.name = name;
+        this.description= description;
+    }
+
     public Questionnaire(){
 
     }
