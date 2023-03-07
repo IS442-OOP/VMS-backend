@@ -1,4 +1,4 @@
-package com.example.is442oop.vmsbackend.controller;
+package com.example.is442oop.vmsbackend.controller.manageusers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package com.example.is442oop.vmsbackend.utils;
 
 import com.example.is442oop.vmsbackend.dto.response.LoginResponseDto;
-import com.example.is442oop.vmsbackend.dto.ManageUsersDto;
+import com.example.is442oop.vmsbackend.dto.response.ManageUsersDto;
 import com.example.is442oop.vmsbackend.dto.response.ResponseDto;
 import com.example.is442oop.vmsbackend.dto.response.TrueFalseDto;
 import com.example.is442oop.vmsbackend.entities.Question;

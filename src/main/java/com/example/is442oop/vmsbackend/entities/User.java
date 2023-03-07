@@ -26,7 +26,7 @@ public class User {
     private boolean isAccountActivated;
 
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-    public List <UserWorkflow> userWorkflow;
+    private List <UserWorkflow> userWorkflows;
 
     @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="userTypeID")
@@ -56,6 +56,10 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<UserWorkflow> getUserWorkflows(){ 
+        return userWorkflows;
     }
 
     @JsonIgnore
@@ -101,7 +105,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", isAccountActivated=" + isAccountActivated +
-                ", userWorkflow=" + userWorkflow +
+                ", userWorkflow=" + userWorkflows +
                 ", userType=" + userType +
                 '}';
     }

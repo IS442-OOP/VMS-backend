@@ -1,4 +1,4 @@
-package com.example.is442oop.vmsbackend.dto;
+package com.example.is442oop.vmsbackend.dto.response;
 import java.util.List;
 
 import com.example.is442oop.vmsbackend.entities.User;

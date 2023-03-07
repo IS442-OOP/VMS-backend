@@ -1,6 +1,6 @@
 package com.example.is442oop.vmsbackend.service.account.register;
 
-import com.example.is442oop.vmsbackend.dao.UserDao;
+import com.example.is442oop.vmsbackend.dao.user.UserDao;
 import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.exception.InternalServerException;
 import com.example.is442oop.vmsbackend.utils.JwtUtil;
