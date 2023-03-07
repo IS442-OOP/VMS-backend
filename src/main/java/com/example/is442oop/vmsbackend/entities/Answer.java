@@ -6,13 +6,13 @@ public class Answer {
     @Id
     private Integer answerID;
     private String answer; 
-    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+    @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="questionID", insertable=false, updatable = false)
     private Question question;
-    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY, optional = true)
+    @ManyToOne(cascade= CascadeType.ALL, optional = true)
     @JoinColumn(name="userWorkflowID", insertable=false, updatable = false, nullable = true)
     private UserWorkflow userWorkflowForAnswer;
-    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+    @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="sequenceID", insertable=false, updatable = false)
     private Sequence sequence;
 

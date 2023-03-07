@@ -10,6 +10,7 @@ import org.springframework.transaction.CannotCreateTransactionException;
 import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Component
 public class UserDao {
@@ -63,14 +64,33 @@ public class UserDao {
 
   }
 
+  public User getUser(String userId) throws Exception {
+      Optional<User> user = userRepository.findById(Long.valueOf(userId));
+      if (user.isPresent()) {
+        return user.get();
+      } else {
+        throw new NotFoundException("User does not exist for id: " + userId);
+      }
+
+  }
+
   public void hashPassword(User user, String password){
     Base64.Encoder encoder = Base64.getEncoder();
     user.setPassword(encoder.encodeToString(password.getBytes()));
+  }
+
+  public String hashPassword(String password){
+    Base64.Encoder encoder = Base64.getEncoder();
+    return encoder.encodeToString(password.getBytes());
   }
 
   public boolean verifyPassword(String encryptedPassword, String enteredPassword){
     Base64.Decoder decoder = Base64.getDecoder();
     byte[] bytes = decoder.decode(encryptedPassword);
     return Objects.equals(new String(bytes), enteredPassword);
+  }
+
+  public void updatePassword(int userId, String password) throws Exception {
+    userRepository.updatePassword(Long.valueOf(userId), password);
   }
 }

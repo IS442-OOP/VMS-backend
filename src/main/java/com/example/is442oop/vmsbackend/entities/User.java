@@ -21,13 +21,15 @@ public class User {
     private Long userID;
     private String name;
     private String email;
+
     private String password;
     private boolean isAccountActivated;
 
-    @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     public List <UserWorkflow> userWorkflow;
-    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name="userTypeID", insertable=false, updatable = false)
+
+    @ManyToOne(cascade= CascadeType.ALL)
+    @JoinColumn(name="userTypeID")
     private UserType userType;
 
     public User(@JsonProperty("email") String email,
@@ -44,12 +46,10 @@ public class User {
 
     }
 
-    @JsonIgnore
     public Long getUserID() {
         return userID;
     }
 
-    @JsonIgnore
     public String getEmail() {
         return email;
     }
@@ -89,7 +89,9 @@ public class User {
     }
 
 
-    
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
 
     @Override
     public String toString() {
