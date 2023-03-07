@@ -1,4 +1,4 @@
-package com.example.is442oop.vmsbackend.controller;
+package com.example.is442oop.vmsbackend.controller.workflow;
 
 import com.example.is442oop.vmsbackend.service.manageworkflows.ManageWorkflowsService;
 import org.springframework.beans.factory.annotation.Autowired;

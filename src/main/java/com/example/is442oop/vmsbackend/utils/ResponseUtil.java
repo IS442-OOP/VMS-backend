@@ -72,10 +72,10 @@ public class ResponseUtil {
         .body(user);
   }
 
-//  public static ResponseEntity <List<Questionnaire>> responseOk(List<Questionnaire> list){
-//    return ResponseEntity.status(HttpStatus.OK)
-//    .body(list);
-//  }
+  public static ResponseEntity <List<Questionnaire>> responseOk(List<Questionnaire> list){
+    return ResponseEntity.status(HttpStatus.OK)
+    .body(list);
+  }
 
   public static ResponseEntity <Questionnaire> responseOkCreateQuestionnaire(Questionnaire questionnaire){
     return ResponseEntity.status(HttpStatus.CREATED)
@@ -184,7 +184,7 @@ public class ResponseUtil {
         .body(body);
   }
 
-  public static ResponseEntity <List<Workflow>> responseOk(List<Workflow> list){
+  public static ResponseEntity <List<Workflow>> responseOkWorkflow(List<Workflow> list){
     return ResponseEntity.status(HttpStatus.OK)
             .body(list);
   }

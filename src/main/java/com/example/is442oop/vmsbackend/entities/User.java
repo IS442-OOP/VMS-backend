@@ -88,10 +88,7 @@ public class User {
     }
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> ad693883c3ac248983e69dc8b6b94f39c5f44fb0
     public void setUserType(UserType userType) {
         this.userType = userType;
     }
