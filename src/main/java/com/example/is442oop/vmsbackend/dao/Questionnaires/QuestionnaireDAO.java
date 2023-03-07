@@ -41,8 +41,10 @@ public class QuestionnaireDAO {
     public Questionnaire createQuestionnaire(Map<String,?> questionnaireDetails) {
         String name = (String) questionnaireDetails.get("name");
         String description = (String) questionnaireDetails.get("description");
+        String dateCreated = (String) questionnaireDetails.get("dateCreated");
+
         try {
-            Questionnaire newQuestionnaire = new Questionnaire(name, description);
+            Questionnaire newQuestionnaire = new Questionnaire(name, description, dateCreated);
             return questionnaireRepository.save(newQuestionnaire);
         } catch (Exception e) {
 
@@ -55,6 +57,8 @@ public class QuestionnaireDAO {
             Questionnaire questionnaire = this.getQuestionnaireByID(questionnaireID);
             String name = (String) questionnaireDetails.get("name");
             String description = (String) questionnaireDetails.get("description");
+            String dateCreated = (String) questionnaireDetails.get("dateCreated");
+
             ArrayList<Map<String, ?>> questions = (ArrayList) questionnaireDetails.get("questions");
             questionnaire.clearQuestions();
             for (Map<String, ?> question : questions) {
@@ -74,6 +78,7 @@ public class QuestionnaireDAO {
             }
             questionnaire.setName(name);
             questionnaire.setDescription(description);
+            questionnaire.setDateCreated(dateCreated);
             return questionnaireRepository.save(questionnaire);
         } catch (Exception e) {
             System.out.println(e);

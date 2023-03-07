@@ -10,6 +10,7 @@ public class Questionnaire {
     private Long questionnaireID;
     private String name;
     private String description;
+    private String dateCreated;
     
     @OneToMany(mappedBy="questionnaire", cascade=CascadeType.ALL, orphanRemoval = true, fetch=FetchType.LAZY)
     public Set <Question> questions;
@@ -24,7 +25,7 @@ public class Questionnaire {
     @JoinColumn(name="formID", insertable=false, updatable = false)
     private Form form;
     
-    public Questionnaire(String name, String description) {
+    public Questionnaire(String name, String description, String dateCreated) {
         this.name = name;
         this.description= description;
     }
@@ -52,6 +53,14 @@ public class Questionnaire {
 
     public void setDescription(String description){
         this.description = description;
+    }
+
+    public String getDateCreated(){
+        return dateCreated;
+    }
+    
+    public void setDateCreated(String dateCreated){
+        this.dateCreated=dateCreated;
     }
 
     public void addQuestion(Question question){
