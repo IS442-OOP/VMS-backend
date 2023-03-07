@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.is442oop.vmsbackend.dao.UserRepository;
 import com.example.is442oop.vmsbackend.service.manageusers.ManageUsersService;
+import com.example.is442oop.vmsbackend.utils.ResponseUtil;
 
 @RestController
 @RequestMapping("/api/v1/manageusers")
@@ -32,10 +33,9 @@ public class ManageUsersController {
 
   // @RequestAttribute("userId") String id
   @GetMapping
-  public List<User> getAllUsers(){
-    return manageUsersService.getAllUsers();
+  public ResponseEntity getAllUsers(){
+    return ResponseUtil.responseOk(manageUsersService.getAllUsers());
   }
-
   
   // @GetMapping("/{userId}")
   // public List<UserWorkflow> getUserWorkflows(@RequestAttribute("userId") Long userId) {
