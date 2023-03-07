@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ManageWorkflowsService implements ManageWorkflowsInterface{
@@ -22,9 +23,14 @@ public class ManageWorkflowsService implements ManageWorkflowsInterface{
 
     public ResponseEntity retrieveWorkflows() {
         return ResponseUtil.responseOkWorkflow(manageWorkflowsDao.retrieveWorkflows());
-//        List<Workflow> workflows = manageWorkflowsDao.retrieveWorkflows();
-//        return workflows;
+    }
 
+    public ResponseEntity createWorkflow(Workflow newworkflow){
+        return ResponseUtil.responseOkCreateWorkflow(manageWorkflowsDao.createWorkflow(newworkflow));
+    }
+
+    public  ResponseEntity updateWorkflow(Workflow workflow){
+        return ResponseUtil.responseOkUpdateWorkflow(manageWorkflowsDao.updateWorkflow(workflow));
     }
 
 }

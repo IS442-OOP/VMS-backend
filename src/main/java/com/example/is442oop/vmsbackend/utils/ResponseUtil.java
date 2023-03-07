@@ -88,6 +88,21 @@ public class ResponseUtil {
 
   }
 
+  public static ResponseEntity <List<Workflow>> responseOkWorkflow(List<Workflow> list){
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(list);
+  }
+
+  public static ResponseEntity <Workflow> responseOkCreateWorkflow(Workflow workflow){
+    return ResponseEntity.status(HttpStatus.CREATED)
+            .body(workflow);
+  }
+
+  public static ResponseEntity <Workflow> responseOkUpdateWorkflow(Workflow workflow){
+    return ResponseEntity.status(HttpStatus.CREATED)
+            .body(workflow);
+  }
+
   public static ResponseEntity<User> responseVendorCreated(User user) {
     return ResponseEntity.status(HttpStatus.CREATED)
             .body(user);
@@ -184,9 +199,5 @@ public class ResponseUtil {
         .body(body);
   }
 
-  public static ResponseEntity <List<Workflow>> responseOkWorkflow(List<Workflow> list){
-    return ResponseEntity.status(HttpStatus.OK)
-            .body(list);
-  }
 
 }
