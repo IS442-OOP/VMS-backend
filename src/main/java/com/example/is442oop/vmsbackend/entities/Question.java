@@ -10,6 +10,7 @@ public class Question {
     private Long questionID;
     private String question; 
     private String questionType;
+    private Integer questionOrder;
     @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name="questionnaireID")
     private Questionnaire questionnaire;
@@ -22,10 +23,11 @@ public class Question {
     public Question() {
     }
 
-    public Question(String question, String questionType) {
+    public Question(String question, String questionType, Integer questionOrder) {
         this.question = question;
         this.questionType = questionType;
         this.options = new ArrayList<QuestionOption>();
+        this.questionOrder = questionOrder;
     }
 
     public Long getQuestionID() {
@@ -60,6 +62,16 @@ public class Question {
     // public void setOptions(Set<QuestionOption> questionOptions){
     //     this.options = questionOptions;
     // }
+
+    public Integer getQuestionOrder(){
+        return this.questionOrder;
+    }
+
+    public void setQuestionOrder(Integer questionOrder){
+        System.out.println(questionOrder);
+        this.questionOrder = questionOrder;
+    }
+
 
     public void addOption(QuestionOption questionOption){
         this.options.add(questionOption);

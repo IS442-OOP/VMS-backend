@@ -85,8 +85,9 @@ public class Questionnaire {
 
     public Question getQuestionById(Long id) {
 
-        for(Question question: questions){
-            if(question.getQuestionID() == id){
+        for (Question question : questions) {
+            System.out.println(question.getQuestion());
+            if (question.getQuestionID() == id) {
                 return question;
             }
         }
@@ -95,8 +96,8 @@ public class Questionnaire {
     }
 
     public void removeQuestionById(Long id) {
-        for(Question question: questions){
-            if(question.getQuestionID() == id){
+        for (Question question : questions) {
+            if (question.getQuestionID() == id) {
                 questions.remove(question);
                 return;
             }

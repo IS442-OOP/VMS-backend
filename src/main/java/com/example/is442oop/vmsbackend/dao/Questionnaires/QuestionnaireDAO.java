@@ -46,7 +46,7 @@ public class QuestionnaireDAO {
 
         try {
             Questionnaire newQuestionnaire = new Questionnaire(name, description, dateCreated);
-            Question question = new Question("","text");
+            Question question = new Question("", "text", 1);
             newQuestionnaire.addQuestion(question);
             question.setQuestionnaire(newQuestionnaire);
             return questionnaireRepository.save(newQuestionnaire);
@@ -61,22 +61,24 @@ public class QuestionnaireDAO {
             Questionnaire questionnaire = this.getQuestionnaireByID(questionnaireID);
             ArrayList<Map<String, ?>> questions = (ArrayList) questionnaireDetails.get("questions");
             List<Integer> deleteQuestionIds = (List) questionnaireDetails.get("deleteQuestions");
+            List<Question> newQuestions = new ArrayList<Question>(); 
 
             for (Integer id : deleteQuestionIds) {
                 questionnaire.removeQuestionById(Long.valueOf(id));
             }
-            
+
             for (Map<String, ?> question : questions) {
                 String questionType = (String) question.get("questionType");
                 String questionName = (String) question.get("question");
+                Integer questionOrder = (Integer) question.get("questionOrder");
                 Object questionIDExists = question.get("questionID");
-
                 if (questionIDExists != null) {
                     Long questionID = Long.valueOf((Integer) questionIDExists);
                     Question questionObj = questionnaire.getQuestionById(questionID);
                     questionObj.setQuestionType(questionType);
                     questionObj.setQuestion(questionName);
-                    List<Integer> deleteOptionIds = question.get("deleteOptionIds") != null ? (List)question.get("deleteOptionIds") : new ArrayList<Integer>() ;
+                    questionObj.setQuestionOrder(questionOrder);
+                    List<Integer> deleteOptionIds = question.get("deleteOptionIds") != null ? (List) question.get("deleteOptionIds") : new ArrayList<Integer>();
 
                     for (Integer id : deleteOptionIds) {
                         questionObj.removeOptionById(id);
@@ -97,11 +99,11 @@ public class QuestionnaireDAO {
                         }
                     }
                 } else {
-                    Question questionObj = new Question(questionName, questionType);
-                    questionnaire.addQuestion(questionObj);
+                    Question questionObj = new Question(questionName, questionType, questionOrder);
                     questionObj.setQuestionnaire(questionnaire);
+                    newQuestions.add(questionObj);
                     ArrayList<Map<String, ?>> options = (ArrayList) question.get("options");
-                    System.out.println(options);
+
                     for (Map<String, ?> option : options) {
                         String questionOption = (String) option.get("questionOption");
                         QuestionOption optionObj = new QuestionOption(questionOption);
@@ -109,8 +111,13 @@ public class QuestionnaireDAO {
                         optionObj.setQuestion(questionObj);
                     }
                 }
-
+                
             }
+
+            for(Question newQuestion : newQuestions){
+                questionnaire.addQuestion(newQuestion);
+            }
+
             return questionnaireRepository.save(questionnaire);
         } catch (Exception e) {
             System.out.println(e);
