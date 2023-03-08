@@ -1,6 +1,7 @@
 package com.example.is442oop.vmsbackend.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.util.List;
@@ -26,6 +27,7 @@ public class User {
     private boolean isAccountActivated;
 
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+    @JsonManagedReference
     private List <UserWorkflow> userWorkflows;
 
     @ManyToOne(cascade= CascadeType.ALL)
@@ -60,6 +62,10 @@ public class User {
 
     public List<UserWorkflow> getUserWorkflows(){ 
         return userWorkflows;
+    }
+
+    public void addUserWorkflow(UserWorkflow uw) {
+        userWorkflows.add(uw);
     }
 
     @JsonIgnore
