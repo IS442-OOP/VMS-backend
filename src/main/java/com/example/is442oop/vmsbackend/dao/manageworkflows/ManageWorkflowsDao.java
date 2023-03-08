@@ -23,7 +23,7 @@ public class ManageWorkflowsDao {
         return manageWorkflowsRepository.getAllWorkflows();
     }
 
-    public Workflow createWorkflow(Map<String,?> workflowDetails) {
+    public Workflow createWorkflow(Map<String, ?> workflowDetails) {
         String workflowid = (String) workflowDetails.get("workflowid");
         String name = (String) workflowDetails.get("name");
         try {
@@ -33,5 +33,13 @@ public class ManageWorkflowsDao {
 
         }
         return null;
+    }
+
+    public void editWorkflow(String workflowID, Map<String, ?> workflowDetails) {
+        String newworkflowid = (String) workflowDetails.get("workflowid");
+        String name = (String) workflowDetails.get("name");
+        manageWorkflowsRepository.updateWorkflow(newworkflowid,workflowID, name);
+
+
     }
 }

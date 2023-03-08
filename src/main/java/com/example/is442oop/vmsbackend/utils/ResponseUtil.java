@@ -34,6 +34,7 @@ public class ResponseUtil {
   private final static String responseTaskUpdated = "Task has been updated for Id: ";
   private final static String responseNotAuthorized = "User not authorized";
   private final static String responseLoginSuccess = "User has login successfully for Id: ";
+  private final static String responseWorkflowSuccess= "Workflow has updated successfully for Id: ";
 
   public static ResponseDto createReturnValue(String message) {
     return ResponseDto.builder()
@@ -98,10 +99,18 @@ public class ResponseUtil {
             .body(workflow);
   }
 
-  public static ResponseEntity <Workflow> responseOkUpdateWorkflow(Workflow workflow){
-    return ResponseEntity.status(HttpStatus.CREATED)
-            .body(workflow);
+  public static ResponseEntity responseWorkflowUpdateSuccess(String Id) {
+    TrueFalseDto body = createReturnValue(responseWorkflowSuccess + Id, true);
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(body);
   }
+
+  public static ResponseEntity responseWorkflowUpdateFailed(String Id) {
+    TrueFalseDto body = createReturnValue(responseWorkflowSuccess + Id, false);
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(body);
+  }
+
 
   public static ResponseEntity<User> responseVendorCreated(User user) {
     return ResponseEntity.status(HttpStatus.CREATED)

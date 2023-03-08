@@ -24,7 +24,14 @@ public class ManageWorkflowsController {
     }
 
     @PostMapping
-    public @ResponseBody ResponseEntity createWorkflow(@RequestBody Map<String, String> workflowDetails) {
+    public ResponseEntity createWorkflow(@RequestBody Map<String, String> workflowDetails) {
         return manageWorkflowsService.createWorkflow(workflowDetails);
     }
+
+    @PutMapping("/{workflowid}")
+    public ResponseEntity editWorkflow(@PathVariable String workflowid, @RequestBody Map<String,?> workflowDetails){
+        return manageWorkflowsService.editWorkflow(workflowid, workflowDetails);
+    }
+
+
 }

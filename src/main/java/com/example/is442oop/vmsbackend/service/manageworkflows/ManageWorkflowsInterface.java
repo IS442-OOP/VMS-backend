@@ -10,4 +10,6 @@ import java.util.Map;
 public interface ManageWorkflowsInterface {
     public ResponseEntity retrieveWorkflows();
     public ResponseEntity createWorkflow(Map<String,?> workflowDetails);
+
+    public ResponseEntity editWorkflow(String workflowID, Map<String,?> workflowDetails);
 }
