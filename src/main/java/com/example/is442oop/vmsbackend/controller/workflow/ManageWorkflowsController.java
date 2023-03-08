@@ -26,8 +26,8 @@ public class ManageWorkflowsController {
         return manageWorkflowsService.createWorkflow(newworkflow);
     }
 
-    @PutMapping(path = "/update")
-    public ResponseEntity updateWorkflow(@RequestBody Workflow workflow){
-        return manageWorkflowsService.updateWorkflow(workflow);
-    }
+//    @PutMapping(path = "/update")
+//    public ResponseEntity updateWorkflow(@RequestBody Workflow workflow){
+//        return manageWorkflowsService.updateWorkflow(workflow);
+//    }
 }

@@ -27,7 +27,7 @@ public class ManageWorkflowsDao {
     public Workflow createWorkflow(Workflow newworkflow) {
         return manageWorkflowsRepository.save(newworkflow);
     }
-    public Workflow updateWorkflow(Workflow workflow) {
-        return manageWorkflowsRepository.updateWorkflow(workflow.getWorkflowID(), workflow.getName());
-    }
+//    public Workflow updateWorkflow(Workflow workflow) {
+//        return manageWorkflowsRepository.updateWorkflow(workflow.getWorkflowID(), workflow.getName());
+//    }
 }

@@ -28,9 +28,9 @@ public class ManageWorkflowsService implements ManageWorkflowsInterface{
     public ResponseEntity createWorkflow(Workflow newworkflow){
         return ResponseUtil.responseOkCreateWorkflow(manageWorkflowsDao.createWorkflow(newworkflow));
     }
-
-    public  ResponseEntity updateWorkflow(Workflow workflow){
-        return ResponseUtil.responseOkUpdateWorkflow(manageWorkflowsDao.updateWorkflow(workflow));
-    }
+//
+//    public  ResponseEntity updateWorkflow(Workflow workflow){
+//        return ResponseUtil.responseOkUpdateWorkflow(manageWorkflowsDao.updateWorkflow(workflow));
+//    }
 
 }

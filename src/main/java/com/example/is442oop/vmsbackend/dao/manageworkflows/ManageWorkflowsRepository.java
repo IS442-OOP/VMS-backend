@@ -15,8 +15,8 @@ public interface ManageWorkflowsRepository extends JpaRepository<Workflow, Strin
     @Query("SELECT w from Workflow w")
     List<Workflow> getAllWorkflows();
 
-    @Modifying
-    @Transactional
-    @Query("UPDATE Workflow w SET w.workflowid = :workflowid, name= :name WHERE w.workflowid = :workflowid")
-    Workflow updateWorkflow(@Param("workflowid") String workflowid, @Param("name") String name);
+//    @Modifying
+//    @Transactional
+//    @Query("UPDATE Workflow w SET w.workflowid = :workflowid, name= :name WHERE w.workflowid = :workflowid")
+//    Workflow updateWorkflow(@Param("workflowid") String workflowid, @Param("name") String name);
 }
