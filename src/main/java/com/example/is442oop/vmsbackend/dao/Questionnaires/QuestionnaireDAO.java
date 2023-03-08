@@ -140,4 +140,14 @@ public class QuestionnaireDAO {
         return null;
     }
 
+    public Questionnaire deleteQuestionnaire(Long questionnaireID){
+        try{
+            questionnaireRepository.deleteById(questionnaireID);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return null;
+    }
+
 }
