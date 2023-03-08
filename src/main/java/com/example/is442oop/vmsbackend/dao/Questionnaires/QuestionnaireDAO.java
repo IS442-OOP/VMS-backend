@@ -46,6 +46,9 @@ public class QuestionnaireDAO {
 
         try {
             Questionnaire newQuestionnaire = new Questionnaire(name, description, dateCreated);
+            Question question = new Question("","text");
+            newQuestionnaire.addQuestion(question);
+            question.setQuestionnaire(newQuestionnaire);
             return questionnaireRepository.save(newQuestionnaire);
         } catch (Exception e) {
 

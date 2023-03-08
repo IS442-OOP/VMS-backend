@@ -29,11 +29,13 @@ public class Questionnaire {
         this.name = name;
         this.description = description;
         this.dateCreated = dateCreated;
+        this.questions = new ArrayList<Question>();
     }
 
     public Questionnaire(String name, String description) {
         this.name = name;
         this.description = description;
+        this.questions = new ArrayList<Question>();
     }
 
     public Questionnaire() {
