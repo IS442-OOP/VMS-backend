@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/v1/manageworkflows")
 public class ManageWorkflowsController {
@@ -22,12 +24,7 @@ public class ManageWorkflowsController {
     }
 
     @PostMapping
-    public ResponseEntity createWorkflow(@RequestBody Workflow newworkflow) {
-        return manageWorkflowsService.createWorkflow(newworkflow);
+    public @ResponseBody ResponseEntity createWorkflow(@RequestBody Map<String, String> workflowDetails) {
+        return manageWorkflowsService.createWorkflow(workflowDetails);
     }
-
-//    @PutMapping(path = "/update")
-//    public ResponseEntity updateWorkflow(@RequestBody Workflow workflow){
-//        return manageWorkflowsService.updateWorkflow(workflow);
-//    }
 }

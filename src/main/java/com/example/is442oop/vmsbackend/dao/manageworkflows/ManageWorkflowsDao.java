@@ -23,11 +23,15 @@ public class ManageWorkflowsDao {
         return manageWorkflowsRepository.getAllWorkflows();
     }
 
+    public Workflow createWorkflow(Map<String,?> workflowDetails) {
+        String workflowid = (String) workflowDetails.get("workflowid");
+        String name = (String) workflowDetails.get("name");
+        try {
+            Workflow newWorkflow = new Workflow(workflowid, name);
+            return manageWorkflowsRepository.save(newWorkflow);
+        } catch (Exception e) {
 
-    public Workflow createWorkflow(Workflow newworkflow) {
-        return manageWorkflowsRepository.save(newworkflow);
+        }
+        return null;
     }
-//    public Workflow updateWorkflow(Workflow workflow) {
-//        return manageWorkflowsRepository.updateWorkflow(workflow.getWorkflowID(), workflow.getName());
-//    }
 }
