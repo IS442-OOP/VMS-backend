@@ -104,7 +104,6 @@ public class ResponseUtil {
 
   }
 
-
   public static ResponseEntity<LoginResponseDto> responseOk(String message, String token, User user) {
     return ResponseEntity.status(HttpStatus.OK)
         .body(createReturnValue(message, token, user));
@@ -117,6 +116,11 @@ public class ResponseUtil {
   public static ResponseEntity<ManageUsersDto> responseGetUserWorkflowsOk(List<UserWorkflow> workflows) {
     return ResponseEntity.status(HttpStatus.OK)
             .body(createReturnUserWorkflows(workflows));
+  }
+
+  public static ResponseEntity<List<UserWorkflow>> responseAssignUserWorkflowsOk(List<UserWorkflow> workflows) {
+    return ResponseEntity.status(HttpStatus.CREATED)
+            .body(workflows);
   }
 
   public static ResponseEntity responseTaskDeleted(Long Id) {
