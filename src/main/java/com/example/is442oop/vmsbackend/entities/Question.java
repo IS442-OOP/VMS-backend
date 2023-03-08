@@ -25,7 +25,7 @@ public class Question {
     public Question(String question, String questionType) {
         this.question = question;
         this.questionType = questionType;
-        // this.options = new List<QuestionOption>();
+        this.options = new ArrayList<QuestionOption>();
     }
 
     public Long getQuestionID() {
@@ -77,6 +77,16 @@ public class Question {
         }
         return null;
     }
+
+    public void removeOptionById(Integer id){
+        for(QuestionOption option: options){
+            if(option.getOptionID() == id){
+                options.remove(option);
+                return;
+            }
+        }
+    }
+
 
     public void setQuestionnaire(Questionnaire questionnaire){
         this.questionnaire= questionnaire;

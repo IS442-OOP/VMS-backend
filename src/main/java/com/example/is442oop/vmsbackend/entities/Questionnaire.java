@@ -91,4 +91,13 @@ public class Questionnaire {
 
         return null;
     }
+
+    public void removeQuestionById(Long id) {
+        for(Question question: questions){
+            if(question.getQuestionID() == id){
+                questions.remove(question);
+                return;
+            }
+        }
+    }
 }

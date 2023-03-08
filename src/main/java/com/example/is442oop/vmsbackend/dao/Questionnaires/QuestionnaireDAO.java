@@ -57,26 +57,35 @@ public class QuestionnaireDAO {
         try {
             Questionnaire questionnaire = this.getQuestionnaireByID(questionnaireID);
             ArrayList<Map<String, ?>> questions = (ArrayList) questionnaireDetails.get("questions");
-            System.out.println(questions);
+            List<Integer> deleteQuestionIds = (List) questionnaireDetails.get("deleteQuestions");
 
+            for (Integer id : deleteQuestionIds) {
+                questionnaire.removeQuestionById(Long.valueOf(id));
+            }
+            
             for (Map<String, ?> question : questions) {
                 String questionType = (String) question.get("questionType");
                 String questionName = (String) question.get("question");
                 Object questionIDExists = question.get("questionID");
+
                 if (questionIDExists != null) {
-                    Long questionID = Long.valueOf((Integer)questionIDExists);
+                    Long questionID = Long.valueOf((Integer) questionIDExists);
                     Question questionObj = questionnaire.getQuestionById(questionID);
                     questionObj.setQuestionType(questionType);
                     questionObj.setQuestion(questionName);
+                    List<Integer> deleteOptionIds = question.get("deleteOptionIds") != null ? (List)question.get("deleteOptionIds") : new ArrayList<Integer>() ;
+
+                    for (Integer id : deleteOptionIds) {
+                        questionObj.removeOptionById(id);
+                    }
+
                     ArrayList<Map<String, ?>> options = (ArrayList) question.get("options");
                     for (Map<String, ?> option : options) {
                         Object optionIDExists = option.get("optionID");
                         String questionOption = (String) option.get("questionOption");
-
                         if (optionIDExists != null) {
                             Integer optionID = (Integer) optionIDExists;
                             QuestionOption optionObj = questionObj.getOptionById(optionID);
-
                             optionObj.setQuestionOption(questionOption);
                         } else {
                             QuestionOption optionObj = new QuestionOption(questionOption);
@@ -87,7 +96,15 @@ public class QuestionnaireDAO {
                 } else {
                     Question questionObj = new Question(questionName, questionType);
                     questionnaire.addQuestion(questionObj);
-                    questionObj.setQuestionnaire(questionnaire);;
+                    questionObj.setQuestionnaire(questionnaire);
+                    ArrayList<Map<String, ?>> options = (ArrayList) question.get("options");
+                    System.out.println(options);
+                    for (Map<String, ?> option : options) {
+                        String questionOption = (String) option.get("questionOption");
+                        QuestionOption optionObj = new QuestionOption(questionOption);
+                        questionObj.addOption(optionObj);
+                        optionObj.setQuestion(questionObj);
+                    }
                 }
 
             }
