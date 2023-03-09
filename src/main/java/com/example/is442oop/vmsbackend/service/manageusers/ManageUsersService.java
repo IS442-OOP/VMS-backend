@@ -51,8 +51,6 @@ public class ManageUsersService implements ManageUsersInterface {
         Workflow workflow = manageworkflowsDao.getWorkflowById(id);
         UserWorkflow uw = new UserWorkflow(dateAssigned, isApproved, user, workflow);
         userworkflows.add(uw);
-        // user.addUserWorkflow(uw);
-        // workflow.addUserWorkflow(uw);
       }
       return userworkflowDao.assignWorkflows(userworkflows);
     }
