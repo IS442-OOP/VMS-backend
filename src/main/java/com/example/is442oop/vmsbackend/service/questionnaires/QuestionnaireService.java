@@ -45,5 +45,8 @@ public class QuestionnaireService implements QuestionnaireInterface {
       return questionnaireDAO.deleteQuestionnaire(questionnaireID);
     }
 
+    public Questionnaire saveQuestionnaire(Long questionnaireID){
+      return questionnaireDAO.saveQuestionnaire(questionnaireID);
+    }
     
 }

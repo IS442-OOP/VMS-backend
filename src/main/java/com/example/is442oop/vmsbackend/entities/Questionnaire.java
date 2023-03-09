@@ -11,6 +11,7 @@ public class Questionnaire {
     private String name;
     private String description;
     private String dateCreated;
+    private Boolean isDraft;
 
     @OneToMany(mappedBy = "questionnaire", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     public List<Question> questions;
@@ -30,12 +31,14 @@ public class Questionnaire {
         this.description = description;
         this.dateCreated = dateCreated;
         this.questions = new ArrayList<Question>();
+        this.isDraft = true;
     }
 
     public Questionnaire(String name, String description) {
         this.name = name;
         this.description = description;
         this.questions = new ArrayList<Question>();
+        this.isDraft = true;
     }
 
     public Questionnaire() {
@@ -72,6 +75,14 @@ public class Questionnaire {
 
     public void setDateCreated(String dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public Boolean getIsDraft(){
+        return this.isDraft;
+    }
+
+    public void setIsDraft(Boolean isDraft){
+        this.isDraft = isDraft;
     }
 
     public void addQuestion(Question question) {

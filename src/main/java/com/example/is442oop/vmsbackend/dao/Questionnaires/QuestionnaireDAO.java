@@ -150,4 +150,9 @@ public class QuestionnaireDAO {
         return null;
     }
 
+    public Questionnaire saveQuestionnaire(Long questionnaireID){
+        Questionnaire questionnaire = questionnaireRepository.getQuestionnaireByID(questionnaireID);
+        questionnaire.setIsDraft(true);
+        return questionnaireRepository.save(questionnaire);
+    }
 }

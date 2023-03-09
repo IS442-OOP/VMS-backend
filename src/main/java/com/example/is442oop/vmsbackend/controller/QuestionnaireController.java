@@ -61,5 +61,8 @@ public class QuestionnaireController {
         return questionnaireService.deleteQuestionnaire(questionnaireID);
     }
 
-
+    @PutMapping("/{questionnaireID}/save")
+    public @ResponseBody Questionnaire saveQuestionnaire(@PathVariable Long questionnaireID){
+        return questionnaireService.saveQuestionnaire(questionnaireID);
+    }
 }
