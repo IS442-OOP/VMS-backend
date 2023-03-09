@@ -37,12 +37,12 @@ public class QuestionnaireController {
     }
 
     @GetMapping("/{questionnaireID}")
-    public ResponseEntity getQuestionnaireByID(@PathVariable Long questionnaireID) {
+    public Questionnaire getQuestionnaireByID(@PathVariable Long questionnaireID) {
         return questionnaireService.getQuestionnaireByID(questionnaireID);
     }
 
     @PostMapping
-    public @ResponseBody ResponseEntity createQuestionnaire(@RequestBody Map<String, String> questionnaireDetails) {
+    public @ResponseBody Questionnaire createQuestionnaire(@RequestBody Map<String, String> questionnaireDetails) {
         return questionnaireService.createQuestionnaire(questionnaireDetails);
     }
 
