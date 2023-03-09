@@ -26,4 +26,20 @@ public class UserWorkflowDao {
         return null;
         
     }
+
+    public UserWorkflow getUserWorkflowById(Long userworkflowid) {
+        try{
+            return userworkflowRepository.findById(userworkflowid).get();
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public void unassignWorkflow(Long userworkflowid) {
+        try {
+            userworkflowRepository.deleteById(userworkflowid);
+        } catch (Exception e) {
+        }
+        
+    }
 }

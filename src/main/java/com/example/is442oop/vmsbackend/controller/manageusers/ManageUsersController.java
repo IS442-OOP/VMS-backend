@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,5 +44,10 @@ public class ManageUsersController {
   @PostMapping("/{userId}")
   public ResponseEntity assignWorkflows(@PathVariable Long userId, @RequestBody List<String> workflowIds) {
     return ResponseUtil.responseAssignUserWorkflowsOk(manageUsersService.assignWorkflows(userId, workflowIds));
+  }
+
+  @DeleteMapping("/{userId}")
+  public ResponseEntity unassignWorkflow(@RequestBody Long userworkflowId) {
+    return ResponseUtil.responseTaskDeleted(manageUsersService.unassignWorkflow(userworkflowId));
   }
 }

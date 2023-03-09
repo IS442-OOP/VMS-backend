@@ -7,6 +7,7 @@ import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.entities.UserWorkflow;
 import com.example.is442oop.vmsbackend.entities.Workflow;
 import com.example.is442oop.vmsbackend.exception.InternalServerException;
+import com.example.is442oop.vmsbackend.utils.ResponseUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;  
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -60,7 +62,16 @@ public class ManageUsersService implements ManageUsersInterface {
       throw new InternalServerException(e.getMessage());
     
   }
-
-
 }
+
+public Long unassignWorkflow(Long userworkflowid) {
+  try {
+    userworkflowDao.unassignWorkflow(userworkflowid);
+  } catch (Exception e) {
+  }
+  return userworkflowid;
+  
+}
+
+
 }
