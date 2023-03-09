@@ -23,12 +23,12 @@ public class UserWorkflow {
     private String dateAssigned;
     private String isApproved;
 
-    @ManyToOne(cascade= CascadeType.ALL, optional = true)
+    @ManyToOne(optional = true)
     @JoinColumn(name="userID")
     @JsonBackReference
     private User user;
 
-    @ManyToOne(cascade= CascadeType.ALL, optional = true)
+    @ManyToOne(optional = true)
     @JoinColumn(name="workflowID")
     private Workflow workflow;
 
