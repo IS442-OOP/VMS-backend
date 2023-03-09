@@ -63,7 +63,7 @@ public class QuestionnaireDAO {
 
     public Questionnaire saveQuestionnaire(Long questionnaireID){
         Questionnaire questionnaire = questionnaireRepository.getQuestionnaireByID(questionnaireID);
-        questionnaire.setIsDraft(true);
+        questionnaire.setIsDraft(false);
         return questionnaireRepository.save(questionnaire);
     }
 }
