@@ -1,5 +1,6 @@
 package com.example.is442oop.vmsbackend.service.manageusers;
 
+import com.example.is442oop.vmsbackend.dao.manageworkflows.ManageWorkflowsDao;
 import com.example.is442oop.vmsbackend.dao.user.UserDao;
 import com.example.is442oop.vmsbackend.dao.userworkflow.UserWorkflowDao;
 import com.example.is442oop.vmsbackend.entities.User;
@@ -20,11 +21,13 @@ public class ManageUsersService implements ManageUsersInterface {
 
   private final UserDao userDao;
   private final UserWorkflowDao userworkflowDao;
+  private final ManageWorkflowsDao manageworkflowsDao;
 
   @Autowired
-  public ManageUsersService(UserDao userDao, UserWorkflowDao userworkflowDao){
+  public ManageUsersService(UserDao userDao, UserWorkflowDao userworkflowDao, ManageWorkflowsDao manageworkflowsDao){
     this.userDao = userDao;
     this.userworkflowDao = userworkflowDao;
+    this.manageworkflowsDao = manageworkflowsDao;
   }
   public List<User> getAllUsers() {
     return userDao.getAllUsers();
@@ -34,7 +37,7 @@ public class ManageUsersService implements ManageUsersInterface {
     return userDao.findUserById(userid).getUserWorkflows();
   }
 
-  public List<UserWorkflow> assignWorkflows(Long userid, List<Workflow> workflows) {
+  public List<UserWorkflow> assignWorkflows(Long userid, List<String> workflowids) {
   
     List<UserWorkflow> userworkflows = new ArrayList<UserWorkflow>();
     User user = userDao.findUserById(userid);
@@ -44,13 +47,12 @@ public class ManageUsersService implements ManageUsersInterface {
     String isApproved = "0";
 
     try {
-      for (Workflow workflow: workflows){ 
-        System.out.println(workflow);
+      for (String id: workflowids){ 
+        Workflow workflow = manageworkflowsDao.getWorkflowById(id);
         UserWorkflow uw = new UserWorkflow(dateAssigned, isApproved, user, workflow);
         userworkflows.add(uw);
-        // user.addUserWorkflow(uw);
-        // workflow.addUserWorkflow(uw);
-        System.out.println(uw);
+        user.addUserWorkflow(uw);
+        workflow.addUserWorkflow(uw);
       }
       return userworkflowDao.assignWorkflows(userworkflows);
     }

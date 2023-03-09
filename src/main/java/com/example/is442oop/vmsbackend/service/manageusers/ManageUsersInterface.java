@@ -12,5 +12,5 @@ public interface ManageUsersInterface {
 
     public List<UserWorkflow> getUserWorkflows(Long userid);
 
-    public List<UserWorkflow> assignWorkflows(Long userid, List<Workflow> workflows);
+    public List<UserWorkflow> assignWorkflows(Long userid, List<String> workflowids);
 }
