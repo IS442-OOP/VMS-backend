@@ -41,7 +41,7 @@ public class ManageUsersController {
   }
 
   @PostMapping("/{userId}")
-  public ResponseEntity assignWorkflows(@PathVariable Long userId, @RequestBody List<Workflow> workflows) {
-    return ResponseUtil.responseAssignUserWorkflowsOk(manageUsersService.assignWorkflows(userId, workflows));
+  public ResponseEntity assignWorkflows(@PathVariable Long userId, @RequestBody List<String> workflowIds) {
+    return ResponseUtil.responseAssignUserWorkflowsOk(manageUsersService.assignWorkflows(userId, workflowIds));
   }
 }

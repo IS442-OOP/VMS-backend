@@ -24,12 +24,12 @@ public class UserWorkflow {
     private String isApproved;
 
     @ManyToOne(cascade= CascadeType.ALL, optional = true)
-    @JoinColumn(name="userID", insertable=false, updatable = false, nullable=true)
+    @JoinColumn(name="userID")
     @JsonBackReference
     private User user;
 
     @ManyToOne(cascade= CascadeType.ALL, optional = true)
-    @JoinColumn(name="workflowID", insertable=false, updatable = false, nullable=true)
+    @JoinColumn(name="workflowID")
     private Workflow workflow;
 
     @OneToMany(mappedBy="userWorkflowForAnswer", cascade=CascadeType.ALL)

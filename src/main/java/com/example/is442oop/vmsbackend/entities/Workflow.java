@@ -39,6 +39,10 @@ public class Workflow {
     }
 
     public void addUserWorkflow(UserWorkflow uw) {
+
+        if (userWorkflow == null) {
+            userWorkflow = new HashSet<UserWorkflow>();
+        }
         userWorkflow.add(uw);
     }
 

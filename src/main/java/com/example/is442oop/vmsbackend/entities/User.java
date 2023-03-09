@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -65,6 +67,9 @@ public class User {
     }
 
     public void addUserWorkflow(UserWorkflow uw) {
+        if (userWorkflows == null) {
+            userWorkflows = new ArrayList<UserWorkflow>();
+        }
         userWorkflows.add(uw);
     }
 
