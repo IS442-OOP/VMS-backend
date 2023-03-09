@@ -3,6 +3,8 @@ package com.example.is442oop.vmsbackend.dao.manageworkflows;
 import com.example.is442oop.vmsbackend.entities.Questionnaire;
 import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.entities.Workflow;
+import com.example.is442oop.vmsbackend.exception.InternalServerException;
+import com.example.is442oop.vmsbackend.exception.NotFoundException;
 import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,21 +26,28 @@ public class ManageWorkflowsDao {
     }
 
     public Workflow createWorkflow(Map<String, ?> workflowDetails) {
-        String workflowid = (String) workflowDetails.get("workflowid");
+        String workflowNo = (String) workflowDetails.get("workflowNo");
+        System.out.println(workflowNo);
         String name = (String) workflowDetails.get("name");
         try {
-            Workflow newWorkflow = new Workflow(workflowid, name);
+            Workflow newWorkflow = new Workflow(name, workflowNo);
             return manageWorkflowsRepository.save(newWorkflow);
-        } catch (Exception e) {
-
+        } catch (InternalServerException e) {
+            System.out.println(e.getMessage());
         }
         return null;
     }
 
     public void editWorkflow(String workflowID, Map<String, ?> workflowDetails) {
-        String newworkflowid = (String) workflowDetails.get("workflowid");
-        String name = (String) workflowDetails.get("name");
-        manageWorkflowsRepository.updateWorkflow(newworkflowid,workflowID, name);
+        try{
+            manageWorkflowsRepository.findById(workflowID);
+            String name = (String) workflowDetails.get("name");
+            String workflowNo = (String) workflowDetails.get("workflowNo");
+            manageWorkflowsRepository.updateWorkflow(workflowID, name, workflowNo);
+        }
+        catch (NotFoundException e){
+            throw new NotFoundException("Workflow not found for ID :" + workflowID);
+        }
 
 
     }
