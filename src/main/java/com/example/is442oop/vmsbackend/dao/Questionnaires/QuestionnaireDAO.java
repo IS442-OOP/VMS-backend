@@ -16,7 +16,7 @@ import java.util.Set;
 
 @Component
 public class QuestionnaireDAO {
-    private final QuestionnaireRepository questionnaireRepository;
+    public final QuestionnaireRepository questionnaireRepository;
 
     @Autowired
     public QuestionnaireDAO(QuestionnaireRepository questionnaireRepository) {
@@ -39,105 +39,16 @@ public class QuestionnaireDAO {
         return null;
     }
 
-    public Questionnaire createQuestionnaire(Map<String, ?> questionnaireDetails) {
-        String name = (String) questionnaireDetails.get("name");
-        String description = (String) questionnaireDetails.get("description");
-        String dateCreated = (String) questionnaireDetails.get("dateCreated");
-
-        try {
-            Questionnaire newQuestionnaire = new Questionnaire(name, description, dateCreated);
-            Question question = new Question("", "text", 1);
-            newQuestionnaire.addQuestion(question);
-            question.setQuestionnaire(newQuestionnaire);
-            return questionnaireRepository.save(newQuestionnaire);
-        } catch (Exception e) {
-
-        }
-        return null;
+    public Questionnaire createQuestionnaire(Questionnaire questionnaire) {
+        return questionnaireRepository.save(questionnaire);
     }
 
-    public Questionnaire editQuestionnaireQuestions(Long questionnaireID, Map<?, ?> questionnaireDetails) {
-        try {
-            Questionnaire questionnaire = this.getQuestionnaireByID(questionnaireID);
-            ArrayList<Map<String, ?>> questions = (ArrayList) questionnaireDetails.get("questions");
-            List<Integer> deleteQuestionIds = (List) questionnaireDetails.get("deleteQuestions");
-            List<Question> newQuestions = new ArrayList<Question>(); 
-
-            for (Integer id : deleteQuestionIds) {
-                questionnaire.removeQuestionById(Long.valueOf(id));
-            }
-
-            for (Map<String, ?> question : questions) {
-                String questionType = (String) question.get("questionType");
-                String questionName = (String) question.get("question");
-                Integer questionOrder = (Integer) question.get("questionOrder");
-                Object questionIDExists = question.get("questionID");
-                if (questionIDExists != null) {
-                    Long questionID = Long.valueOf((Integer) questionIDExists);
-                    Question questionObj = questionnaire.getQuestionById(questionID);
-                    questionObj.setQuestionType(questionType);
-                    questionObj.setQuestion(questionName);
-                    questionObj.setQuestionOrder(questionOrder);
-                    List<Integer> deleteOptionIds = question.get("deleteOptionIds") != null ? (List) question.get("deleteOptionIds") : new ArrayList<Integer>();
-
-                    for (Integer id : deleteOptionIds) {
-                        questionObj.removeOptionById(id);
-                    }
-
-                    ArrayList<Map<String, ?>> options = (ArrayList) question.get("options");
-                    for (Map<String, ?> option : options) {
-                        Object optionIDExists = option.get("optionID");
-                        String questionOption = (String) option.get("questionOption");
-                        if (optionIDExists != null) {
-                            Integer optionID = (Integer) optionIDExists;
-                            QuestionOption optionObj = questionObj.getOptionById(optionID);
-                            optionObj.setQuestionOption(questionOption);
-                        } else {
-                            QuestionOption optionObj = new QuestionOption(questionOption);
-                            questionObj.addOption(optionObj);
-                            optionObj.setQuestion(questionObj);
-                        }
-                    }
-                } else {
-                    Question questionObj = new Question(questionName, questionType, questionOrder);
-                    questionObj.setQuestionnaire(questionnaire);
-                    newQuestions.add(questionObj);
-                    ArrayList<Map<String, ?>> options = (ArrayList) question.get("options");
-
-                    for (Map<String, ?> option : options) {
-                        String questionOption = (String) option.get("questionOption");
-                        QuestionOption optionObj = new QuestionOption(questionOption);
-                        questionObj.addOption(optionObj);
-                        optionObj.setQuestion(questionObj);
-                    }
-                }
-                
-            }
-
-            for(Question newQuestion : newQuestions){
-                questionnaire.addQuestion(newQuestion);
-            }
-
-            return questionnaireRepository.save(questionnaire);
-        } catch (Exception e) {
-            System.out.println(e);
-
-        }
-        return null;
+    public Questionnaire editQuestionnaireQuestions(Questionnaire questionnaire) {
+        return questionnaireRepository.save(questionnaire);
     }
 
-    public Questionnaire editQuestionnaire(Long questionnaireID, Map<?, ?> questionnaireDetails) {
-        try {
-            Questionnaire questionnaire = this.getQuestionnaireByID(questionnaireID);
-            String name = (String) questionnaireDetails.get("name");
-            String description = (String) questionnaireDetails.get("description");
-            questionnaire.setName(name);
-            questionnaire.setDescription(description);
-            return questionnaireRepository.save(questionnaire);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return null;
+    public Questionnaire editQuestionnaire(Questionnaire questionnaire) {
+        return questionnaireRepository.save(questionnaire);
     }
 
     public Questionnaire deleteQuestionnaire(Long questionnaireID){

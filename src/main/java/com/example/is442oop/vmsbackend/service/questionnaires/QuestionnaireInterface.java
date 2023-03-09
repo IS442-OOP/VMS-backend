@@ -3,9 +3,11 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 
+import com.example.is442oop.vmsbackend.entities.Questionnaire;
+
 
 interface QuestionnaireInterface {
     public ResponseEntity getAllQuestionnaires();
-    public ResponseEntity getQuestionnaireByID(Long questionnaireID);
-    public ResponseEntity createQuestionnaire(Map<String,?> questionnaireDetails);
+    public Questionnaire getQuestionnaireByID(Long questionnaireID);
+    public Questionnaire createQuestionnaire(Map<String,?> questionnaireDetails);
 }
