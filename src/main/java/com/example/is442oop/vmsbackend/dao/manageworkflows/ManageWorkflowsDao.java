@@ -1,6 +1,7 @@
 package com.example.is442oop.vmsbackend.dao.manageworkflows;
 
 import com.example.is442oop.vmsbackend.entities.Questionnaire;
+import com.example.is442oop.vmsbackend.entities.Sequence;
 import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.entities.Workflow;
 import com.example.is442oop.vmsbackend.exception.InternalServerException;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Component
 public class ManageWorkflowsDao {
@@ -48,7 +50,16 @@ public class ManageWorkflowsDao {
         catch (NotFoundException e){
             throw new NotFoundException("Workflow not found for ID :" + workflowID);
         }
+    }
 
+    public Set<Sequence> getListOfSequences(String workflowID, Map<String, ?> workflowDetails) {
+        try{
+            Workflow workflow = manageWorkflowsRepository.findById(workflowID).orElse(null);
 
+            return workflow.getListOfSequences();
+        }
+        catch (NotFoundException e){
+            throw new NotFoundException("Workflow not found for ID :" + workflowID);
+        }
     }
 }

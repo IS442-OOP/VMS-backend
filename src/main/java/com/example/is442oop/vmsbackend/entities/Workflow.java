@@ -49,5 +49,8 @@ public class Workflow {
     }
     public void setName(String name) {
         this.name = name;
-    } 
+    }
+    public Set<Sequence> getListOfSequences(){
+        return sequence;
+    }
 }

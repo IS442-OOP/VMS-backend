@@ -1,6 +1,7 @@
 package com.example.is442oop.vmsbackend.service.manageworkflows;
 
 import com.example.is442oop.vmsbackend.dao.manageworkflows.ManageWorkflowsDao;
+import com.example.is442oop.vmsbackend.entities.Sequence;
 import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.entities.Workflow;
 import com.example.is442oop.vmsbackend.utils.ResponseUtil;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public class ManageWorkflowsService implements ManageWorkflowsInterface{
@@ -32,6 +34,10 @@ public class ManageWorkflowsService implements ManageWorkflowsInterface{
     public ResponseEntity editWorkflow(String workflowID, Map<String,?> workflowDetails){
         manageWorkflowsDao.editWorkflow(workflowID, workflowDetails);
         return ResponseUtil.responseWorkflowUpdateSuccess(workflowID);
+    }
+
+    public Set<Sequence> getListOfSequences(String workflowID, Map<String, ?> workflowDetails){
+        return manageWorkflowsDao.getListOfSequences(workflowID, workflowDetails);
     }
 
 }
