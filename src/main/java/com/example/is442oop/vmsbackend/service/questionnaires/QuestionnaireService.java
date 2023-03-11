@@ -46,7 +46,7 @@ public class QuestionnaireService implements QuestionnaireInterface {
       Question question = new Question("", "text", 1);
       newQuestionnaire.addQuestion(question);
       question.setQuestionnaire(newQuestionnaire);
-      questionnaireDAO.createQuestionnaire(newQuestionnaire);
+      ResponseUtil.responseOkCreateQuestionnaire(questionnaireDAO.createQuestionnaire(newQuestionnaire));
 
     } catch (Exception e) {
 
@@ -54,7 +54,7 @@ public class QuestionnaireService implements QuestionnaireInterface {
     return null;
   }
 
-  public Questionnaire editQuestionnaireQuestions(Long questionnaireID, Map<?, ?> questionnaireDetails) {
+  public ResponseEntity editQuestionnaireQuestions(Long questionnaireID, Map<?, ?> questionnaireDetails) {
     try {
       Questionnaire questionnaire = this.getQuestionnaireById(questionnaireID);
       ArrayList<Map<String, ?>> questions = (ArrayList) questionnaireDetails.get("questions");
@@ -118,7 +118,7 @@ public class QuestionnaireService implements QuestionnaireInterface {
         questionnaire.addQuestion(newQuestion);
       }
 
-      return questionnaireDAO.editQuestionnaireQuestions(questionnaire);
+      return ResponseUtil.responseOkEditQuestionnaireQuestions(questionnaireDAO.editQuestionnaireQuestions(questionnaire));
     } catch (Exception e) {
       System.out.println(e);
 
@@ -126,7 +126,7 @@ public class QuestionnaireService implements QuestionnaireInterface {
     return null;
   }
 
-  public Questionnaire editQuestionnaire(Long questionnaireID, Map<?, ?> questionnaireDetails) {
+  public ResponseEntity editQuestionnaire(Long questionnaireID, Map<?, ?> questionnaireDetails) {
 
     try {
       Questionnaire questionnaire = this.getQuestionnaireById(questionnaireID);
@@ -134,7 +134,7 @@ public class QuestionnaireService implements QuestionnaireInterface {
       String description = (String) questionnaireDetails.get("description");
       questionnaire.setName(name);
       questionnaire.setDescription(description);
-      return questionnaireDAO.editQuestionnaire(questionnaire);
+      return ResponseUtil.responseOkEditQuestionnaire(questionnaireDAO.editQuestionnaire(questionnaire));
 
     } catch (Exception e) {
       System.out.println(e);

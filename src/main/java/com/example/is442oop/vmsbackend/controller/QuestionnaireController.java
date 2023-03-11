@@ -49,11 +49,11 @@ public class QuestionnaireController {
 
     @PutMapping("/{questionnaireID}/questions")
     public @ResponseBody ResponseEntity editQuestionnaireQuestions(@PathVariable Long questionnaireID, @RequestBody Map<?, ?> questionnaireDetails) {
-        return ResponseUtil.responseOkEditQuestionnaireQuestions(questionnaireService.editQuestionnaireQuestions(questionnaireID, questionnaireDetails)); 
+        return questionnaireService.editQuestionnaireQuestions(questionnaireID, questionnaireDetails); 
     }
 
     @PutMapping("/{questionnaireID}")
-    public @ResponseBody Questionnaire editQuestionnaire(@PathVariable Long questionnaireID, @RequestBody Map<?, ?> questionnaireDetails){
+    public @ResponseBody ResponseEntity editQuestionnaire(@PathVariable Long questionnaireID, @RequestBody Map<?, ?> questionnaireDetails){
         return questionnaireService.editQuestionnaire(questionnaireID, questionnaireDetails);
     }
 

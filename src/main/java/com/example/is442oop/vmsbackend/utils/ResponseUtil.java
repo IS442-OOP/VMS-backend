@@ -70,6 +70,11 @@ public class ResponseUtil {
     .body(questionnaire);
   }
 
+  public static ResponseEntity <Questionnaire> responseOkEditQuestionnaire(Questionnaire questionnaire){
+    return ResponseEntity.status(HttpStatus.OK)
+    .body(questionnaire);
+  }
+
   public static ResponseEntity <Questionnaire> responseOkGetQuestionnaire(Questionnaire questionnaire){
     return ResponseEntity.status(HttpStatus.OK)
     .body(questionnaire);
