@@ -8,7 +8,7 @@ import com.example.is442oop.vmsbackend.entities.Questionnaire;
 
 
 interface QuestionnaireInterface {
-    public List<Questionnaire> getAllQuestionnaires();
-    public Questionnaire getQuestionnaireByID(Long questionnaireID);
-    public Questionnaire createQuestionnaire(Map<String,?> questionnaireDetails);
+    public ResponseEntity getAllQuestionnaires();
+    public ResponseEntity getQuestionnaireByID(Long questionnaireID);
+    public ResponseEntity createQuestionnaire(Map<String,?> questionnaireDetails);
 }

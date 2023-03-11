@@ -33,23 +33,23 @@ public class QuestionnaireController {
     }
 
     @GetMapping
-    public ResponseEntity getAllQuestionnaires() {
-        return ResponseUtil.responseOkGetAllQuestionnaire(questionnaireService.getAllQuestionnaires());
+    public @ResponseBody ResponseEntity getAllQuestionnaires() {
+        return questionnaireService.getAllQuestionnaires();
     }
 
     @GetMapping("/{questionnaireID}")
-    public ResponseEntity getQuestionnaireByID(@PathVariable Long questionnaireID) {
-        return ResponseUtil.responseOkCreateQuestionnaire(questionnaireService.getQuestionnaireByID(questionnaireID));
+    public @ResponseBody ResponseEntity getQuestionnaireByID(@PathVariable Long questionnaireID) {
+        return questionnaireService.getQuestionnaireByID(questionnaireID);
     }
 
     @PostMapping
-    public @ResponseBody Questionnaire createQuestionnaire(@RequestBody Map<String, String> questionnaireDetails) {
+    public @ResponseBody ResponseEntity createQuestionnaire(@RequestBody Map<String, String> questionnaireDetails) {
         return questionnaireService.createQuestionnaire(questionnaireDetails);
     }
 
     @PutMapping("/{questionnaireID}/questions")
-    public @ResponseBody Questionnaire editQuestionnaireQuestions(@PathVariable Long questionnaireID, @RequestBody Map<?, ?> questionnaireDetails) {
-        return questionnaireService.editQuestionnaireQuestions(questionnaireID, questionnaireDetails);
+    public @ResponseBody ResponseEntity editQuestionnaireQuestions(@PathVariable Long questionnaireID, @RequestBody Map<?, ?> questionnaireDetails) {
+        return ResponseUtil.responseOkEditQuestionnaireQuestions(questionnaireService.editQuestionnaireQuestions(questionnaireID, questionnaireDetails)); 
     }
 
     @PutMapping("/{questionnaireID}")

@@ -25,15 +25,19 @@ public class QuestionnaireService implements QuestionnaireInterface {
     this.questionnaireDAO = questionnaireDAO;
   }
 
-  public List<Questionnaire> getAllQuestionnaires() {
-    return questionnaireDAO.getAllQuestionnaires();
+  public ResponseEntity getAllQuestionnaires() {
+    return ResponseUtil.responseOkGetAllQuestionnaire(questionnaireDAO.getAllQuestionnaires());
   }
 
-  public Questionnaire getQuestionnaireByID(Long questionnaireID) {
+  public ResponseEntity getQuestionnaireByID(Long questionnaireID) {
+    return ResponseUtil.responseOkGetQuestionnaire(questionnaireDAO.getQuestionnaireByID(questionnaireID));
+  }
+
+  private Questionnaire getQuestionnaireById(Long questionnaireID) {
     return questionnaireDAO.getQuestionnaireByID(questionnaireID);
   }
 
-  public Questionnaire createQuestionnaire(Map<String, ?> questionnaireDetails) {
+  public ResponseEntity createQuestionnaire(Map<String, ?> questionnaireDetails) {
     String name = (String) questionnaireDetails.get("name");
     String description = (String) questionnaireDetails.get("description");
     String dateCreated = (String) questionnaireDetails.get("dateCreated");
@@ -42,7 +46,7 @@ public class QuestionnaireService implements QuestionnaireInterface {
       Question question = new Question("", "text", 1);
       newQuestionnaire.addQuestion(question);
       question.setQuestionnaire(newQuestionnaire);
-      return questionnaireDAO.createQuestionnaire(newQuestionnaire);
+      questionnaireDAO.createQuestionnaire(newQuestionnaire);
 
     } catch (Exception e) {
 
@@ -52,7 +56,7 @@ public class QuestionnaireService implements QuestionnaireInterface {
 
   public Questionnaire editQuestionnaireQuestions(Long questionnaireID, Map<?, ?> questionnaireDetails) {
     try {
-      Questionnaire questionnaire = this.getQuestionnaireByID(questionnaireID);
+      Questionnaire questionnaire = this.getQuestionnaireById(questionnaireID);
       ArrayList<Map<String, ?>> questions = (ArrayList) questionnaireDetails.get("questions");
       List<Integer> deleteQuestionIds = (List) questionnaireDetails.get("deleteQuestions");
       List<Question> newQuestions = new ArrayList<Question>();
@@ -125,7 +129,7 @@ public class QuestionnaireService implements QuestionnaireInterface {
   public Questionnaire editQuestionnaire(Long questionnaireID, Map<?, ?> questionnaireDetails) {
 
     try {
-      Questionnaire questionnaire = this.getQuestionnaireByID(questionnaireID);
+      Questionnaire questionnaire = this.getQuestionnaireById(questionnaireID);
       String name = (String) questionnaireDetails.get("name");
       String description = (String) questionnaireDetails.get("description");
       questionnaire.setName(name);
