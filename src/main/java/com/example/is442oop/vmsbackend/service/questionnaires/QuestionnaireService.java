@@ -142,12 +142,12 @@ public class QuestionnaireService implements QuestionnaireInterface {
     return null;
   }
 
-  public Questionnaire deleteQuestionnaire(Long questionnaireID) {
-    return questionnaireDAO.deleteQuestionnaire(questionnaireID);
+  public ResponseEntity deleteQuestionnaire(Long questionnaireID) {
+    return ResponseUtil.responseDeleteQuestionnaire(questionnaireDAO.deleteQuestionnaire(questionnaireID));
   }
 
-  public Questionnaire saveQuestionnaire(Long questionnaireID) {
-    return questionnaireDAO.saveQuestionnaire(questionnaireID);
+  public ResponseEntity saveQuestionnaire(Long questionnaireID) {
+    return ResponseUtil.responseSaveQuestionnaire(questionnaireDAO.saveQuestionnaire(questionnaireID));
   }
 
 }

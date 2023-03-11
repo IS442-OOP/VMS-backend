@@ -80,10 +80,15 @@ public class ResponseUtil {
     .body(questionnaire);
   }
 
-  public static ResponseEntity responseDeleteQuestionnaire(Long questionnaireID){
-    ResponseDto body = createReturnValue(responseTaskDeleted+questionnaireID);
+  public static ResponseEntity responseDeleteQuestionnaire(Questionnaire questionnaire){
+    ResponseDto body = createReturnValue(responseQuestionnaireDeleted+questionnaire);
     return ResponseEntity.status(HttpStatus.NO_CONTENT)
     .body(body);
+  }
+
+  public static ResponseEntity responseSaveQuestionnaire(Questionnaire questionnaire){
+    return ResponseEntity.status(HttpStatus.OK)
+    .body(questionnaire);
   }
 
   public static ResponseEntity<User> responseVendorCreated(User user) {

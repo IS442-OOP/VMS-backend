@@ -11,4 +11,6 @@ interface QuestionnaireInterface {
     public ResponseEntity createQuestionnaire(Map<String,?> questionnaireDetails);
     public ResponseEntity editQuestionnaireQuestions(Long questionnaireID, Map<?, ?> questionnaireDetails);
     public ResponseEntity editQuestionnaire(Long questionnaireID, Map<?, ?> questionnaireDetails);
+    public ResponseEntity deleteQuestionnaire(Long questionnaireID);
+    public ResponseEntity saveQuestionnaire(Long questionnaireID);
 }
