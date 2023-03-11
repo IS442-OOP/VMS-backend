@@ -1,6 +1,7 @@
 package com.example.is442oop.vmsbackend.controller;
 
 import com.example.is442oop.vmsbackend.service.questionnaires.QuestionnaireService;
+import com.example.is442oop.vmsbackend.utils.ResponseUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -33,12 +34,12 @@ public class QuestionnaireController {
 
     @GetMapping
     public ResponseEntity getAllQuestionnaires() {
-        return questionnaireService.getAllQuestionnaires();
+        return ResponseUtil.responseOkGetAllQuestionnaire(questionnaireService.getAllQuestionnaires());
     }
 
     @GetMapping("/{questionnaireID}")
-    public Questionnaire getQuestionnaireByID(@PathVariable Long questionnaireID) {
-        return questionnaireService.getQuestionnaireByID(questionnaireID);
+    public ResponseEntity getQuestionnaireByID(@PathVariable Long questionnaireID) {
+        return ResponseUtil.responseOkCreateQuestionnaire(questionnaireService.getQuestionnaireByID(questionnaireID));
     }
 
     @PostMapping
