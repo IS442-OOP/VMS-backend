@@ -1,5 +1,6 @@
 package com.example.is442oop.vmsbackend.dao.manageworkflows;
 
+import com.example.is442oop.vmsbackend.entities.Sequence;
 import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.entities.Workflow;
 import jakarta.transaction.Transactional;

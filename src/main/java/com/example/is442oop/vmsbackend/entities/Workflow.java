@@ -20,7 +20,8 @@ public class Workflow {
     private String workflowNo;
     private String name;
     @OneToMany(mappedBy="workflow", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public Set <UserWorkflow> userWorkflow; 
+    public Set <UserWorkflow> userWorkflow;
+
     @OneToMany(mappedBy="sequence", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public Set <Sequence> sequence;
 
@@ -52,5 +53,8 @@ public class Workflow {
     }
     public Set<Sequence> getListOfSequences(){
         return sequence;
+    }
+    public void setSequence(Set<Sequence> sequence) {
+        this.sequence = sequence;
     }
 }

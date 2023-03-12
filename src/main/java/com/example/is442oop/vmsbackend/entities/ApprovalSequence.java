@@ -9,7 +9,10 @@ public class ApprovalSequence {
   @JoinColumn(name = "sequenceID")
   private Sequence sequence;
 
+//  @ManyToOne(cascade= CascadeType.ALL)
+//  @JoinColumn(name = "questionnaireID", insertable = false, updatable = false)
+//  private Questionnaire questionnaireToApprove;
   @ManyToOne(cascade= CascadeType.ALL)
-  @JoinColumn(name = "questionnaireID", insertable = false, updatable = false)
-  private Questionnaire questionnaireToApprove;
+  @JoinColumn(name = "sequenceID", insertable = false, updatable = false)
+  private Sequence sequenceToApprove;
 }

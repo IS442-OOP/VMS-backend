@@ -36,8 +36,10 @@ public class ManageWorkflowsService implements ManageWorkflowsInterface{
         return ResponseUtil.responseWorkflowUpdateSuccess(workflowID);
     }
 
-    public Set<Sequence> getListOfSequences(String workflowID, Map<String, ?> workflowDetails){
-        return manageWorkflowsDao.getListOfSequences(workflowID, workflowDetails);
+    public Set<Sequence> getListOfSequences(String workflowID){
+        return manageWorkflowsDao.getListOfSequences(workflowID);
     }
+
+
 
 }

@@ -108,9 +108,9 @@ public class ResponseUtil {
             .body(body);
   }
 
-  public static ResponseEntity responseWorkflowGetListOfSequences(Set<Sequence> listofsequences){
+  public static ResponseEntity responseOkAddSequenceToWorkflow(Sequence sequence){
     return ResponseEntity.status(HttpStatus.OK)
-            .body(listofsequences);
+            .body(sequence);
   }
 
   public static ResponseEntity<User> responseVendorCreated(User user) {

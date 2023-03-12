@@ -40,7 +40,9 @@ public class ManageWorkflowsController {
     }
 
     @GetMapping("/{workflowid}/sequences")
-    public Set<Sequence> getListOfSequences(@PathVariable String workflowid, @RequestBody Map<String, ?> workflowDetails){
-        return manageWorkflowsService.getListOfSequences(workflowid, workflowDetails);
+    public Set<Sequence> getListOfSequences(@PathVariable String workflowid){
+        return manageWorkflowsService.getListOfSequences(workflowid);
     }
+
+
 }

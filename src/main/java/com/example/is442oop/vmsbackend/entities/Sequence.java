@@ -90,11 +90,18 @@ public class Sequence {
         this.sequenceTypeEnum = sequenceTypeEnum;
     }
 
+    public void setQuestionnaireSequence(QuestionnaireSequence questionnaireSequence) {
+        this.questionnaireSequence = questionnaireSequence;
+    }
+
+    public void setApprovalSequence(ApprovalSequence approvalSequence) {
+        this.approvalSequence = approvalSequence;
+    }
 
 }
 
 enum sequenceTypeEnum {
     APPROVAL,
-    QUESTIONAIRE
+    QUESTIONNAIRE
 
 }

@@ -1,13 +1,13 @@
 package com.example.is442oop.vmsbackend.dao.manageworkflows;
 
-import com.example.is442oop.vmsbackend.entities.Questionnaire;
-import com.example.is442oop.vmsbackend.entities.Sequence;
-import com.example.is442oop.vmsbackend.entities.User;
-import com.example.is442oop.vmsbackend.entities.Workflow;
+import com.example.is442oop.vmsbackend.entities.*;
 import com.example.is442oop.vmsbackend.exception.InternalServerException;
 import com.example.is442oop.vmsbackend.exception.NotFoundException;
+import org.aspectj.weaver.ast.Not;
 import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -52,7 +52,7 @@ public class ManageWorkflowsDao {
         }
     }
 
-    public Set<Sequence> getListOfSequences(String workflowID, Map<String, ?> workflowDetails) {
+    public Set<Sequence> getListOfSequences(String workflowID) {
         try{
             Workflow workflow = manageWorkflowsRepository.findById(workflowID).orElse(null);
 
@@ -62,4 +62,6 @@ public class ManageWorkflowsDao {
             throw new NotFoundException("Workflow not found for ID :" + workflowID);
         }
     }
+
+
 }
