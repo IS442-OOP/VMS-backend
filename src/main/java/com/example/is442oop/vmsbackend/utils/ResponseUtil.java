@@ -113,6 +113,11 @@ public class ResponseUtil {
             .body(sequence);
   }
 
+  public static ResponseEntity responseOkDeleteSequenceToWorkflow(Sequence sequence){
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(sequence);
+  }
+
   public static ResponseEntity<User> responseVendorCreated(User user) {
     return ResponseEntity.status(HttpStatus.CREATED)
             .body(user);

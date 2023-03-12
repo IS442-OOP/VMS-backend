@@ -11,6 +11,18 @@ public class QuestionnaireSequence {
   private Sequence sequence;
 
   @ManyToOne(cascade= CascadeType.ALL)
-  @JoinColumn(name = "questionnaireID", insertable = false, updatable = false)
+  @JoinColumn(name = "questionnaireID", insertable = true, updatable = false)
   private Questionnaire questionnaire;
+
+  public QuestionnaireSequence() {
+
+  }
+  public QuestionnaireSequence(Sequence sequence, Questionnaire questionnaire){
+    this.sequence = sequence;
+    this.questionnaire = questionnaire;
+  }
+
+  public void setSequence(Sequence sequence) {
+    this.sequence = sequence;
+  }
 }

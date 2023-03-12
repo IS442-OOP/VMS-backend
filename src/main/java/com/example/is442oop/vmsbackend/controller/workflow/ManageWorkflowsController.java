@@ -17,12 +17,10 @@ import java.util.Set;
 public class ManageWorkflowsController {
 
     private final ManageWorkflowsService manageWorkflowsService;
-    private final ManageWorkflowsRepository manageWorkflowsRepository;
 
     @Autowired
-    public ManageWorkflowsController(ManageWorkflowsService manageWorkflowsService, ManageWorkflowsRepository manageWorkflowsRepository) {
+    public ManageWorkflowsController(ManageWorkflowsService manageWorkflowsService) {
         this.manageWorkflowsService = manageWorkflowsService;
-        this.manageWorkflowsRepository = manageWorkflowsRepository;
     }
     @GetMapping
     public ResponseEntity retrieveWorkflows(){
@@ -44,5 +42,14 @@ public class ManageWorkflowsController {
         return manageWorkflowsService.getListOfSequences(workflowid);
     }
 
+    @PostMapping("{workflowid}/sequences")
+    public ResponseEntity addWorkflowSequence(@PathVariable String workflowid, @RequestBody Map<String, ?> sequenceDetails){
+        return manageWorkflowsService.addWorkflowSequence(workflowid, sequenceDetails);
+    }
+
+    @DeleteMapping("{workflowid}/sequences/{sequenceid}")
+    public ResponseEntity deleteWorkflowSequence(@PathVariable String workflowid, @PathVariable String sequenceid){
+        return  manageWorkflowsService.deleteWorkflowSequence(workflowid, sequenceid);
+    }
 
 }

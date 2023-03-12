@@ -15,4 +15,12 @@ public class ApprovalSequence {
   @ManyToOne(cascade= CascadeType.ALL)
   @JoinColumn(name = "sequenceID", insertable = false, updatable = false)
   private Sequence sequenceToApprove;
+
+  public ApprovalSequence () {
+
+  }
+  public ApprovalSequence(Sequence sequence,Sequence sequenceToApprove){
+    this.sequence = sequence;
+    this.sequenceToApprove = sequenceToApprove;
+  }
 }

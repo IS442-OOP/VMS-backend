@@ -8,6 +8,7 @@ import com.example.is442oop.vmsbackend.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,12 @@ public class ManageWorkflowsService implements ManageWorkflowsInterface{
         return manageWorkflowsDao.getListOfSequences(workflowID);
     }
 
+    public ResponseEntity addWorkflowSequence(String workflowid, Map<String, ?> sequenceDetails){
+        return ResponseUtil.responseOkAddSequenceToWorkflow(manageWorkflowsDao.addWorkflowSequence(workflowid, sequenceDetails));
+    }
 
+    public ResponseEntity deleteWorkflowSequence(String workflowid, String sequenceid) {
+        return ResponseUtil.responseOkDeleteSequenceToWorkflow(manageWorkflowsDao.deleteWorkflowSequence(workflowid, sequenceid));
+    }
 
 }

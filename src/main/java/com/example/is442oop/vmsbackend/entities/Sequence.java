@@ -18,8 +18,14 @@ public class Sequence {
     private Long sequenceID;
     private Integer sequence;
     private Boolean isDone;
+
+    public enum sequenceTypeEnum {
+        APPROVAL,
+        QUESTIONNAIRE
+
+    }
     @Enumerated(EnumType.STRING)
-    private sequenceTypeEnum sequenceTypeEnum;
+    private Sequence.sequenceTypeEnum sequenceTypeEnum;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "workflowID", insertable = false, updatable = false)
@@ -38,6 +44,7 @@ public class Sequence {
     @OneToOne(mappedBy = "sequence", cascade= CascadeType.ALL)
     private ApprovalSequence approvalSequence;
 
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userTypeID", insertable = false, updatable = false)
     private UserType userType;
@@ -53,6 +60,19 @@ public class Sequence {
         this.sequenceTypeEnum = sequenceTypeEnum;
     }
 
+    public Sequence(Integer sequence, Boolean isDone,
+                    sequenceTypeEnum sequenceTypeEnum) {
+        this.sequence = sequence;
+        this.isDone = isDone;
+        this.sequenceTypeEnum = sequenceTypeEnum;
+    }    public Sequence(Integer sequence, Boolean isDone, sequenceTypeEnum sequenceTypeEnum, Questionnaire questionnaire, UserType userType, Workflow workflow){
+        this.sequence = sequence;
+        this.isDone = isDone;
+        this.sequenceTypeEnum = sequenceTypeEnum;
+        this.questionnaire = questionnaire;
+        this.userType = userType;
+        this.workflow = workflow;
+    }
     public Sequence() {
 
     }
@@ -90,18 +110,17 @@ public class Sequence {
         this.sequenceTypeEnum = sequenceTypeEnum;
     }
 
-    public void setQuestionnaireSequence(QuestionnaireSequence questionnaireSequence) {
-        this.questionnaireSequence = questionnaireSequence;
+    public void setQuestionnaireSequence(QuestionnaireSequence questionnaireSequence) { this.questionnaireSequence = questionnaireSequence; }
+    public QuestionnaireSequence getQuestionnaireSequence() {
+        return questionnaireSequence;
     }
-
     public void setApprovalSequence(ApprovalSequence approvalSequence) {
         this.approvalSequence = approvalSequence;
     }
 
+    public void setQuestionnaire(Questionnaire questionnaire) { this.questionnaire = questionnaire; }
+
+    public void setWorkflow(Workflow workflow) { this.workflow = workflow; }
+    public void setUserType(UserType userType) { this.userType = userType; }
 }
 
-enum sequenceTypeEnum {
-    APPROVAL,
-    QUESTIONNAIRE
-
-}
