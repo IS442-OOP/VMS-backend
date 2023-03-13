@@ -21,4 +21,6 @@ public interface ManageWorkflowsInterface {
     public ResponseEntity addWorkflowSequence(String workflowid, Map<String, ?> sequenceDetails);
     public ResponseEntity deleteWorkflowSequence(String workflowid, String sequenceid);
 
-}
+    public ResponseEntity updateWorkflowSequence(String workflowid, String sequenceid, Map<String, ?> sequenceDetails);
+
+    }

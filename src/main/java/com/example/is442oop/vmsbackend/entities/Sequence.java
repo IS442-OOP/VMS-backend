@@ -60,12 +60,21 @@ public class Sequence {
         this.sequenceTypeEnum = sequenceTypeEnum;
     }
 
-    public Sequence(Integer sequence, Boolean isDone,
+    public Sequence(Integer sequence,
                     sequenceTypeEnum sequenceTypeEnum) {
+        this.sequence = sequence;
+        this.sequenceTypeEnum = sequenceTypeEnum;
+    }
+    public Sequence(Long sequenceID, Integer sequence, Boolean isDone, sequenceTypeEnum sequenceTypeEnum, Questionnaire questionnaire, UserType userType, Workflow workflow){
+        this.sequenceID = sequenceID;
         this.sequence = sequence;
         this.isDone = isDone;
         this.sequenceTypeEnum = sequenceTypeEnum;
-    }    public Sequence(Integer sequence, Boolean isDone, sequenceTypeEnum sequenceTypeEnum, Questionnaire questionnaire, UserType userType, Workflow workflow){
+        this.questionnaire = questionnaire;
+        this.userType = userType;
+        this.workflow = workflow;
+    }
+    public Sequence(Integer sequence, Boolean isDone, sequenceTypeEnum sequenceTypeEnum, Questionnaire questionnaire, UserType userType, Workflow workflow){
         this.sequence = sequence;
         this.isDone = isDone;
         this.sequenceTypeEnum = sequenceTypeEnum;

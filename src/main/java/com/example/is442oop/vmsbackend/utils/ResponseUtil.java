@@ -102,10 +102,9 @@ public class ResponseUtil {
             .body(body);
   }
 
-  public static ResponseEntity responseWorkflowUpdateFailed(String Id) {
-    TrueFalseDto body = createReturnValue(responseWorkflowSuccess + Id, false);
+  public static ResponseEntity responseOkUpdateSequenceToWorkflow(Sequence sequence) {
     return ResponseEntity.status(HttpStatus.OK)
-            .body(body);
+            .body(sequence);
   }
 
   public static ResponseEntity responseOkAddSequenceToWorkflow(Sequence sequence){

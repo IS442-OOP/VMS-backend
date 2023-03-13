@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Map;
@@ -49,4 +50,7 @@ public class ManageWorkflowsService implements ManageWorkflowsInterface{
         return ResponseUtil.responseOkDeleteSequenceToWorkflow(manageWorkflowsDao.deleteWorkflowSequence(workflowid, sequenceid));
     }
 
+    public ResponseEntity updateWorkflowSequence(String workflowid, String sequenceid, Map<String, ?> sequenceDetails) {
+        return ResponseUtil.responseOkUpdateSequenceToWorkflow(manageWorkflowsDao.updateWorkflowSequence(workflowid, sequenceid, sequenceDetails));
+    }
 }

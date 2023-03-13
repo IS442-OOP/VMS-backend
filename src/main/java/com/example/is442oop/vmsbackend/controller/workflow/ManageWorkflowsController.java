@@ -52,4 +52,9 @@ public class ManageWorkflowsController {
         return  manageWorkflowsService.deleteWorkflowSequence(workflowid, sequenceid);
     }
 
+    @PutMapping("{workflowid}/sequences/{sequenceid}")
+    public ResponseEntity updateWorkflowSequence(@PathVariable String workflowid, @PathVariable String sequenceid, @RequestBody Map<String, ?> sequenceDetails){
+        return manageWorkflowsService.updateWorkflowSequence(workflowid, sequenceid, sequenceDetails);
+    }
+
 }
