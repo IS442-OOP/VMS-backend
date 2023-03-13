@@ -1,4 +1,4 @@
-package com.example.is442oop.vmsbackend.controller;
+package com.example.is442oop.vmsbackend.controller.questionnaire;
 
 import com.example.is442oop.vmsbackend.service.questionnaires.QuestionnaireService;
 import com.example.is442oop.vmsbackend.utils.ResponseUtil;

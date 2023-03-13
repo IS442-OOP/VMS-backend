@@ -1,11 +1,17 @@
 package com.example.is442oop.vmsbackend.utils;
 
-import com.example.is442oop.vmsbackend.dto.LoginResponseDto;
-import com.example.is442oop.vmsbackend.dto.ResponseDto;
+import com.example.is442oop.vmsbackend.dto.response.LoginResponseDto;
+import com.example.is442oop.vmsbackend.dto.response.ResponseDto;
+import com.example.is442oop.vmsbackend.dto.response.TrueFalseDto;
 import com.example.is442oop.vmsbackend.entities.Question;
 import com.example.is442oop.vmsbackend.entities.QuestionOption;
 import com.example.is442oop.vmsbackend.entities.Questionnaire;
 import com.example.is442oop.vmsbackend.entities.User;
+import com.example.is442oop.vmsbackend.entities.Workflow;
+import org.hibernate.jdbc.Work;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -20,7 +26,9 @@ public class ResponseUtil {
   private final static String responseConflictEmail = "User already exists for email: ";
   private final static String responseCreated = "User has been created for Id: ";
   private final static String responseInternalServerError = "Internal Server Error has occured";
-  private final static String responseUserNotFound = "User cannot be found with email: ";
+  private final static String responseUserNotFoundEmail = "User cannot be found with email: ";
+
+  private final static String responseUserNotFoundId = "User cannot be found with id: ";
   private final static String responseTaskNotFound = "Task cannot be found for Id: ";
   private final static String responseTaskDeleted = "Task has been deleted for Id: ";
   private final static String responseTaskUpdated = "Task has been updated for Id: ";
@@ -50,7 +58,18 @@ public class ResponseUtil {
         .build();
   }
 
-  public static ResponseEntity<User> responseOk(User user) {
+  public static TrueFalseDto createReturnValue(String message, boolean state) {
+    return TrueFalseDto.builder()
+            .isCompleted(state)
+            .message(message)
+            .build();
+  }
+
+  public static ResponseEntity<User> responseOk(User user) throws JsonProcessingException {
+//    System.out.println(user.toString());
+//    ObjectMapper mapper = new ObjectMapper();
+//    mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+//    String json = mapper.writeValueAsString(user);
     return ResponseEntity.status(HttpStatus.OK)
         .body(user);
   }
@@ -120,8 +139,14 @@ public class ResponseUtil {
         .body(body);
   }
 
-  public static ResponseEntity responseUserNotFound(String email) {
-    ResponseDto body = createReturnValue(responseUserNotFound + email);
+  public static ResponseEntity responseUserNotFoundEmail(String email) {
+    ResponseDto body = createReturnValue(responseUserNotFoundEmail + email);
+    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body(body);
+  }
+
+  public static ResponseEntity responseUserNotFoundId(String userId) {
+    ResponseDto body = createReturnValue(responseUserNotFoundId + userId);
     return ResponseEntity.status(HttpStatus.NOT_FOUND)
         .body(body);
   }
@@ -145,9 +170,22 @@ public class ResponseUtil {
   }
 
   public static ResponseEntity responseLoginSuccess(Long Id, String token, User user) {
-    ResponseDto body = createReturnValue(responseLoginSuccess + Id, token, user);
-    return ResponseEntity.status(HttpStatus.CREATED)
-        .body(body);
+    ResponseDto body = createReturnValue(responseLoginSuccess + Id, token);
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(body);
+  }
+
+  public static ResponseEntity responseUpdateSuccess(String Id) {
+    TrueFalseDto body = createReturnValue(responseLoginSuccess + Id, true);
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(body);
+  }
+
+  public static ResponseEntity responseUpdateFail(String Id) {
+    TrueFalseDto body = createReturnValue(responseLoginSuccess + Id, false);
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(body);
+
   }
 
   public static ResponseEntity responseInternalServerError() {
@@ -156,9 +194,21 @@ public class ResponseUtil {
         .body(body);
   }
 
+  public static ResponseEntity responseInternalServerError(String message) {
+    ResponseDto body = createReturnValue(message);
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(body);
+  }
+
   public static ResponseEntity responseNotAuthorized() {
     ResponseDto body = createReturnValue(responseNotAuthorized);
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
         .body(body);
   }
+
+  public static ResponseEntity <List<Workflow>> responseOkWorkflow(List<Workflow> list){
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(list);
+  }
+
 }

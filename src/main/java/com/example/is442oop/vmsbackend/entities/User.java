@@ -1,5 +1,6 @@
 package com.example.is442oop.vmsbackend.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.util.List;
@@ -20,13 +21,14 @@ public class User {
     private Long userID;
     private String name;
     private String email;
+
     private String password;
     private boolean isAccountActivated;
 
-    @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     public List <UserWorkflow> userWorkflow;
 
-    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+    @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="userTypeID")
     private UserType userType;
 
@@ -44,12 +46,10 @@ public class User {
 
     }
 
-    @JsonIgnore
     public Long getUserID() {
         return userID;
     }
 
-    @JsonIgnore
     public String getEmail() {
         return email;
     }
@@ -86,6 +86,7 @@ public class User {
     public UserType getUserType() {
         return userType;
     }
+
 
 
     public void setUserType(UserType userType) {
