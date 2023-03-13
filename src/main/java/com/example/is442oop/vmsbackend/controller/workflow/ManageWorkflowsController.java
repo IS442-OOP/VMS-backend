@@ -1,9 +1,16 @@
 package com.example.is442oop.vmsbackend.controller.workflow;
 
+import com.example.is442oop.vmsbackend.dao.manageworkflows.ManageWorkflowsRepository;
+import com.example.is442oop.vmsbackend.entities.Sequence;
+import com.example.is442oop.vmsbackend.entities.Workflow;
+import com.example.is442oop.vmsbackend.exception.NotFoundException;
 import com.example.is442oop.vmsbackend.service.manageworkflows.ManageWorkflowsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/manageworkflows")
@@ -19,4 +26,35 @@ public class ManageWorkflowsController {
     public ResponseEntity retrieveWorkflows(){
         return manageWorkflowsService.retrieveWorkflows();
     }
+
+    @PostMapping
+    public ResponseEntity createWorkflow(@RequestBody Map<String, String> workflowDetails) {
+        return manageWorkflowsService.createWorkflow(workflowDetails);
+    }
+
+    @PutMapping("/{workflowid}")
+    public ResponseEntity editWorkflow(@PathVariable String workflowid, @RequestBody Map<String,?> workflowDetails){
+        return manageWorkflowsService.editWorkflow(workflowid, workflowDetails);
+    }
+
+    @GetMapping("/{workflowid}/sequences")
+    public Set<Sequence> getListOfSequences(@PathVariable String workflowid){
+        return manageWorkflowsService.getListOfSequences(workflowid);
+    }
+
+    @PostMapping("{workflowid}/sequences")
+    public ResponseEntity addWorkflowSequence(@PathVariable String workflowid, @RequestBody Map<String, ?> sequenceDetails){
+        return manageWorkflowsService.addWorkflowSequence(workflowid, sequenceDetails);
+    }
+
+    @DeleteMapping("{workflowid}/sequences/{sequenceid}")
+    public ResponseEntity deleteWorkflowSequence(@PathVariable String workflowid, @PathVariable String sequenceid){
+        return  manageWorkflowsService.deleteWorkflowSequence(workflowid, sequenceid);
+    }
+
+    @PutMapping("{workflowid}/sequences/{sequenceid}")
+    public ResponseEntity updateWorkflowSequence(@PathVariable String workflowid, @PathVariable String sequenceid, @RequestBody Map<String, ?> sequenceDetails){
+        return manageWorkflowsService.updateWorkflowSequence(workflowid, sequenceid, sequenceDetails);
+    }
+
 }

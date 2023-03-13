@@ -17,8 +17,8 @@ public class Questionnaire {
     @OneToMany(mappedBy="questionnaire", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public Set <QuestionnaireSequence> sequenceQuestionnaires;
 
-    @OneToMany(mappedBy="questionnaireToApprove", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    public Set<ApprovalSequence> sequenceApprovals;
+//    @OneToMany(mappedBy="questionnaireToApprove", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+//    public Set<ApprovalSequence> sequenceApprovals;
 
     @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name="formID", insertable=false, updatable = false)

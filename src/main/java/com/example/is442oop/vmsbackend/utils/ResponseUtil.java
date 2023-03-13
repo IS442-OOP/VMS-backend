@@ -3,11 +3,7 @@ package com.example.is442oop.vmsbackend.utils;
 import com.example.is442oop.vmsbackend.dto.response.LoginResponseDto;
 import com.example.is442oop.vmsbackend.dto.response.ResponseDto;
 import com.example.is442oop.vmsbackend.dto.response.TrueFalseDto;
-import com.example.is442oop.vmsbackend.entities.Question;
-import com.example.is442oop.vmsbackend.entities.QuestionOption;
-import com.example.is442oop.vmsbackend.entities.Questionnaire;
-import com.example.is442oop.vmsbackend.entities.User;
-import com.example.is442oop.vmsbackend.entities.Workflow;
+import com.example.is442oop.vmsbackend.entities.*;
 import org.hibernate.jdbc.Work;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Component
 public class ResponseUtil {
@@ -34,6 +31,7 @@ public class ResponseUtil {
   private final static String responseTaskUpdated = "Task has been updated for Id: ";
   private final static String responseNotAuthorized = "User not authorized";
   private final static String responseLoginSuccess = "User has login successfully for Id: ";
+  private final static String responseWorkflowSuccess= "Workflow has updated successfully for Id: ";
 
   public static ResponseDto createReturnValue(String message) {
     return ResponseDto.builder()
@@ -86,6 +84,37 @@ public class ResponseUtil {
     return ResponseEntity.status(HttpStatus.OK)
     .body(questionnaire);
 
+  }
+
+  public static ResponseEntity <List<Workflow>> responseOkWorkflow(List<Workflow> list){
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(list);
+  }
+
+  public static ResponseEntity <Workflow> responseOkCreateWorkflow(Workflow workflow){
+    return ResponseEntity.status(HttpStatus.CREATED)
+            .body(workflow);
+  }
+
+  public static ResponseEntity responseWorkflowUpdateSuccess(String Id) {
+    TrueFalseDto body = createReturnValue(responseWorkflowSuccess + Id, true);
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(body);
+  }
+
+  public static ResponseEntity responseOkUpdateSequenceToWorkflow(Sequence sequence) {
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(sequence);
+  }
+
+  public static ResponseEntity responseOkAddSequenceToWorkflow(Sequence sequence){
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(sequence);
+  }
+
+  public static ResponseEntity responseOkDeleteSequenceToWorkflow(Sequence sequence){
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(sequence);
   }
 
   public static ResponseEntity<User> responseVendorCreated(User user) {
@@ -184,9 +213,5 @@ public class ResponseUtil {
         .body(body);
   }
 
-  public static ResponseEntity <List<Workflow>> responseOkWorkflow(List<Workflow> list){
-    return ResponseEntity.status(HttpStatus.OK)
-            .body(list);
-  }
 
 }
