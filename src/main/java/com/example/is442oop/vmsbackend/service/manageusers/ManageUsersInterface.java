@@ -9,8 +9,7 @@ import java.util.List;
 
 public interface ManageUsersInterface {
     public List<User> getAllUsers();
-
+    public User getUserByID(Long userid);
     public List<UserWorkflow> getUserWorkflows(Long userid);
-
     public List<UserWorkflow> assignWorkflows(Long userid, List<String> workflowids);
 }

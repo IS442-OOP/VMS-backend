@@ -35,8 +35,14 @@ public class ManageUsersController {
   public ResponseEntity getAllUsers(){
     return ResponseUtil.responseGetUsersOk(manageUsersService.getAllUsers());
   }
-  
+
   @GetMapping("/{userId}")
+  public ResponseEntity getUserByID(@PathVariable Long userId){
+    return ResponseUtil.responseOkGetUserByID(manageUsersService.getUserByID(userId));
+  }
+
+  
+  @GetMapping("/workflows/{userId}")
   public ResponseEntity getUserWorkflows(@PathVariable Long userId) {
     return ResponseUtil.responseGetUserWorkflowsOk(manageUsersService.getUserWorkflows(userId)); 
   }

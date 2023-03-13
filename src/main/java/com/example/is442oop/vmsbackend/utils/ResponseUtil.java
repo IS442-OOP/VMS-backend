@@ -104,6 +104,11 @@ public class ResponseUtil {
 
   }
 
+  public static ResponseEntity <User> responseOkGetUserByID(User user){
+    return ResponseEntity.status(HttpStatus.OK)
+    .body(user);
+  }
+
   public static ResponseEntity<LoginResponseDto> responseOk(String message, String token, User user) {
     return ResponseEntity.status(HttpStatus.OK)
         .body(createReturnValue(message, token, user));

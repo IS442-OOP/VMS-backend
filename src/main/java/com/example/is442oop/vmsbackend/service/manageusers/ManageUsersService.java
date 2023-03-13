@@ -35,6 +35,10 @@ public class ManageUsersService implements ManageUsersInterface {
     return userDao.getAllUsers();
   }
 
+  public User getUserByID(Long userid){
+    return userDao.findUserById(userid);
+  }
+
   public List<UserWorkflow> getUserWorkflows(Long userid) {
     return userDao.findUserById(userid).getUserWorkflows();
   }
