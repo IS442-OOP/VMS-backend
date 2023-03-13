@@ -34,6 +34,8 @@ public class ResponseUtil {
   private final static String responseTaskUpdated = "Task has been updated for Id: ";
   private final static String responseNotAuthorized = "User not authorized";
   private final static String responseLoginSuccess = "User has login successfully for Id: ";
+  private final static String responseQuestionnaireDeleted = "Questionnaire has been deleted for Id: ";
+
 
   public static ResponseDto createReturnValue(String message) {
     return ResponseDto.builder()
@@ -72,7 +74,7 @@ public class ResponseUtil {
         .body(user);
   }
 
-  public static ResponseEntity <List<Questionnaire>> responseOk(List<Questionnaire> list){
+  public static ResponseEntity <List<Questionnaire>> responseOkGetAllQuestionnaire(List<Questionnaire> list){
     return ResponseEntity.status(HttpStatus.OK)
     .body(list);
   }
@@ -82,10 +84,30 @@ public class ResponseUtil {
     .body(questionnaire);
   }
 
+  public static ResponseEntity <Questionnaire> responseOkEditQuestionnaireQuestions(Questionnaire questionnaire){
+    return ResponseEntity.status(HttpStatus.OK)
+    .body(questionnaire);
+  }
+
+  public static ResponseEntity <Questionnaire> responseOkEditQuestionnaire(Questionnaire questionnaire){
+    return ResponseEntity.status(HttpStatus.OK)
+    .body(questionnaire);
+  }
+
   public static ResponseEntity <Questionnaire> responseOkGetQuestionnaire(Questionnaire questionnaire){
     return ResponseEntity.status(HttpStatus.OK)
     .body(questionnaire);
+  }
 
+  public static ResponseEntity responseDeleteQuestionnaire(Questionnaire questionnaire){
+    ResponseDto body = createReturnValue(responseQuestionnaireDeleted+questionnaire);
+    return ResponseEntity.status(HttpStatus.NO_CONTENT)
+    .body(body);
+  }
+
+  public static ResponseEntity responseSaveQuestionnaire(Questionnaire questionnaire){
+    return ResponseEntity.status(HttpStatus.OK)
+    .body(questionnaire);
   }
 
   public static ResponseEntity<User> responseVendorCreated(User user) {

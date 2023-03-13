@@ -10,12 +10,12 @@ public class Question {
     private Long questionID;
     private String question; 
     private String questionType;
-
-    @ManyToOne(cascade= CascadeType.ALL)
-    @JoinColumn(name="questionnaireID", insertable=false, updatable = false)
+    private Integer questionOrder;
+    @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+    @JoinColumn(name="questionnaireID")
     private Questionnaire questionnaire;
     @OneToMany(mappedBy="question", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval = true)
-    public Set <QuestionOption> options;    
+    public List <QuestionOption> options;    
     @OneToMany(mappedBy="question", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public Set <Answer> answer;
 
@@ -23,10 +23,11 @@ public class Question {
     public Question() {
     }
 
-    public Question(String question, String questionType) {
+    public Question(String question, String questionType, Integer questionOrder) {
         this.question = question;
         this.questionType = questionType;
-        this.options = new HashSet<QuestionOption>();
+        this.options = new ArrayList<QuestionOption>();
+        this.questionOrder = questionOrder;
     }
 
     public Long getQuestionID() {
@@ -62,6 +63,16 @@ public class Question {
     //     this.options = questionOptions;
     // }
 
+    public Integer getQuestionOrder(){
+        return this.questionOrder;
+    }
+
+    public void setQuestionOrder(Integer questionOrder){
+        System.out.println(questionOrder);
+        this.questionOrder = questionOrder;
+    }
+
+
     public void addOption(QuestionOption questionOption){
         this.options.add(questionOption);
     }
@@ -69,6 +80,25 @@ public class Question {
     public void clearOptions(){
         this.options.clear();
     }
+
+    public QuestionOption getOptionById(Integer id){
+        for(QuestionOption option: options){
+            if(option.getOptionID() == id){
+                return option;
+            }
+        }
+        return null;
+    }
+
+    public void removeOptionById(Integer id){
+        for(QuestionOption option: options){
+            if(option.getOptionID() == id){
+                options.remove(option);
+                return;
+            }
+        }
+    }
+
 
     public void setQuestionnaire(Questionnaire questionnaire){
         this.questionnaire= questionnaire;

@@ -7,17 +7,13 @@ public class QuestionOption {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer optionID;
     private String questionOption;
-    private String optionType;
-    
-    @ManyToOne(cascade = CascadeType.ALL, optional = true)
-    @JoinColumn(name = "questionID", insertable = false, updatable = false, nullable = true)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "questionID")
     private Question question;
 
-
-    public QuestionOption(String questionOption, String optionType) {
-        this.optionID = optionID;
+    
+    public QuestionOption(String questionOption) {
         this.questionOption = questionOption;
-        this.optionType = optionType;
     }
 
     public QuestionOption(){
@@ -35,24 +31,13 @@ public class QuestionOption {
     }
 
 
-    public String getOption() {
+    public String getQuestionOption() {
         return questionOption;
     }
 
-
-    public void setOption(String questionOption) {
+    public void setQuestionOption(String questionOption) {
         this.questionOption = questionOption;
     }
-
-
-    public String getOptionType() {
-        return optionType;
-    }
-
-
-    public void setOptionType(String optionType) {
-        this.optionType = optionType;
-    }  
 
     public void setQuestion(Question question){
         this.question= question;
