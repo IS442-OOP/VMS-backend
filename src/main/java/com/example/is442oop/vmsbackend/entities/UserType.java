@@ -29,8 +29,6 @@ public class UserType {
 
     }
 
-
-
     public Long getUserTypeID() {
         return userTypeID;
     }

@@ -1,6 +1,11 @@
 package com.example.is442oop.vmsbackend.entities;
 import jakarta.persistence.*;
+
+import java.sql.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class UserWorkflow {
@@ -16,14 +21,15 @@ public class UserWorkflow {
     )
     private Long userWorkflowID;
     private String dateAssigned;
-    private String isApprroved;
+    private String isApproved;
 
-    @ManyToOne(cascade= CascadeType.ALL, optional = true)
-    @JoinColumn(name="userID", insertable=false, updatable = false, nullable=true)
+    @ManyToOne(optional = true)
+    @JoinColumn(name="userID")
+    @JsonBackReference
     private User user;
 
-    @ManyToOne(cascade= CascadeType.ALL, optional = true)
-    @JoinColumn(name="workflowID", insertable=false, updatable = false, nullable=true)
+    @ManyToOne(optional = true)
+    @JoinColumn(name="workflowID")
     private Workflow workflow;
 
     @OneToMany(mappedBy="userWorkflowForAnswer", cascade=CascadeType.ALL)
@@ -32,7 +38,18 @@ public class UserWorkflow {
     @OneToMany(mappedBy = "userWorkflow", cascade=CascadeType.ALL)
     private List<UserWorkflowSequence> userWorkflowSequences;
 
+    public UserWorkflow() {
+    }
 
+    public UserWorkflow(@JsonProperty("dateAssigned") String dateAssigned,
+                        @JsonProperty("isApproved") String isApproved,
+                        @JsonProperty("user") User user,
+                        @JsonProperty("workflow") Workflow workflow) {
+        this.dateAssigned = dateAssigned;
+        this.isApproved = isApproved;
+        this.user = user;
+        this.workflow = workflow;
+    }
     public User getUser() {
         return user;
     }
@@ -57,12 +74,12 @@ public class UserWorkflow {
         this.dateAssigned = dateAssigned;
     }
 
-    public String getIsApprroved() {
-        return isApprroved;
+    public String getIsApproved() {
+        return isApproved;
     }
 
-    public void setIsApprroved(String isApprroved) {
-        this.isApprroved = isApprroved;
+    public void setIsApproved(String isApproved) {
+        this.isApproved = isApproved;
     }
 
 

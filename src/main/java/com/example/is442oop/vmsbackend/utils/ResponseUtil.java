@@ -1,6 +1,7 @@
 package com.example.is442oop.vmsbackend.utils;
 
 import com.example.is442oop.vmsbackend.dto.response.LoginResponseDto;
+import com.example.is442oop.vmsbackend.dto.response.ManageUsersDto;
 import com.example.is442oop.vmsbackend.dto.response.ResponseDto;
 import com.example.is442oop.vmsbackend.dto.response.TrueFalseDto;
 import com.example.is442oop.vmsbackend.entities.Question;
@@ -12,6 +13,8 @@ import org.hibernate.jdbc.Work;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.example.is442oop.vmsbackend.entities.UserWorkflow;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -34,6 +37,7 @@ public class ResponseUtil {
   private final static String responseTaskUpdated = "Task has been updated for Id: ";
   private final static String responseNotAuthorized = "User not authorized";
   private final static String responseLoginSuccess = "User has login successfully for Id: ";
+ 
 
   public static ResponseDto createReturnValue(String message) {
     return ResponseDto.builder()
@@ -54,6 +58,18 @@ public class ResponseUtil {
         .token(token)
         .user(user)
         .build();
+  }
+
+  public static ManageUsersDto createReturnUsers(List<User> users) {
+    return ManageUsersDto.builder()     
+            .users(users)
+            .build();
+  }
+
+  public static ManageUsersDto createReturnUserWorkflows(List<UserWorkflow> userworkflows) {
+    return ManageUsersDto.builder()
+            .userworkflows(userworkflows)
+            .build();
   }
 
   public static TrueFalseDto createReturnValue(String message, boolean state) {
@@ -88,15 +104,28 @@ public class ResponseUtil {
 
   }
 
-  public static ResponseEntity<User> responseVendorCreated(User user) {
-    return ResponseEntity.status(HttpStatus.CREATED)
-            .body(user);
+  public static ResponseEntity <User> responseOkGetUserByID(User user){
+    return ResponseEntity.status(HttpStatus.OK)
+    .body(user);
   }
-
 
   public static ResponseEntity<LoginResponseDto> responseOk(String message, String token, User user) {
     return ResponseEntity.status(HttpStatus.OK)
         .body(createReturnValue(message, token, user));
+  }
+  public static ResponseEntity<ManageUsersDto> responseGetUsersOk(List<User> users) {
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(createReturnUsers(users));
+  }
+
+  public static ResponseEntity<ManageUsersDto> responseGetUserWorkflowsOk(List<UserWorkflow> workflows) {
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(createReturnUserWorkflows(workflows));
+  }
+
+  public static ResponseEntity<List<UserWorkflow>> responseAssignUserWorkflowsOk(List<UserWorkflow> workflows) {
+    return ResponseEntity.status(HttpStatus.CREATED)
+            .body(workflows);
   }
 
   public static ResponseEntity responseTaskDeleted(Long Id) {
@@ -143,6 +172,7 @@ public class ResponseUtil {
 
   public static ResponseEntity responseUserCreated(Long Id, String token) {
     ResponseDto body = createReturnValue(responseCreated + Id, token);
+    System.out.println(body);
     return ResponseEntity.status(HttpStatus.CREATED)
         .body(body);
   }

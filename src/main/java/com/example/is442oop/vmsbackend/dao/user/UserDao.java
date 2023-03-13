@@ -2,11 +2,13 @@ package com.example.is442oop.vmsbackend.dao.user;
 
 import com.example.is442oop.vmsbackend.entities.User;
 import com.example.is442oop.vmsbackend.exception.NotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.CannotCreateTransactionException;
 
 import java.util.Base64;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -21,6 +23,22 @@ public class UserDao {
 
   public void registerUser(User user) {
     userRepository.save(user);
+  }
+
+  public List<User> getAllUsers() {
+    return userRepository.findAll();
+  }
+
+  public User findUserById(Long userId) {
+    try {
+      return userRepository.findById(userId).get();
+    }
+    catch (Exception e) {
+      if (e instanceof CannotCreateTransactionException) {
+        throw e;
+      }
+      throw new NotFoundException("User cannot be found for ID: " + userId);
+    }
   }
 
   public User findUser(String email){

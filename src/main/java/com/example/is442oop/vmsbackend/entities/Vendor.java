@@ -2,7 +2,8 @@ package com.example.is442oop.vmsbackend.entities;
 
 import jakarta.persistence.*;
 
-public class Vendor extends UserType {
+@Entity
+public class Vendor extends UserType{
     private String companyDescription;
 
 
@@ -10,7 +11,7 @@ public class Vendor extends UserType {
     }
 
     public Vendor(String companyDescription) {
-        super();
+        // super();
         this.companyDescription = companyDescription;
     }
 

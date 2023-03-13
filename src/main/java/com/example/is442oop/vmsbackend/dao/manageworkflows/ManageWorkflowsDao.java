@@ -18,4 +18,8 @@ public class ManageWorkflowsDao {
     public List<Workflow> retrieveWorkflows() {
         return manageWorkflowsRepository.getAllWorkflows();
     }
+
+    public Workflow getWorkflowById(String workflowid) {
+        return manageWorkflowsRepository.findById(workflowid).get();
+    }
 }

@@ -37,6 +37,15 @@ public class Workflow {
     public void setWorkflowID(String workflowID) {
         this.workflowID = workflowID;
     }
+
+    public void addUserWorkflow(UserWorkflow uw) {
+
+        if (userWorkflow == null) {
+            userWorkflow = new HashSet<UserWorkflow>();
+        }
+        userWorkflow.add(uw);
+    }
+
     public String getName() {
         return name;
     }

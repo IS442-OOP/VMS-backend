@@ -1,8 +1,11 @@
 package com.example.is442oop.vmsbackend.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,7 +29,8 @@ public class User {
     private boolean isAccountActivated;
 
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-    public List <UserWorkflow> userWorkflow;
+    @JsonManagedReference
+    private List <UserWorkflow> userWorkflows;
 
     @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="userTypeID")
@@ -58,6 +62,17 @@ public class User {
         this.email = email;
     }
 
+    public List<UserWorkflow> getUserWorkflows(){ 
+        return userWorkflows;
+    }
+
+    public void addUserWorkflow(UserWorkflow uw) {
+        if (userWorkflows == null) {
+            userWorkflows = new ArrayList<UserWorkflow>();
+        }
+        userWorkflows.add(uw);
+    }
+
     @JsonIgnore
     public String getPassword() {
         return password;
@@ -80,9 +95,10 @@ public class User {
     }
 
     public void setName(String vendorName) {
-        this.name = name;
+        this.name = vendorName;
     }
     
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
     public UserType getUserType() {
         return userType;
     }
@@ -101,7 +117,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", isAccountActivated=" + isAccountActivated +
-                ", userWorkflow=" + userWorkflow +
+                ", userWorkflow=" + userWorkflows +
                 ", userType=" + userType +
                 '}';
     }
